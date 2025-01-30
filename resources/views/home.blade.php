@@ -34,9 +34,9 @@
   <!-- 
     - preload images
   -->
-  <link rel="preload" as="image" href="./assets/images/hero-slider-1.jpg">
-  <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
-  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
+  <link rel="preload" as="image" href="images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="images/hero-slider-3.jpg">
 
 </head>
 
@@ -59,42 +59,7 @@
     - #TOP BAR
   -->
 
-  <div class="topbar">
-    <div class="container">
-
-      <address class="topbar-item">
-        <div class="icon">
-          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-        </div>
-
-        <span class="span">
-          xyz , Lahore City, Pakistan
-        </span>
-      </address>
-
-      <div class="separator"></div>
-
-
-      <a href="tel:+92000000000" class="topbar-item link">
-        <div class="icon">
-          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-        </div>
-
-        <span class="span">+92 000 000 0000</span>
-      </a>
-
-      <div class="separator"></div>
-
-      <a href="mailto: mail@transpoflow.com" class="topbar-item link">
-        <div class="icon">
-          <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-        </div>
-
-        <span class="span">mail@transpoflow.com</span>
-      </a>
-
-    </div>
-  </div>
+  <x-topbar />
 
 
 
@@ -104,106 +69,8 @@
     - #HEADER
   -->
 
-  <header class="header" data-header>
-    <div class="container">
 
-      <a href="#" class="logo">
-        <img src="./assets/images/logo.svg" width="160" height="50" alt="logo">
-      </a>
-
-      <nav class="navbar" data-navbar>
-
-        <button class="close-btn" aria-label="close services" data-nav-toggler>
-          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-        </button>
-
-        <a href="#" class="logo">
-          <img src="./assets/images/logo.svg" width="160" height="50" alt="transpoflow-logo">
-        </a>
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <a href="/" class="navbar-link hover-underline active">
-              <div class="separator"></div>
-
-              <span class="span">Home</span>
-            </a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="/services" class="navbar-link hover-underline">
-              <div class="separator"></div>
-
-              <span class="span">services</span>
-            </a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="aboutus.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-
-              <span class="span">About Us</span>
-            </a>
-          </li>
-
-
-          <li class="navbar-item">
-            <a href="contact.html" class="navbar-link hover-underline">
-              <div class="separator"></div>
-
-              <span class="span">Contact</span>
-            </a>
-          </li>
-
-        </ul>
-
-        <div class="text-center">
-          <p class="headline-1 navbar-title">Visit Us</p>
-
-          <address class="body-4">
-            xyz, Lahore City, <br>
-            Pakistan
-          </address>
-
-          <a href="mailto:mail@transpoflow.com" class="body-4 sidebar-link">mail@transpoflow.com</a>
-
-          <div class="separator"></div>
-
-          <p class="contact-label">Start Today!</p>
-
-          <a href="signin.html" class="body-1 contact-number hover-underline">
-            Sign in
-          </a>
-        </div>
-
-      </nav>
-
-      <a href="/login" class="btn btn-secondary">
-        <span class="text text-1">Sign In</span>
-
-        <span class="text text-2" aria-hidden="true">Sign In</span>
-      </a>
-
-      
-      <a href="/register" class="btn btn-secondary">
-        <span class="text text-1">Sign up</span>
-
-        <span class="text text-2" aria-hidden="true">Sign In</span>
-      </a>
-
-
-      <button class="nav-open-btn" aria-label="open services" data-nav-toggler>
-        <span class="line line-1"></span>
-        <span class="line line-2"></span>
-        <span class="line line-3"></span>
-      </button>
-
-      <div class="overlay" data-nav-toggler data-overlay></div>
-
-    </div>
-  </header>
-
+  <x-header />
 
 
 
@@ -222,7 +89,7 @@
           <li class="slider-item active" data-hero-slider-item>
 
             <div class="slider-bg">
-              <img src="./assets/images/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
+              <img src="images/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
             <p class="label-2 section-subtitle slider-reveal">Seamless Transport</p>
@@ -247,7 +114,7 @@
           <li class="slider-item" data-hero-slider-item>
 
             <div class="slider-bg">
-              <img src="./assets/images/hero-slider-2.jpg" width="1880" height="950" alt="" class="img-cover">
+              <img src="images/hero-slider-2.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
             <p class="label-2 section-subtitle slider-reveal">Effortless Management</p>
@@ -272,7 +139,7 @@
           <li class="slider-item" data-hero-slider-item>
 
             <div class="slider-bg">
-              <img src="./assets/images/hero-slider-3.jpg" width="1880" height="950" alt="" class="img-cover">
+              <img src="images/hero-slider-3.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
             <p class="label-2 section-subtitle slider-reveal">Manage Smarter</p>
@@ -305,7 +172,7 @@
         </button>
 
         <a href="signin.html" class="hero-btn has-after">
-          <img src="./assets/images/hero-icon.png" width="48" height="48" alt="booking icon">
+          <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
 
           <span class="label-2 text-center span">Start Now</span>
         </a>
@@ -328,7 +195,8 @@
           <h2 class="headline-1 section-title">Our Top Services</h2>
 
           <p class="section-text">
-            Empowering your transport business with cutting-edge tools, AI-powered solutions, and seamless management services.
+            Empowering your transport business with cutting-edge tools, AI-powered solutions, and seamless management
+            services.
           </p>
 
           <ul class="grid-list">
@@ -338,7 +206,7 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="./assets/images/fms.jpg" width="285" height="336" loading="lazy" alt="Breakfast"
+                    <img src="images/fms.jpg" width="285" height="336" loading="lazy" alt="Breakfast"
                       class="img-cover">
                   </figure>
                 </a>
@@ -361,7 +229,7 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="./assets/images/service-2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
+                    <img src="images/service-2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
                       class="img-cover">
                   </figure>
                 </a>
@@ -384,7 +252,7 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="./assets/images/cms.jpg" width="285" height="336" loading="lazy" alt="Drinks"
+                    <img src="images/cms.jpg" width="285" height="336" loading="lazy" alt="Drinks"
                       class="img-cover">
                   </figure>
                 </a>
@@ -404,9 +272,9 @@
 
           </ul>
 
-          <img src="./assets/images/shape-1.png" width="246" height="412" loading="lazy" alt="shape"
+          <img src="images/shape-1.png" width="246" height="412" loading="lazy" alt="shape"
             class="shape shape-1 move-anim">
-          <img src="./assets/images/shape-2.png" width="343" height="345" loading="lazy" alt="shape"
+          <img src="images/shape-2.png" width="343" height="345" loading="lazy" alt="shape"
             class="shape shape-2 move-anim">
 
         </div>
@@ -430,7 +298,10 @@
             <h2 class="headline-1 section-title">Our Journey Towards Revolutionizing Transport Management</h2>
 
             <p class="section-text">
-              At TRANSPO FLOW, we started with a simple vision: to make transport management smarter, easier, and more efficient. By combining innovative technology with AI-driven solutions, we empower businesses to streamline operations, enhance customer experiences, and drive growth. Our passion for excellence and commitment to innovation continues to shape the future of transport management, one company at a time.
+              At TRANSPO FLOW, we started with a simple vision: to make transport management smarter, easier, and more
+              efficient. By combining innovative technology with AI-driven solutions, we empower businesses to
+              streamline operations, enhance customer experiences, and drive growth. Our passion for excellence and
+              commitment to innovation continues to shape the future of transport management, one company at a time.
             </p>
 
             <a href="aboutus.html" class="btn btn-primary">
@@ -443,19 +314,19 @@
 
           <figure class="about-banner">
 
-            <img src="./assets/images/about-banner.png" width="570" height="570" loading="lazy" alt="about banner"
+            <img src="images/about-banner.png" width="570" height="570" loading="lazy" alt="about banner"
               class="w-100" data-parallax-item data-parallax-speed="1">
 
             <div class="abs-img abs-img-1 has-before" data-parallax-item data-parallax-speed="1.75">
-              <img src="./assets/images/about-abs-image.jpg" width="285" height="285" loading="lazy" alt=""
+              <img src="images/about-abs-image.jpg" width="285" height="285" loading="lazy" alt=""
                 class="w-100">
             </div>
 
-           
+
 
           </figure>
 
-          <img src="./assets/images/shape-3.png" width="197" height="194" loading="lazy" alt="" class="shape">
+          <img src="images/shape-3.png" width="197" height="194" loading="lazy" alt="" class="shape">
 
         </div>
       </section>
@@ -480,7 +351,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="./assets/images/menu-1.jpg" width="100" height="100" loading="lazy" alt="aadmin-dashboard"
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="aadmin-dashboard"
                     class="img-cover">
                 </figure>
 
@@ -493,7 +364,7 @@
 
                     <span class="badge label-1">HOT</span>
 
-      
+
                   </div>
 
                   <p class="card-text label-1">
@@ -509,7 +380,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="./assets/images/menu-1.jpg" width="100" height="100" loading="lazy" alt="tms"
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="tms"
                     class="img-cover">
                 </figure>
 
@@ -523,7 +394,8 @@
                   </div>
 
                   <p class="card-text label-1">
-                    Simplify ticket pricing, bookings, and cancellations to provide a seamless experience for your passengers
+                    Simplify ticket pricing, bookings, and cancellations to provide a seamless experience for your
+                    passengers
                   </p>
 
                 </div>
@@ -535,7 +407,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="./assets/images/menu-1.jpg" width="100" height="100" loading="lazy" alt="cms"
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="cms"
                     class="img-cover">
                 </figure>
 
@@ -561,7 +433,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="./assets/images/menu-1.jpg" width="100" height="100" loading="lazy" alt="fms"
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="fms"
                     class="img-cover">
                 </figure>
 
@@ -577,7 +449,8 @@
                   </div>
 
                   <p class="card-text label-1">
-                    Manage vehicle details, create schedules, and oversee drivers to keep your operations running smoothly.
+                    Manage vehicle details, create schedules, and oversee drivers to keep your operations running
+                    smoothly.
                   </p>
 
                 </div>
@@ -589,7 +462,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="./assets/images/menu-1.jpg" width="100" height="100" loading="lazy" alt="csm"
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="csm"
                     class="img-cover">
                 </figure>
 
@@ -603,7 +476,8 @@
                   </div>
 
                   <p class="card-text label-1">
-                    Enhance customer satisfaction with instant chat support, a feedback system, and responsive communication tools.
+                    Enhance customer satisfaction with instant chat support, a feedback system, and responsive
+                    communication tools.
                   </p>
 
                 </div>
@@ -611,11 +485,11 @@
               </div>
             </li>
 
-           
+
 
           </ul>
 
-       
+
 
           <a href="#" class="btn btn-primary">
             <span class="text text-1">View All services</span>
@@ -623,9 +497,9 @@
             <span class="text text-2" aria-hidden="true">View All services</span>
           </a>
 
-          <img src="./assets/images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
+          <img src="images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
             class="shape shape-2 move-anim">
-          <img src="./assets/images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
+          <img src="images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
             class="shape shape-3 move-anim">
 
         </div>
@@ -651,7 +525,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src="./assets/images/features-icon-1.png" width="100" height="80" loading="lazy" alt="icon">
+                  <img src="images/features-icon-1.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">Customizable Solutions</h3>
@@ -665,7 +539,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src="./assets/images/features-icon-2.png" width="100" height="80" loading="lazy" alt="icon">
+                  <img src="images/features-icon-2.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">User-Friendly Interface</h3>
@@ -679,7 +553,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src="./assets/images/features-icon-3.png" width="100" height="80" loading="lazy" alt="icon">
+                  <img src="images/features-icon-3.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">Comprehensive Management</h3>
@@ -693,7 +567,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src="./assets/images/features-icon-4.png" width="100" height="80" loading="lazy" alt="icon">
+                  <img src="images/features-icon-4.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">Reliable Support</h3>
@@ -705,10 +579,10 @@
 
           </ul>
 
-          <img src="./assets/images/shape-7.png" width="208" height="178" loading="lazy" alt="shape"
+          <img src="images/shape-7.png" width="208" height="178" loading="lazy" alt="shape"
             class="shape shape-1">
 
-          <img src="./assets/images/shape-8.png" width="120" height="115" loading="lazy" alt="shape"
+          <img src=".images/shape-8.png" width="120" height="115" loading="lazy" alt="shape"
             class="shape shape-2">
 
         </div>
@@ -726,8 +600,7 @@
     - #FOOTER
   -->
 
-  <footer class="footer section has-bg-image text-center"
-    style="background-color: black;">
+  <footer class="footer section has-bg-image text-center" style="background-color: black;">
     <div class="container">
 
       <div class="footer-top grid-list">
@@ -735,7 +608,7 @@
         <div class="footer-brand has-before has-after">
 
           <a href="#" class="logo">
-            <img src="./assets/images/logo.svg" width="160" height="50" loading="lazy" alt="transpo-flow">
+            <img src="images/logo.svg" width="160" height="50" loading="lazy" alt="transpo-flow">
           </a>
 
           <address class="body-4">
