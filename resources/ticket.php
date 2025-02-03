@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Management | Tivotal</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- CSS File -->
+    <link rel="stylesheet" href="c:\xampp\htdocs\p1\resources\css\admin.css" />
+  </head>
+  <body>
+    <section class="sidebar">
+      <a href="admin.html" class="logo">
+        <i class="fab fa-slack"></i>
+        <span class="text">Admin Panel</span>
+      </a>
+      <ul class="side-menu top">
+        <li>
+          <a href="admin.html" class="nav-link">
+            <i class="fas fa-border-all"></i>
+            <span class="text">Admin Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="fms copy.html" class="nav-link">
+            <i class="fas fa-road"></i>
+            <span class="text">Fleet Management</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="ticket.html" class="nav-link">
+            <i class="fas fa-ticket"></i>
+            <span class="text">Ticket Management</span>
+          </a>
+        </li>
+        <li>
+          <a href="cms.html" class="nav-link">
+            <i class="fas fa-truck"></i>
+            <span class="text">Cargo Management</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i class="fas fa-people-group"></i>
+            <span class="text">Customer Support</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a href="#">
+            <i class="fas fa-cog"></i>
+            <span class="text">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="logout">
+            <i class="fas fa-right-from-bracket"></i>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    
+    <section class="content">
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Ticket Management</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="admin.html">Dashboard</a>
+              </li>
+              <i class="fas fa-chevron-right"></i>
+              <li>
+                <a href="#" class="active">Ticket Management</a>
+              </li>
+            </ul>
+          </div>
+          <a href="#" class="download-btn">
+            <i class="fas fa-globe"></i>
+            <span class="text">View Website</span>
+          </a>
+        </div>
+
+        <!-- Manage Ticket Pricing Module -->
+        <div class="box-info">
+          <h1>Manage Ticket Pricing</h1>
+          <div class="ticket-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Event</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="text" value="T001" disabled></td>
+                  <td><input type="text" value="Concert" disabled></td>
+                  <td><input type="text" value="VIP" disabled></td>
+                  <td><input type="text" value="$150" disabled></td>
+                  <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+            <button class="add-ticket">Add New Ticket</button>
+          </div>
+        </div>
+
+        <!-- Manage Ticket Booking Module -->
+        <div class="box-info">
+          <h1>Manage Ticket Booking</h1>
+          <div class="booking-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Customer</th>
+                  <th>Event</th>
+                  <th>Seats</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="text" value="B001" disabled></td>
+                  <td><input type="text" value="John Doe" disabled></td>
+                  <td><input type="text" value="Concert" disabled></td>
+                  <td><input type="text" value="2" disabled></td>
+                  <td><input type="text" value="Confirmed" disabled></td>
+                  <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+            <button class="add-booking">Add New Booking</button>
+          </div>
+        </div>
+
+        <!-- Customer Support Module -->
+        <div class="box-info">
+          <h1>Customer Support</h1>
+          <div class="support-container">
+            <p>Manage customer queries related to ticketing.</p>
+            <button>View Tickets</button>
+            <button>Live Chat</button>
+            <button>Contact Support</button>
+          </div>
+        </div>
+        
+      </main>
+    </section>
+
+    <script>
+      // Handle edit button click
+      const editButtons = document.querySelectorAll('.edit-btn');
+      
+      editButtons.forEach((editBtn) => {
+        editBtn.addEventListener('click', function() {
+          const row = editBtn.closest('tr');
+          const inputs = row.querySelectorAll('input');
+          const isEditable = inputs[0].disabled;
+
+          // Toggle the disabled state
+          inputs.forEach(input => input.disabled = !isEditable);
+
+          
+        });
+      });
+    </script>
+  </body>
+</html>

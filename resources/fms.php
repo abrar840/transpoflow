@@ -1,0 +1,347 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Store | Tivotal</title>
+
+    <!--font awesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!--css file-->
+    <link rel="stylesheet" href="c:\xampp\htdocs\p1\resources\css\admin.css" />
+  </head>
+  <body>
+    <section class="sidebar">
+        <a href="admin.html" class="logo">
+          <i class="fab fa-slack"></i>
+          <span class="text">Admin Panel</span>
+        </a>
+  
+        <ul class="side-menu top">
+          <li>
+            <a href="admin.html" class="nav-link">
+              <i class="fas fa-border-all"></i>
+              <span class="text">Admin Dashboard</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="fms.html" class="nav-link">
+              <i class="fas fa-road"></i>
+              <span class="text">Fleet Management</span>
+            </a>
+          </li>
+          <li>
+            <a href="ticket.html" class="nav-link">
+              <i class="fas fa-ticket"></i>
+              <span class="text">Ticket Management</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link">
+              <i class="fas fa-truck"></i>
+              <span class="text">Cargo Management</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link">
+              <i class="fas fa-people-group"></i>
+              <span class="text">Customer Support</span>
+            </a>
+          </li>
+        </ul>
+  
+        <ul class="side-menu">
+          <li>
+            <a href="#">
+              <i class="fas fa-cog"></i>
+              <span class="text">Settings</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="logout">
+              <i class="fas fa-right-from-bracket"></i>
+              <span class="text">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="content">
+        <main>
+          <div class="head-title">
+            <div class="left">
+              <h1>Fleet Management</h1>
+              <ul class="breadcrumb">
+                <li>
+                  <a href="#">Dashboard</a>
+                </li>
+                <i class="fas fa-chevron-right"></i>
+                <li>
+                  <a href="#" class="active">Fleet Management</a>
+                </li>
+              </ul>
+            </div>
+      
+            <a href="#" class="download-btn">
+              <i class="fas fa-globe"></i>
+              <span class="text">View Website</span>
+            </a>
+          </div>
+          <main>
+      
+          <div class="box-info">
+            <h1>Manage Vehicles</h1>
+            <div class="vehicle-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Vehicle ID</th>
+                    <th>Model</th>
+                    <th>License Plate</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" value="V001" disabled></td>
+                    <td><input type="text" value="Toyota Prius" disabled></td>
+                    <td><input type="text" value="ABC-1234" disabled></td>
+                    <td>
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" value="V002" disabled></td>
+                    <td><input type="text" value="Ford Transit" disabled></td>
+                    <td><input type="text" value="XYZ-5678" disabled></td>
+                    <td>
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+              <button class="add-vehicle">Add New Vehicle</button>
+              <button class="save-vehicles">Save Vehicles</button> <!-- Save Button Aligned -->
+            </div>
+          </div>
+          
+          <div class="box-info">
+            <h1>Manage Drivers</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Driver ID</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>License Number</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="text" value="D001" disabled></td>
+                  <td><input type="text" value="John Doe" disabled></td>
+                  <td><input type="text" value="+123456789" disabled></td>
+                  <td><input type="text" value="A123456789" disabled></td>
+                  <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="text" value="D002" disabled></td>
+                  <td><input type="text" value="Jane Smith" disabled></td>
+                  <td><input type="text" value="+987654321" disabled></td>
+                  <td><input type="text" value="B987654321" disabled></td>
+                  <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+              <button class="add-driver">Add New Driver</button>
+              <button class="save-drivers">Save Drivers</button> <!-- Save Button Aligned -->
+            </div>
+          </div>
+          
+          <div class="box-info">
+            <h1>Manage Schedules</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Schedule ID</th>
+                  <th>Vehicle</th>
+                  <th>Driver</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="text" value="S001" disabled></td>
+                  <td><input type="text" value="Toyota Prius" disabled></td>
+                  <td><input type="text" value="John Doe" disabled></td>
+                  <td><input type="text" value="2023-08-15" disabled></td>
+                  <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="text" value="S002" disabled></td>
+                  <td><input type="text" value="Ford Transit" disabled></td>
+                  <td><input type="text" value="Jane Smith" disabled></td>
+                  <td><input type="text" value="2023-08-16" disabled></td>
+                  <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+              <button class="add-schedule">Add New Schedule</button>
+              <button class="save-schedules">Save Schedules</button> <!-- Save Button Aligned -->
+            </div>
+          </div>
+          
+          <div class="box-info">
+            <h1>Reporting and Analytics</h1>
+            <div class="analytics-container">
+              <p>Generate insights and reports for your fleet management system.</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Report ID</th>
+                    <th>Title</th>
+                    <th>Generated Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" value="R001" disabled></td>
+                    <td><input type="text" value="Fleet Performance" disabled></td>
+                    <td><input type="text" value="2023-08-01" disabled></td>
+                    <td>
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" value="R002" disabled></td>
+                    <td><input type="text" value="Driver Efficiency" disabled></td>
+                    <td><input type="text" value="2023-08-10" disabled></td>
+                    <td>
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                <button class="add-report">Generate New Report</button>
+                <button class="save-reports">Save Reports</button> <!-- Save Button Aligned -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="box-info">
+            <h1>Trip and Route Planning</h1>
+            <div class="route-planning-container">
+              <h2>Key Features</h2>
+              <ul>
+                <li><strong>Trip Scheduling:</strong> Assign vehicles and drivers to trips, and plan departure/arrival times.</li>
+                <li><strong>Route Optimization:</strong> Identify the most efficient route for cost and time savings.</li>
+                <li><strong>Dynamic Adjustments:</strong> Adjust routes in real-time based on traffic or weather conditions.</li>
+                <li><strong>Geofencing:</strong> Set virtual boundaries and receive alerts for location-specific activities.</li>
+                <li><strong>Estimated Time of Arrival (ETA):</strong> Calculate and provide real-time updates on arrival times.</li>
+                <li><strong>Compliance:</strong> Ensure routes comply with regulations and restrictions.</li>
+                <li><strong>Reporting:</strong> Generate trip history and performance analytics.</li>
+                <li><strong>Emergency Response:</strong> Provide alternative routes or assistance in case of incidents.</li>
+              </ul>
+              <h2>Manage Routes</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Route ID</th>
+                    <th>Vehicle</th>
+                    <th>Driver</th>
+                    <th>Planned Departure</th>
+                    <th>Planned Arrival</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="text" value="R001" disabled></td>
+                    <td><input type="text" value="Toyota Prius" disabled></td>
+                    <td><input type="text" value="John Doe" disabled></td>
+                    <td><input type="text" value="2025-01-24 08:00 AM" disabled></td>
+                    <td><input type="text" value="2025-01-24 02:00 PM" disabled></td>
+                    <td>
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" value="R002" disabled></td>
+                    <td><input type="text" value="Ford Transit" disabled></td>
+                    <td><input type="text" value="Jane Smith" disabled></td>
+                    <td><input type="text" value="2025-01-24 09:00 AM" disabled></td>
+                    <td><input type="text" value="2025-01-24 03:30 PM" disabled></td>
+                    <td>
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                <button class="add-route">Add New Route</button>
+                <button class="save-routes">Save Routes</button> <!-- Save Button Aligned -->
+              </div>
+            </div>
+          </div>
+          
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const editButtons = document.querySelectorAll('.edit-btn');
+          
+              // Function for enabling/disabling inputs
+              function toggleEdit(row) {
+                const rowInputs = row.querySelectorAll('input');
+                rowInputs.forEach(input => input.disabled = !input.disabled);
+          
+                // Toggle the Edit button visibility
+                const editBtn = row.querySelector('.edit-btn');
+                editBtn.style.display = 'inline-block'; // Ensure Edit button stays visible
+              }
+          
+              // Add event listeners to edit buttons
+              editButtons.forEach(editBtn => {
+                editBtn.addEventListener('click', function() {
+                  const row = editBtn.closest('tr');
+                  toggleEdit(row);  // Enable editing for row
+                });
+              });
+            });
+          </script>
+          
+          
+          </main>
+      </section>
+      
+      </body>
+      </html>
+      

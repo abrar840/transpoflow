@@ -373,29 +373,92 @@ body.dark {
 
 .content main .box-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr; /* One column by default, which will adapt for larger screens */
   gap: 24px;
   margin-top: 36px;
-}
-
-.content main .box-info li {
   padding: 24px;
-  background: var(--light);
+  background: whitesmoke;
   border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.content main .box-info li i {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
-  font-size: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.content main .box-info h1 {
+  font-size: 28px;
+  color: var(--dark);
+  margin-bottom: 20px;
 }
+
+.vehicle-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.content main .box-info table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.content main .box-info table th, 
+.content main .box-info table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.content main .box-info table th {
+  background-color: var(--blue);
+  color: #fff;
+}
+
+.content main .box-info table td {
+  background-color: #fff;
+}
+
+.content main .box-info table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.content main .box-info table tr:hover {
+  background-color: var(--grey);
+}
+
+.content main .box-info button {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: var(--blue);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.content main .box-info button:hover {
+  background-color: var(--dark-blue);
+  transform: scale(1.05);
+}
+
+.add-vehicle {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+  background-color: var(--green);
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-vehicle:hover {
+  background-color: var(--dark-green);
+  transform: scale(1.05);
+}
+
 
 .content main .box-info li:nth-child(1) i {
   background: var(--light-orange);
@@ -691,4 +754,4 @@ canvas {
   background-color: #f9f9f9;
   font-size: 16px;
   border-radius: 4px;
-}
+} 
