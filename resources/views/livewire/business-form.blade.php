@@ -1,3 +1,5 @@
+<div>
+<form wire:submit.prevent="submit">
 <section class="companyform-section">
     <div class="companyform-container">
         <div class="companyform-form">
@@ -7,42 +9,66 @@
                 <!-- Full Name -->
                 <div class="input-container">
                     <label for="">Company Name :</label>
-                    <input type="text" class="input-field" placeholder="" required>
+                    <input type="text" class="input-field" placeholder="" required wire:model='name'>
+                    @error('name') <span class="error">{{$message}}</span>
+
+                    @enderror
                 </div>
 
                 <!-- Email Address -->
                 <div class="input-container">
                     <label for="companyType">Company Type :</label>
-                    <select id="companyType" class="input-field" required>
+                    <select id="companyType" class="input-field" required wire:model="type">
                         <option value="" disabled selected>Select Company Type</option>
                         <option value="fleet" style="color: black;">Fleet Company</option>
                         <option value="shuttle" style="color: black;">Shuttle Company</option>
                         <option value="transport" style="color: black;">Transport Company</option>
                     </select>
+                    @error('type') <span class="errror">{{$message}}</span>
+                    @enderror
                 </div>
 
-                <!-- Username -->
+                <!-- addres -->
                 <div class="input-container">
                     <label for="">Company Address :</label>
-                    <input type="text" class="input-field" placeholder="" required>
-                </div>
+                    
+                <input type="text" class="input-field" placeholder="" required wire:model='address'>
+                 @error('address') <span class="error">{{$message}}</span>
+                 @enderror
+            </div>
 
-                <!-- Password -->
+                <!-- email -->
                 <div class="input-container password-container">
                     <label for="company-email">Company email :</label>
-                    <input type="tel" id="company-email" class="input-field" placeholder="" required>
+                    <input type="tel" id="company-email" class="input-field" placeholder="" required wire:model='email'>
+                    @error('email') <span class="error">{{$message}}</span>
+                    @enderror
                 </div>
 
-                <!-- Confirm Password -->
+                <!-- services -->
                 <label>Services</label>
                 <div class="input-container checkbox-container">
                     <div class="checkbox-group">
-                        <label><input type="checkbox" value="admin-panel"> Admin Panel</label>
+                        {{-- <label><input type="checkbox" value="admin-panel"> Admin Panel</label>
                         <label><input type="checkbox" value="transport-management"> Transport Management System</label>
                         <label><input type="checkbox" value="fleet-management"> Fleet Management System</label>
                         <label><input type="checkbox" value="ticket-management"> Ticket Management System</label>
                         <label><input type="checkbox" value="cargo-management"> Cargo Management System</label>
-                        <label><input type="checkbox" value="customer-support"> Customer Support</label>
+                        <label><input type="checkbox" value="customer-support"> Customer Support</label> --}}
+                         @foreach ($availableSerivces as $service)
+                         <label for="">
+                            <input type="checkbox" wire:model='services' value='{{$service->id}}'>
+                            {{$service->name}}
+                        </label>
+                         @endforeach
+                         
+                   
+                   
+                   
+                   
+                   
+                   
+                   
                     </div>
 
                 </div>
@@ -66,10 +92,12 @@
                     </div>
                 </div>
 
-                <!-- Date of Birth -->
+                <!-- logo -->
                 <div class="input-container">
                     <label for="companyLogo">Company Logo (Optional)</label>
-                    <input type="file" class="input-field" id="companyLogo" accept="image/*">
+                    <input type="file" class="input-field" id="companyLogo" accept="image/*" wire:model='logo'>
+                    @error('logo') <span class="error">{{$message}}</span>
+                    @enderror
                 </div>
 
 
@@ -77,19 +105,22 @@
 
                 <div class="input-container">
                     <label for="adminUsername">Admin Username</label>
-                    <input type="text" class="input-field" id="adminUsername" required>
-
+                    <input type="text" class="input-field" id="adminUsername" required wire:model='admin_username'>
+                    @error('admin_username') <span class="error">{{$message}}</span>
+                 @enderror
                 </div>
 
                 <div class="input-container">
                     <label for="numEmployees">Number of Employees</label>
-                    <select id="numEmployees" class="input-field" required>
+                    <select id="numEmployees" class="input-field" required wire:model="num_employees">
                         <option value="" disabled selected>Select Number of Employees</option>
                         <option value="<5" style="color: black;">Less than 5</option>
                         <option value="5-20" style="color: black;">5 to 20</option>
                         <option value="20-100" style="color: black;">20 to 100</option>
                         <option value="100-250" style="color: black;">100 to 250</option>
                         <option value=">250" style="color: black;">More than 250</option>
+                        @error('num_employes') <span class="error">{{$message}}</span>
+                        @enderror
                     </select>
                 </div>
 
@@ -107,3 +138,13 @@
         </div>
     </div>
 </section>
+</form>
+
+ <!-- Success Message -->
+ @if (session()->has('success'))
+ <div class="success">
+     {{ session('success') }}
+ </div>
+@endif
+
+</div>
