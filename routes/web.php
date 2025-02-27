@@ -15,6 +15,8 @@ Route::view('/contact', 'contact')->name('contact');
 
 Route::view('/form', 'form')->name('form');
 
+Route::view('/admin', 'AdminPanel')->name('admin');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
