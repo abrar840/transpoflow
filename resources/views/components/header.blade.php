@@ -1,3 +1,5 @@
+
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 <header class="header" data-header>
     <div class="container">
         <a href="#" class="logo">
@@ -15,7 +17,7 @@
 
             <ul class="navbar-list">
                 <li class="navbar-item">
-                    <a href="{{ route('home') }}" class="navbar-link hover-underline {{ request()->routeIs('home') ? 'active' : '' }}">
+                    <a href="{{ route('home') }}" class="navbar-link hover-underline {{ request()->routeIs('home') ? 'active' : '' }}" wire:navigate.hover>
                        
                         <div class="separator"></div>
                         <span class="span">Home</span>
@@ -23,21 +25,21 @@
                 </li>
 
                 <li class="navbar-item">
-                    <a href="{{ route('services') }}" class="navbar-link hover-underline {{ request()->routeIs('services') ? 'active' : '' }}">
+                    <a href="{{ route('services') }}" class="navbar-link hover-underline {{ request()->routeIs('services') ? 'active' : '' }}" wire:navigate.hover>
                         <div class="separator"></div>
                         <span class="span">Services</span>
                     </a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="{{ route('aboutus') }}" class="navbar-link hover-underline {{ request()->routeIs('aboutus') ? 'active' : '' }}">
+                    <a href="{{ route('aboutus') }}" class="navbar-link hover-underline {{ request()->routeIs('aboutus') ? 'active' : '' }}" wire:navigate.hover>
                         <div class="separator"></div>
                         <span class="span">About Us</span>
                     </a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="{{ route('contact') }}" class="navbar-link hover-underline {{ request()->routeIs('contact') ? 'active' : '' }}">
+                    <a href="{{ route('contact') }}" class="navbar-link hover-underline {{ request()->routeIs('contact') ? 'active' : '' }}" wire:navigate>
                         <div class="separator"></div>
                         <span class="span">Contact</span>
                     </a>

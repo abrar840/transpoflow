@@ -24,6 +24,18 @@ class BusinessForm extends Component
     public $services = [];
 
     public $colorPalette;
+
+     // Data for dropdowns
+     public $availableServices;
+     public $colorPalettes;
+ 
+     // Initialize data
+     public function mount()
+     {
+         // Fetch data for dropdowns once when the component is loaded
+         $this->availableServices = Service::all();
+         $this->colorPalettes = ColorPalette::all();
+     }
     protected $rules = [
         'name' => 'required|string|max:255',
         'type' => 'required|in:fleet,shuttle,transport',
@@ -125,10 +137,9 @@ class BusinessForm extends Component
 
     public function render()
     {
-        return view('livewire.business-form',
-    [
-        'availableSerivces'=>Service::all(),
-        'colorPalettes' =>ColorPalette::all(),
-    ]);
+        return view('livewire.business-form', [
+            'availableSerivcess' => $this->availableServices,
+            'colorPalettes' => $this->colorPalettes,
+        ]);
     }
 }

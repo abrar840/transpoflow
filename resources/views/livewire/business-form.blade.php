@@ -37,13 +37,13 @@
                  @enderror
             </div>
 
-                <!-- email -->
+                {{-- <!-- email -->
                 <div class="input-container password-container">
                     <label for="company-email">Company email :</label>
                     <input type="tel" id="company-email" class="input-field" placeholder="" required wire:model='email'>
                     @error('email') <span class="error">{{$message}}</span>
                     @enderror
-                </div>
+                </div> --}}
 
                 <!-- services -->
                 <label>Services</label>
