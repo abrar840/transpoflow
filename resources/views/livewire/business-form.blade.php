@@ -7,12 +7,13 @@
             <br>
             <form action="/form" method="POST">
                 <!-- Full Name -->
+                @error('email') <span class="error">{{ $message }}</span> @enderror
                 <div class="input-container">
                     <label for="">Company Name :</label>
                     <input type="text" class="input-field" placeholder="" required wire:model='name'>
-                    @error('name') <span class="error">{{$message}}</span>
+                    @error('name') <span class="error">{{$message}}</span> @enderror
 
-                    @enderror
+                   
                 </div>
 
                 <!-- Email Address -->
@@ -24,8 +25,8 @@
                         <option value="shuttle" style="color: black;">Shuttle Company</option>
                         <option value="transport" style="color: black;">Transport Company</option>
                     </select>
-                    @error('type') <span class="errror">{{$message}}</span>
-                    @enderror
+                    @error('type') <span class="errror">{{$message}}</span> @enderror
+                 
                 </div>
 
                 <!-- addres -->
@@ -33,8 +34,8 @@
                     <label for="">Company Address :</label>
                     
                 <input type="text" class="input-field" placeholder="" required wire:model='address'>
-                 @error('address') <span class="error">{{$message}}</span>
-                 @enderror
+                 @error('address') <span class="error">{{$message}}</span> @enderror
+                 
             </div>
 
                 {{-- <!-- email -->
@@ -44,6 +45,7 @@
                     @error('email') <span class="error">{{$message}}</span>
                     @enderror
                 </div> --}}
+              
 
                 <!-- services -->
                 <label>Services</label>
@@ -96,8 +98,8 @@
                 <div class="input-container">
                     <label for="companyLogo">Company Logo (Optional)</label>
                     <input type="file" class="input-field" id="companyLogo" accept="image/*" wire:model='logo'>
-                    @error('logo') <span class="error">{{$message}}</span>
-                    @enderror
+                    @error('logo') <span class="error">{{$message}}</span> @enderror
+                 
                 </div>
 
 
@@ -106,8 +108,8 @@
                 <div class="input-container">
                     <label for="adminUsername">Admin Username</label>
                     <input type="text" class="input-field" id="adminUsername" required wire:model='admin_username'>
-                    @error('admin_username') <span class="error">{{$message}}</span>
-                 @enderror
+                    @error('admin_username') <span class="error">{{$message}}</span> @enderror
+                 
                 </div>
 
                 <div class="input-container">
@@ -119,8 +121,8 @@
                         <option value="20-100" style="color: black;">20 to 100</option>
                         <option value="100-250" style="color: black;">100 to 250</option>
                         <option value=">250" style="color: black;">More than 250</option>
-                        @error('num_employes') <span class="error">{{$message}}</span>
-                        @enderror
+                        @error('num_employes') <span class="error">{{$message}}</span> @enderror
+                       
                     </select>
                 </div>
 

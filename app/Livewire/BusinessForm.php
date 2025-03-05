@@ -19,25 +19,27 @@ class BusinessForm extends Component
 
     //form field 
 
-    public $name, $type, $address, $email, $logo, $admin_uername, $num_employees, $admin_username;
+    public $name, $type, $address, $email, $logo, $admin_uername, $num_employees, $admin_username, $user_id;
 
     public $services = [];
 
     public $colorPalette;
 
-     // Data for dropdowns
-     public $availableServices;
-     public $colorPalettes;
- 
-     // Initialize data
-     public function mount()
-     {
-         // Fetch data for dropdowns once when the component is loaded
-         $this->availableServices = Service::all();
-         $this->colorPalettes = ColorPalette::all();
-     }
+    // Data for dropdowns
+    public $availableServices;
+    public $colorPalettes;
+
+    // Initialize data
+    public function mount()
+    {
+        // Fetch data for dropdowns once when the component is loaded
+        $this->user_id = auth()->user()->id;
+        $this->email = auth()->user()->email;
+        $this->availableServices = Service::all();
+        $this->colorPalettes = ColorPalette::all();
+    }
     protected $rules = [
-        'name' => 'required|string|max:255',
+        'name' => 'string|max:255|unique:companies,name',
         'type' => 'required|in:fleet,shuttle,transport',
         'email' => 'required|email|unique:companies,email',
         'address' => 'nullable|string|max:255',
@@ -52,30 +54,33 @@ class BusinessForm extends Component
     public function submit()
     {
         // Debugging: Check if the method is being called
-      
-    
+        // dd($this->email);
+
         $this->validate();
-    
+
         // Debugging: Check if validation passes
-       
+
         DB::transaction(function () {
             // Debugging: Check if the transaction is being executed
-       
-    
+
+
             $logopath = $this->handleLogoUpload();
-    
+
             $company = $this->createCompany($logopath);
-           
-    
+
+
             $this->attachServices($company);
-          //  $this->attachColorPalette($company);                             //color paltte functionality curently non functional
+            //  $this->attachColorPalette($company);                             //color paltte functionality curently non functional
         });
-    
+
         // Flash success message
         session()->flash('success', 'Company registered successfully');
-    
+
         // Reset form fields
         $this->reset();
+        redirect()->route("admin");
+
+        
     }
 
     protected function handleLogoUpload()
@@ -84,9 +89,10 @@ class BusinessForm extends Component
     }
 
     protected function createCompany($logopath)
-    {
+    {dd($this->user_id);
         return Company::create([
             'name' => $this->name,
+            'user_id' => $this->user_id,
             'type' => $this->type,
             'address' => $this->address,
             'email' => $this->email,
@@ -138,7 +144,7 @@ class BusinessForm extends Component
     public function render()
     {
         return view('livewire.business-form', [
-            'availableSerivcess' => $this->availableServices,
+            'availableSerivces' => $this->availableServices,
             'colorPalettes' => $this->colorPalettes,
         ]);
     }

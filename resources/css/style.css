@@ -892,7 +892,11 @@ body.nav-active { overflow: hidden; }
 
 .hero .slider-item.active .btn { animation-delay: 2s; }
 
-
+.error {
+  color: red;
+  font-size: 3rem;
+  margin-top: 0.25rem;
+}
 
 
 
