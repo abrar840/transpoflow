@@ -21,9 +21,9 @@ Route::view('/admin', 'AdminPanel')->name('admin');
 
 
 
-Route::view('/cargo', 'manage-cargo')->name('cargo');
-Route::view('/fleet', 'manage-fleet')->name('fleet');
-Route::view('/ticket', 'manage-ticket')->name('ticket');
+Route::view('/CargoManagement', 'manage-cargo')->name('CargoManagement');
+Route::view('/FleetManagement', 'manage-fleet')->name('FleetManagement');
+Route::view('/TicketManagement', 'manage-ticket')->name('TicketManagement');
 
 
 Route::view('dashboard', 'dashboard')

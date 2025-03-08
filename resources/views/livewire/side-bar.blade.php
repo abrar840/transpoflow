@@ -2,19 +2,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <div>
     <section class="sidebar">
-        <a href="admin.html" class="logo">
+        <a href="/admin" class="logo">
           <i class="fab fa-slack"></i>
           <span class="text">Admin Panel</span>
         </a>
   
+
+
         <ul class="side-menu top">
-          <li class="active">
-            <a href="/admin" class="nav-link">
-              <i class="fas fa-border-all"></i>
-              <span class="text">Admin Dashboard</span>
-            </a>
-          </li>
-          <li >
+          @foreach ($serviceNames as $name)
+
+          <li class="{{request()->routeIs($name) ? 'active' : '' }}" >
+                  <a href="/{{$name}}" class="nav-link" wire:navigate>
+                      <i class="fas fa-border-all"></i>
+                      <span class="text">{{ $name }}</span>
+                  </a>
+              </li>
+
+          @endforeach
+      </ul>
+          {{-- <li >
             <a href="/fleet" class="nav-link">
               <i class="fas fa-road"></i>
               <span class="text">Fleet Managment</span>
@@ -37,8 +44,8 @@
               <i class="fas fa-people-group"></i>
               <span class="text">Customer Support</span>
             </a>
-          </li>
-        </ul>
+          </li> --}}
+     
   
         <ul class="side-menu">
           <li>

@@ -89,7 +89,7 @@ class BusinessForm extends Component
     }
 
     protected function createCompany($logopath)
-    {dd($this->user_id);
+    {
         return Company::create([
             'name' => $this->name,
             'user_id' => $this->user_id,
