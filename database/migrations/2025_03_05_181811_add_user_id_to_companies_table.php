@@ -13,16 +13,16 @@ return new class extends Migration
     public function up()
     {
         Schema::table('companies', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->after('id'); // Add user_id column
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Define foreign key
+            //$table->unsignedBigInteger('user_id')->after('id'); // Add user_id column
+           // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Define foreign key
         });
     }
     
     public function down()
     {
         Schema::table('companies', function (Blueprint $table) {
-            $table->dropForeign(['user_id']); // Drop foreign key
-            $table->dropColumn('user_id'); // Drop user_id column
+           /// $table->dropForeign(['user_id']); // Drop foreign key
+           // $table->dropColumn('user_id'); // Drop user_id column
         });
     }
 };

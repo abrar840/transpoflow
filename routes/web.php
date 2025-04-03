@@ -25,6 +25,7 @@ Route::view('/CargoManagement', 'manage-cargo')->name('CargoManagement');
 Route::view('/FleetManagement', 'manage-fleet')->name('FleetManagement');
 Route::view('/TicketManagement', 'manage-ticket')->name('TicketManagement');
 
+Route::view('/vregister', 'vehicleRegistration')->name('vehicleRegistraion');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

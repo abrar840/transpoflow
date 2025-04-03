@@ -34,4 +34,13 @@ class Company extends Model
     {
         return $this->belongsToMany(ColorPalette::class, 'company_colors');
     }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class, 'company_id', 'id'); // Referencing 'company_id' in Vehicle table
+    }
+    public function user()
+{
+    return $this->belongsTo(User::class,'user_id','id');
+}
 }

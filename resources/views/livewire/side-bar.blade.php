@@ -54,6 +54,15 @@
               <span class="text">Settings</span>
             </a>
           </li>
+
+          <li>
+            <a href="/vregister">
+              <i class="fas fa-cog"></i>
+              <span class="text">vechicle record</span>
+            </a>
+          </li>
+
+
           <li>
             <a href="#" class="logout">
               <i class="fas fa-right-from-bracket"></i>

@@ -214,10 +214,10 @@
                 <div class="card-content">
 
                   <h3 class="title-4 card-title">
-                    <a href="#">Fleet Management System</a>
+                    <a href="#">Create one </a>
                   </h3>
 
-                  <a href="services.html" class="btn-text hover-underline label-2">View services</a>
+                  <a href="/form" class="btn-text hover-underline label-2">click to continue </a>
 
                 </div>
 

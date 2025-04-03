@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // In User model (app/Models/User.php)
+public function company()
+{
+    return $this->hasOne(Company::class,'user_id','id');
+}
+
 }
