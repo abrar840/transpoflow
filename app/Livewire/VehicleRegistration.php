@@ -142,23 +142,24 @@ class VehicleRegistration extends Component
         $this->resetErrorBag();
         $this->showForm = false;
     }
-
+   
     public function render()
     {
         $vehicles = Vehicle::where('company_id', $this->company->id)
-            ->when($this->search, function($query) {
-                $query->where(function($q) {
-                    $q->where('registration_number', 'like', '%'.$this->search.'%')
-                      ->orWhere('make', 'like', '%'.$this->search.'%')
-                      ->orWhere('model', 'like', '%'.$this->search.'%');
-                });
-            })
-            ->when($this->filterStatus === 'active', function($query) {
-                $query->where('is_active', true);
-            })
-            ->when($this->filterStatus === 'inactive', function($query) {
-                $query->where('is_active', false);
-            })
+
+        //     ->when($this->search, function($query) {
+        //         $query->where(function($q) {
+        //             $q->where('registration_number', 'like', '%'.$this->search.'%')
+        //               ->orWhere('make', 'like', '%'.$this->search.'%')
+        //               ->orWhere('model', 'like', '%'.$this->search.'%');
+        //         });
+        //     })
+        //     ->when($this->filterStatus === 'active', function($query) {
+        //         $query->where('is_active', true);
+        //     })
+        //     ->when($this->filterStatus === 'inactive', function($query) {
+        //         $query->where('is_active', false);
+        //     })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 

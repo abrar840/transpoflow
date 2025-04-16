@@ -1,76 +1,61 @@
 @vite('resources/css/admin.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
 <div>
     <section class="sidebar">
-        <a href="/admin" class="logo">
-          <i class="fab fa-slack"></i>
-          <span class="text">Admin Panel</span>
-        </a>
-  
-
-
-        <ul class="side-menu top">
-          @foreach ($serviceNames as $name)
-
-          <li class="{{request()->routeIs($name) ? 'active' : '' }}" >
-                  <a href="/{{$name}}" class="nav-link" wire:navigate>
-                      <i class="fas fa-border-all"></i>
-                      <span class="text">{{ $name }}</span>
-                  </a>
-              </li>
-
-          @endforeach
-      </ul>
-          {{-- <li >
-            <a href="/fleet" class="nav-link">
-              <i class="fas fa-road"></i>
-              <span class="text">Fleet Managment</span>
+        <!-- Header Section -->
+        <div class="sidebar-header">
+            <a href="/admin" class="logo" wire:navigate>
+                <i class="fab fa-slack"></i>
+                <span class="text">Admin Panel</span>
             </a>
-          </li>
-          <li>
-            <a href="/ticket" class="nav-link">
-              <i class="fas fa-ticket"></i>
-              <span class="text">Ticket Management</span>
-            </a>
-          </li>
-          <li>
-            <a href="/cargo" class="nav-link">
-              <i class="fas fa-truck"></i>
-              <span class="text">Cargo Management</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link">
-              <i class="fas fa-people-group"></i>
-              <span class="text">Customer Support</span>
-            </a>
-          </li> --}}
-     
-  
-        <ul class="side-menu">
-          <li>
-            <a href="#">
-              <i class="fas fa-cog"></i>
-              <span class="text">Settings</span>
-            </a>
-          </li>
+        </div>
 
-          <li>
-            <a href="/vregister">
-              <i class="fas fa-cog"></i>
-              <span class="text">vechicle record</span>
-            </a>
-          </li>
+        <!-- Main Navigation -->
+        <div class="sidebar-menu">
+            <ul class="side-menu top">
+                @foreach ($serviceNames as $name)
+                <li class="{{ 
+                    request()->routeIs($name) ? 'active' : '' }} 
+                    {{ ($name == 'TicketManagement' && request()->routeIs('RouteRegister')) ? 'active' : '' }}
+                ">
+                    <a href="/{{ $name }}" class="nav-link" wire:navigate>
+                        @if($name == 'fleet')
+                            <i class="fas fa-road"></i>
+                        @elseif($name == 'ticket')
+                            <i class="fas fa-ticket"></i>
+                        @elseif($name == 'cargo')
+                            <i class="fas fa-truck"></i>
+                        @elseif($name == 'schedule')
+                            <i class="fas fa-calendar-alt"></i>
+                        @else
+                            <i class="fas fa-border-all"></i>
+                        @endif
+                        <span class="text">{{ ucfirst($name) }}</span>
+                    </a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
 
-
-          <li>
-            <a href="#" class="logout">
-              <i class="fas fa-right-from-bracket"></i>
-              <span class="text">Logout</span>
-            </a>
-          </li>
-        </ul>
-      </section>
+        <!-- Bottom Navigation -->
+        <div class="sidebar-footer">
+            <ul class="side-menu">
+                <li>
+                    <a href="#" wire:navigate>
+                        <i class="fas fa-cog"></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="logout" wire:navigate>
+                        <i class="fas fa-right-from-bracket"></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
 </div>
 
 @vite('resources/js/admin.js')

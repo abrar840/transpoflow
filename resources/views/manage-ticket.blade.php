@@ -11,10 +11,39 @@
     
     <!-- CSS File -->
     @vite('resources/css/admin.css')
+    <style>
+      /* Add to admin.css */
+.wire-transition {
+    transition: opacity 300ms ease;
+}
+.wire-transition.in {
+    opacity: 1;
+}
+.wire-transition.out {
+    opacity: 0;
+}
+
+/* Header button styles */
+.page-header .header-options {
+    display: flex;
+    gap: 1rem;
+}
+.page-header button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+.page-header button.active {
+    background: #3498db;
+    color: white;
+}
+    </style>
   </head>
   <body>
-   @livewire('side-bar')
-    @livewire('manage-ticket')
+
+  @livewire('side-bar')
+  
+  @livewire('manage-ticket')
     
   </body>
 </html>

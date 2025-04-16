@@ -378,6 +378,10 @@
 </style>
 
 <script>
+
+
+
+
     function toggleForm() {
         const form = document.getElementById("registrationForm");
         const button = document.getElementById("toggleFormBtn");

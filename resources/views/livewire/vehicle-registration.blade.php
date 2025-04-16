@@ -192,9 +192,9 @@
                 </tbody>
             </table>
             
-            <div class="pagination-container">
+            {{-- <div class="pagination-container">
                 {{ $vehicles->links() }}
-            </div> 
+            </div>  --}}
         </div>
     </div>
 </div>
