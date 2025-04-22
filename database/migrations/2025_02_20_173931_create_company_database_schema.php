@@ -10,6 +10,8 @@ class CreateCompanyDatabaseSchema extends Migration
         // Companies Table
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->after('id'); // Add user_id column
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Define foreign key
             $table->string('name');
             $table->enum('type', ['fleet', 'shuttle', 'transport']);
             $table->text('address')->nullable();

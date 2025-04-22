@@ -50,12 +50,12 @@
     }">
 
       <div class="debug">
-        Departure: {{ $selectedDepartureCity }}<br>
+        {{-- Departure: {{ $selectedDepartureCity }}<br>
         Arrival: {{ $selectedArrivalCity }}<br>
         Type: {{ $selectedVehicleType }}<br>
         Query: {{ $query }}<br>
-      
-        Times: {{ $departureTime }} - {{ $arrivalTime }}
+       --}}
+     
       </div>
 
       <div class="cargo-container">
@@ -171,7 +171,7 @@
         {{-- Days selection --}}
         <div class="space-y-2 mt-4">
           @if($editMode)
-          <p>current days {{ json_encode($selectedDays) }}</p>
+          <p  class="px-2 py-2 bg-gray-300 cursor-pointer red-200">current days {{ json_encode($selectedDays) }}</p>
           @endif
           <br>
 
