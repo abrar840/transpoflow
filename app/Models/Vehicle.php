@@ -51,4 +51,10 @@ class Vehicle extends Model
     {
         return $this->belongsTo(Company::class, 'company_id', 'id'); // Referencing 'id' of Company table
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(VehicleSchedule::class);
+    }
+
 }

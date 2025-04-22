@@ -16,7 +16,13 @@ class BusRouteRegistration extends Component
     public $editingId = null;
     public $company;
     public $routeFares = [];
+
     
+    protected $messages = [
+        'departure_city.required' => 'Departure city is required',
+        'arrival_city.different' => 'Arrival city must be different from departure',
+        // ... other custom messages
+    ];
     protected $rules = [
         'departure_city' => 'required|string|max:255',
         'arrival_city' => 'required|string|max:255|different:departure_city',
@@ -71,6 +77,7 @@ class BusRouteRegistration extends Component
         } else {
             Routes::create($data);
             session()->flash('message', 'Route fare added successfully!');
+            $this->resetForm();
         }
         
         $this->resetForm();
@@ -85,11 +92,14 @@ class BusRouteRegistration extends Component
         $this->arrival_city = $routeFare->arrival_city;
         $this->fare_per_seat = $routeFare->fare_per_seat;
         $this->vehicle_type = $routeFare->vehicle_type;
+       
     }
 
     public function deleteRouteFare($id)
     {
-        Routes::find($id)->delete();
+        // Routes::find($id)->delete();
+
+        Routes::find($id)->forceDelete();
         $this->loadRouteFares();
         session()->flash('message', 'Route fare deleted successfully!');
     }
@@ -103,6 +113,7 @@ class BusRouteRegistration extends Component
             'vehicle_type',
             'editingId'
         ]);
+        $this->resetErrorBag();
     }
 
     public function render()

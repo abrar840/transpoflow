@@ -9,36 +9,38 @@
                 {{ session('message') }}
             </div>
         @endif
-
         <form wire:submit.prevent="saveRouteFare">
-            <h3>Routes & Pricing Management</h3>
+            <h3>{{ $editingId ? 'Edit Route' : 'Add New Route' }}</h3>
+            
             <div class="cargo-container">
-                <div>
-                    <input type="text" wire:model="departure_city" class="editable" placeholder="Departure City">
-                    @error('departure_city') <span class="error">{{ $message }}</span> @enderror
-
-                    <input type="text" wire:model="arrival_city" class="editable" placeholder="Arrival City">
-                    @error('arrival_city') <span class="error">{{ $message }}</span> @enderror
-
-                    <input type="number" wire:model="fare_per_seat" class="editable" step="0.01" placeholder="Fare Per Seat">
-                    @error('fare_per_seat') <span class="error">{{ $message }}</span> @enderror
-
-                    <br>
-                    <select wire:model="vehicle_type" class="editable">
-                        <option value="">Select Vehicle Type</option>
-                        <option value="Economy Bus">Economy Bus</option>
-                        <option value="Luxury Bus">Luxury Bus</option>
-                        <option value="Mini Bus">Mini Bus</option>
-                    </select>
-                    @error('vehicle_type') <span class="error">{{ $message }}</span> @enderror
-                </div>
+                <!-- Add wire:key to all inputs -->
+                <input type="text" wire:model="departure_city" wire:key="departure-{{ $editingId ?? 'new' }}" 
+                       class="editable" placeholder="Departure City">
+                @error('departure_city') <span class="error">{{ $message }}</span> @enderror
+        
+                <input type="text" wire:model="arrival_city" wire:key="arrival-{{ $editingId ?? 'new' }}" 
+                       class="editable" placeholder="Arrival City">
+                @error('arrival_city') <span class="error">{{ $message }}</span> @enderror
+        
+                <input type="number" wire:model="fare_per_seat" wire:key="fare-{{ $editingId ?? 'new' }}" 
+                       class="editable" step="0.01" placeholder="Fare Per Seat">
+                @error('fare_per_seat') <span class="error">{{ $message }}</span> @enderror
+        
+                <br>
+                <select wire:model="vehicle_type" wire:key="vehicle-{{ $editingId ?? 'new' }}" class="editable">
+                    <option value="">Select Vehicle Type</option>
+                    <option value="Economy Bus">Economy Bus</option>
+                    <option value="Luxury Bus">Luxury Bus</option>
+                    <option value="Mini Bus">Mini Bus</option>
+                </select>
+                @error('vehicle_type') <span class="error">{{ $message }}</span> @enderror
             </div>
-
+        
             <div class="button-container">
-                <button type="submit" class="save-btn">
-                    {{ $editingId ?? false ? 'Update' : 'Save' }}
+                <button type="submit" class="save-btn {{ $editingId ? 'bg-yellow-500' : 'bg-blue-500' }}">
+                    {{ $editingId ? 'Update' : 'Save' }}
                 </button>
-
+        
                 @if($editingId)
                     <button type="button" wire:click="resetForm" class="cancel-btn">Cancel</button>
                 @endif

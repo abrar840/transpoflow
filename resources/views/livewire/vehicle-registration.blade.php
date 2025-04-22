@@ -1,5 +1,7 @@
  
    
+      <section class="content">
+        <main>
     
     
     <div  class="vehicle-box-info ">
@@ -198,4 +200,6 @@
         </div>
     </div>
 </div>
+</main>
+</section>
  

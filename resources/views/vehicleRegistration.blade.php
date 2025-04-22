@@ -18,6 +18,8 @@
         </div>
     </header>
 
+
+    @livewire('side-bar')
 @livewire('vehicle-registration')
 
 

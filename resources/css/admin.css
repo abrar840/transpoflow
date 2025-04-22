@@ -440,7 +440,7 @@ body.dark {
 }
 
 .content main .box-info button:hover {
-  background-color: var(--dark-blue);
+  background-color:blue;
   transform: scale(1.05);
 }
 

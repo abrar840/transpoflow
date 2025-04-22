@@ -1,49 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ticket Management | Tivotal</title>
+<x-app-layout>
+    <!-- Page Header -->
+    {{-- <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+           
+        </h2>
+    </x-slot> --}}
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
-    <!-- CSS File -->
-    @vite('resources/css/admin.css')
-    <style>
-      /* Add to admin.css */
-.wire-transition {
-    transition: opacity 300ms ease;
-}
-.wire-transition.in {
-    opacity: 1;
-}
-.wire-transition.out {
-    opacity: 0;
-}
 
-/* Header button styles */
-.page-header .header-options {
-    display: flex;
-    gap: 1rem;
-}
-.page-header button {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background 0.3s ease;
-}
-.page-header button.active {
-    background: #3498db;
-    color: white;
-}
-    </style>
-  </head>
-  <body>
+    <!-- Sidebar -->
+    @livewire('side-bar')
 
-  @livewire('side-bar')
-  
-  @livewire('manage-ticket')
-    
-  </body>
-</html>
+    <!-- Livewire Component for Ticket Management -->
+    @livewire('manage-ticket')
+</x-app-layout>

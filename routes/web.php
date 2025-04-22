@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
  
  
  
-Route::view('/', 'home')->name('home');
+Route::view('/', 'welcome')->name('home');
 
 Route::view('/services', 'services')->name('services');
 
@@ -30,6 +30,7 @@ Route::view('/vregister', 'vehicleRegistration')->name('vehicleRegistraion');
 
 Route::view('/routeregister', 'admin.RouteRegister')->name('RouteRegister');
 
+Route::view('/vs', 'admin.vehicle-schedule')->name('schedule');
 
 
 
