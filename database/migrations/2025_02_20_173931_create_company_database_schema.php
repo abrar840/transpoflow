@@ -7,11 +7,9 @@ class CreateCompanyDatabaseSchema extends Migration
 {
     public function up()
     {
-        // Companies Table
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->after('id'); // Add user_id column
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Define foreign key
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->enum('type', ['fleet', 'shuttle', 'transport']);
             $table->text('address')->nullable();
@@ -21,6 +19,7 @@ class CreateCompanyDatabaseSchema extends Migration
             $table->enum('num_employees', ['<5', '5-20', '20-100', '100-250', '>250']);
             $table->timestamps();
         });
+        
 
         // Websites Table
         Schema::create('websites', function (Blueprint $table) {
