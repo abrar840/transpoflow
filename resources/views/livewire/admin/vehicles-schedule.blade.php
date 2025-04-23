@@ -3,14 +3,14 @@
     <h2>Vehicle Schedule Configuration</h2>
 
     @if (session('error'))
-    <div class="alert alert-danger">
+    <div class="alert alert-danger text-red-500">
       {{ session('error') }}
     </div>
 
     @endif
 
     @if (session('message'))
-    <div class="alert alert-success">
+    <div class="alert alert-success text-red-500">
       {{ session('message') }}
     </div>
     @endif
@@ -53,8 +53,8 @@
         {{-- Departure: {{ $selectedDepartureCity }}<br>
         Arrival: {{ $selectedArrivalCity }}<br>
         Type: {{ $selectedVehicleType }}<br>
-        Query: {{ $query }}<br>
-       --}}
+        Query: {{ $query }}<br> --}}
+      
      
       </div>
 
@@ -119,15 +119,21 @@
 
         <div x-data="{ open:false, selectedVehicle: ''}" class="relative w-full" x-ref="vehicleSearch">
 
-          @if(!$editMode)
-          <input type="text" wire:model.live='query' x-model="selectedVehicle" x-on:focus="open=true"
-            x-on:click.away="open=false" name="bus_bo" class="editable" placeholder="vehicle no" required
-            x-ref="vehicleInput">
+          @if($editMode)
+      
+
+            <input type="text" wire:model='query' x-model="selectedVehicle" x-on:focus="open=true"
+            x-on:click.away="open=false" name="bus_bo" placeholder="vehicle no" required class="editable">
 
           @else
+            
 
-          <input type="text" wire:model='query' x-model="selectedVehicle" x-on:focus="open=true"
-            x-on:click.away="open=false" name="bus_bo" placeholder="vehicle no" required class="editable">
+        
+          <input type="text" wire:model.live='query' x-model="selectedVehicle" x-on:focus="open=true"
+          x-on:click.away="open=false" name="bus_bo" class="editable" placeholder="vehicle no" required
+          x-ref="vehicleInput">
+
+         
           @endif
 
           @error('query')
@@ -137,13 +143,19 @@
           @if(!empty($suggestions))
           <ul class="absolute bg-white border w-full z-10" x-show="open">
             @foreach ($suggestions as $item)
-            <li class="px-2 py-2 hover:bg-gray-300 cursor-pointer" @style([ 'color: red'=> $item === 'Vehicle not
-              registered'
-              ]) @click="selectedVehicle='{{$item}}'; open=false">
-              {{ $item }}
-            </li>
+            <li 
+            class="px-2 py-2 bg-gray-300 cursor-pointer"
+            @click="
+                selectedVehicle='{{$item}}';
+                $wire.set('query', '{{$item}}');
+                open=false
+            ">
+            {{ $item }}
+        </li>
             @endforeach
           </ul>
+        
+ 
           @endif
         </div>
 

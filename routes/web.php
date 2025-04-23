@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Actions\Logout;
+
+Route::post('/logout', Logout::class)->name('logout');
  
- 
- 
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'home')->name('home');
 
 Route::view('/services', 'services')->name('services');
 
@@ -16,7 +17,7 @@ Route::view('/contact', 'contact')->name('contact');
 
 Route::view('/form', 'form')->name('form');
 
-Route::view('/admin', 'AdminPanel')->name('admin');
+Route::view('/admin', 'AdminPanel')->name('adminpanel');
 
 
 
@@ -37,9 +38,18 @@ Route::view('/vs', 'admin.vehicle-schedule')->name('schedule');
 
 
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('dashboard', 'dashboard')
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
+
+
+
+
+// Route::view('/homepage', 'home')
+//     // ->middleware(['auth', 'verified'])
+//     ->name('homepage');
+
+
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

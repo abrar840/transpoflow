@@ -35,6 +35,11 @@ class BusinessForm extends Component
         // Fetch data for dropdowns once when the component is loaded
         $this->user_id = auth()->user()->id;
         $this->email = auth()->user()->email;
+         if(auth()->user()->company){
+        return redirect((route('adminpanel')));
+         }
+
+
         $this->availableServices = Service::all();
         $this->colorPalettes = ColorPalette::all();
     }

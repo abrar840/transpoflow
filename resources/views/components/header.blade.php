@@ -47,15 +47,47 @@
             </ul>
         </nav>
 
-        <a href="{{ route('login') }}" class="btn btn-secondary">
-            <span class="text text-1">Sign In</span>
-            <span class="text text-2" aria-hidden="true">Sign In</span>
-        </a>
 
-        <a href="{{ route('register') }}" class="btn btn-secondary">
-            <span class="text text-1">Sign Up</span>
-            <span class="text text-2" aria-hidden="true">Sign Up</span>
-        </a>
+
+
+      
+
+        @guest
+        <div class="flex space-x-4">
+            <a href="{{ route('login') }}" class="btn btn-secondary">
+                <span class="text text-1">Sign In</span>
+                <span class="text text-2" aria-hidden="true">Sign In</span>
+            </a>
+    
+            <a href="{{ route('register') }}" class="btn btn-secondary">
+                <span class="text text-1">Sign Up</span>
+                <span class="text text-2" aria-hidden="true">Sign Up</span>
+            </a>
+        </div>
+    @endguest
+
+    <!-- User Menu - Only show when authenticated -->
+    @auth
+    <div class="flex items-center space-x-4">
+
+        <span class="text-white">{{ auth()->user()->name }}</span>
+        
+        <!-- Livewire Logout Button -->
+        {{-- <button 
+            wire:click.prevent="logout"
+            class="text-white hover:text-gray-300"
+        >
+            Logout
+        </button> --}}
+        
+        <!-- OR Traditional Form (if you prefer) -->
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="text-white hover:text-gray-300">Logout</button>
+        </form>
+    </div>
+@endauth
+        
 
         <button class="nav-open-btn" aria-label="open services" data-nav-toggler>
             <span class="line line-1"></span>

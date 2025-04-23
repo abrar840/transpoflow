@@ -148,6 +148,9 @@ class VehiclesSchedule extends Component
             return;
         }
 
+        // $this->resetErrorBag(); // Clears all errors
+        // OR for specific field:
+        $this->resetErrorBag(['query']); 
         $this->suggestions = Vehicle::where('company_id', $this->company->id)
             ->where('registration_number', 'like', '%' . $this->query . '%')
             ->take(5)
@@ -155,7 +158,8 @@ class VehiclesSchedule extends Component
             ->toArray();
 
         if (!$this->suggestions && $this->query) {
-            $this->suggestions = ["Vehicle not registered"];
+            $this->addError('query', 'Vehicle not registered');
+           
         }
     }
 
@@ -186,21 +190,47 @@ protected $rules=[
 public function saveSchedule()
 {
 
-$this->validate();
 
+$this->validate();
+  // Check if the vehicle number is in the suggestions
+    if (!in_array($this->query, $this->suggestions)) {
+        session()->flash('error', 'Please select a vehicle number from the suggestions.');
+        return;
+    }
+    
+try{
 $route=Routes::where('company_id',$this->company->id)
 ->where('departure_city',$this->selectedDepartureCity)
 ->where('arrival_city',$this->selectedArrivalCity)
 ->where('vehicle_type',$this->selectedVehicleType)
-->firstOrFail();
-
+->firstOrFail();}catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+    session()->flash('error', 'Route not found!');
+    return;
+}
+try{
 $vehicle=Vehicle::where('company_id',$this->company->id)
 ->where('registration_number',$this->query)
-->firstOrFail();
+->firstOrFail();}catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+    session()->flash('error', 'Vehicle not found!');
+    return;
+}
 
+
+//check if vehicel is alredy registered and we are not in edit mode
+
+if($vehicle->scheduled==1 && !$this->editMode) {
+    session()->flash('error','this vehicle is alreday scheduled');
+    return;
+}
+
+
+
+
+$registrationnumber=strtoupper($vehicle->registration_number);
+ 
 $data = [
     'route_id'=>$route->id,
-    'vehicle_id'=>$vehicle->registration_number,
+    'vehicle_id'=>$registrationnumber,
     'days_of_week'=>$this->selectedDays,
     'departure_time'=>$this->departureTime,
     'arrival_time'=>$this->arrivalTime

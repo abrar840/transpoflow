@@ -206,18 +206,42 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="images/fms.jpg" width="285" height="336" loading="lazy" alt="Breakfast"
-                      class="img-cover">
+                    <img src="images/fms.jpg" width="285" height="336" loading="lazy" alt="Breakfast" class="img-cover">
                   </figure>
                 </a>
 
                 <div class="card-content">
 
-                  <h3 class="title-4 card-title">
-                    <a href="#">Create one </a>
-                  </h3>
+                 
 
-                  <a href="/form" class="btn-text hover-underline label-2">click to continue </a>
+
+                  @auth
+                  
+                  @if (auth()->user()->company)
+                  <h3 class="title-4 card-title">
+                    <a href="/admin">{{ auth()->user()->company->name }}</a>
+                  </h3>
+                  <a href="/admin" class="btn-text hover-underline label-2" wire:navigate>admin panel</a>
+                  @else
+                  <h3 class="title-4 card-title">
+                    <a href="/form">Create One</a>
+                  </h3>
+                  <a href="/form" class="btn-text hover-underline label-2" wire:navigate>click to continue</a>
+                  @endif
+                  @endauth
+
+                  @guest
+                  <h3 class="title-4 card-title">
+                    <a href="">Create One</a>
+                  </h3>
+                  <a href="" class="btn-text hover-underline label-2" wire:navigate>login to continue</a>
+                  @endguest
+
+
+
+
+
+
 
                 </div>
 
@@ -252,8 +276,7 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="images/cms.jpg" width="285" height="336" loading="lazy" alt="Drinks"
-                      class="img-cover">
+                    <img src="images/cms.jpg" width="285" height="336" loading="lazy" alt="Drinks" class="img-cover">
                   </figure>
                 </a>
 
@@ -314,12 +337,11 @@
 
           <figure class="about-banner">
 
-            <img src="images/about-banner.png" width="570" height="570" loading="lazy" alt="about banner"
-              class="w-100" data-parallax-item data-parallax-speed="1">
+            <img src="images/about-banner.png" width="570" height="570" loading="lazy" alt="about banner" class="w-100"
+              data-parallax-item data-parallax-speed="1">
 
             <div class="abs-img abs-img-1 has-before" data-parallax-item data-parallax-speed="1.75">
-              <img src="images/about-abs-image.jpg" width="285" height="285" loading="lazy" alt=""
-                class="w-100">
+              <img src="images/about-abs-image.jpg" width="285" height="285" loading="lazy" alt="" class="w-100">
             </div>
 
 
@@ -380,8 +402,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="tms"
-                    class="img-cover">
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="tms" class="img-cover">
                 </figure>
 
                 <div>
@@ -407,8 +428,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="cms"
-                    class="img-cover">
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="cms" class="img-cover">
                 </figure>
 
                 <div>
@@ -433,8 +453,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="fms"
-                    class="img-cover">
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="fms" class="img-cover">
                 </figure>
 
                 <div>
@@ -462,8 +481,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="csm"
-                    class="img-cover">
+                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="csm" class="img-cover">
                 </figure>
 
                 <div>
@@ -579,11 +597,9 @@
 
           </ul>
 
-          <img src="images/shape-7.png" width="208" height="178" loading="lazy" alt="shape"
-            class="shape shape-1">
+          <img src="images/shape-7.png" width="208" height="178" loading="lazy" alt="shape" class="shape shape-1">
 
-          <img src=".images/shape-8.png" width="120" height="115" loading="lazy" alt="shape"
-            class="shape shape-2">
+          <img src=".images/shape-8.png" width="120" height="115" loading="lazy" alt="shape" class="shape shape-2">
 
         </div>
       </section>
