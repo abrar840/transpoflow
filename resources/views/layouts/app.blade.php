@@ -1,69 +1,85 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js']) <!-- Combined Vite assets -->
-    @vite('resources/js/script.js') 
-    @livewireStyles
+  <!-- Scripts -->
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <!-- Combined Vite assets -->
+  @vite('resources/js/script.js')
+  @livewireStyles
 
-    <style>
-        .wire-transition {
-          transition: opacity 300ms ease;
-        }
-        .wire-transition.in {
-          opacity: 1;
-        }
-        .wire-transition.out {
-          opacity: 0;
-        }
-    
-        .page-header .header-options {
-          display: flex;
-          gap: 1rem;
-          margin-top:0;
+  <style>
+    .wire-transition {
+      transition: opacity 300ms ease;
+    }
 
-        }
-        .page-header button {
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          transition: background 0.3s ease;
-        }
-        .page-header button.active {
-          background: #3498db;
-          color: white;
-        }
-      </style>
+    .wire-transition.in {
+      opacity: 1;
+    }
+
+    .wire-transition.out {
+      opacity: 0;
+    }
+
+    .page-header .header-options {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0;
+
+    }
+
+    .page-header button {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .page-header button.active {
+      background: #3498db;
+      color: white;
+    }
+  </style>
 </head>
+
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        <!-- Navigation Component -->
-        <livewire:layout.navigation />
+  <div class="min-h-screen bg-gray-100"x-data="{ show: false }"
+  x-init="show = true"
+  x-show="show"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0 translate-y-2"
+  x-transition:enter-end="opacity-100 translate-y-0"
+  x-transition:leave="transition ease-in duration-200"
+  x-transition:leave-start="opacity-100 translate-y-0"
+  x-transition:leave-end="opacity-0 translate-y-2">
+    <!-- Navigation Component -->
+    <livewire:layout.navigation />
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+    <!-- Page Heading -->
+    @if (isset($header))
+    <header class="bg-white shadow">
+      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        {{ $header }}
+      </div>
+    </header>
+    @endif
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+    <!-- Page Content -->
+    <main>
+      {{ $slot }}
+    </main>
+  </div>
 
-    @livewireScripts
+  @livewireScripts
 </body>
+
 </html>

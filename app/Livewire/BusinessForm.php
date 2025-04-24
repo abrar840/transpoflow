@@ -36,7 +36,7 @@ class BusinessForm extends Component
         $this->user_id = auth()->user()->id;
         $this->email = auth()->user()->email;
          if(auth()->user()->company){
-        return redirect((route('adminpanel')));
+        return redirect((route('AdminPanel')));
          }
 
 
@@ -56,6 +56,38 @@ class BusinessForm extends Component
         //'colorPalette' => 'exists:color_palettes,id'
     ];
 
+
+    protected $messages = [
+        'name.string' => 'The company name must be a string.',
+        'name.max' => 'The company name may not be greater than 255 characters.',
+        'name.unique' => 'This company name is already taken.',
+    
+        'type.required' => 'The company type is required.',
+        'type.in' => 'The company type must be one of: fleet, shuttle, or transport.',
+    
+        'email.required' => 'The email address is required.',
+        'email.email' => 'Please provide a valid email address.',
+        'email.unique' => 'This email address is already registered.',
+    
+        'address.string' => 'The address must be a string.',
+        'address.max' => 'The address may not be greater than 255 characters.',
+    
+        'logo.image' => 'The logo must be an image.',
+        'logo.max' => 'The logo must not be larger than 2MB.',
+    
+        'admin_username.required' => 'The admin username is required.',
+        'admin_username.string' => 'The admin username must be a string.',
+        'admin_username.max' => 'The admin username may not be greater than 225 characters.',
+    
+        'num_employees.in' => 'Please select a valid number of employees.',
+    
+        'services.required' => 'At least one service must be selected.',
+        'services.array' => 'The services field must be an array.',
+        'services.*.exists' => 'One or more selected services are invalid.',
+        
+        // 'colorPalette.exists' => 'The selected color palette is invalid.',
+    ];
+    
     public function submit()
     {
         // Debugging: Check if the method is being called
@@ -83,7 +115,7 @@ class BusinessForm extends Component
 
         // Reset form fields
         $this->reset();
-        redirect()->route("admin");
+        redirect()->route("AdminPanel");
 
         
     }

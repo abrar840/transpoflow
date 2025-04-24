@@ -70,7 +70,7 @@
     @auth
     <div class="flex items-center space-x-4">
 
-        <span class="text-white">{{ auth()->user()->name }}</span>
+       
         
         <!-- Livewire Logout Button -->
         {{-- <button 
@@ -98,3 +98,6 @@
         <div class="overlay" data-nav-toggler data-overlay></div>
     </div>
 </header>
+@auth
+ <span class="text-white">{{ auth()->user()->name }}</span>
+ @endauth

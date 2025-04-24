@@ -232,9 +232,9 @@
 
                   @guest
                   <h3 class="title-4 card-title">
-                    <a href="">Create One</a>
+                    <a href="{{ route('login') }}">Create One</a>
                   </h3>
-                  <a href="" class="btn-text hover-underline label-2" wire:navigate>login to continue</a>
+                  <a href="{{ route('login') }}" class="btn-text hover-underline label-2" wire:navigate>login to continue</a>
                   @endguest
 
 

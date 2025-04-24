@@ -17,6 +17,8 @@ class BusRouteRegistration extends Component
     public $company;
     public $routeFares = [];
 
+    public $formId=null;
+
     
     protected $messages = [
         'departure_city.required' => 'Departure city is required',
@@ -61,6 +63,30 @@ class BusRouteRegistration extends Component
             return;
         }
         $this->validate();
+
+   // Check if route with same cities and vehicle type already exists
+   $existingRoute = Routes::where('company_id', $this->company->id)
+   ->where('departure_city', $this->departure_city)
+   ->where('arrival_city', $this->arrival_city)
+   ->where('vehicle_type', $this->vehicle_type)
+   ->when($this->editingId, function ($query) {
+       return $query->where('id', '!=', $this->editingId);
+   })
+   ->first();
+
+   //when() will allow query to fetch result if id are not equal then seeion meesage od sipatheced ...
+   //if id's are equal then it will return no result which willl cause no session meessage 
+
+
+
+   //now check if we re  creating same route again 
+    if ($existingRoute) {
+        session()->flash('message', 'Route with this vehicle type already exists.');
+        return;
+    }
+
+
+
         
         $data = [
             'departure_city' => $this->departure_city,
@@ -73,19 +99,21 @@ class BusRouteRegistration extends Component
         
         if ($this->editingId) {
            Routes::find($this->editingId)->update($data);
+           $this->resetForm();
             session()->flash('message', 'Route fare updated successfully!');
         } else {
             Routes::create($data);
-            session()->flash('message', 'Route fare added successfully!');
             $this->resetForm();
+            session()->flash('message', 'Route fare added successfully!');
+           
         }
         
-        $this->resetForm();
+        
         $this->loadRouteFares();
     }
 
     public function editRouteFare($id)
-    {
+    {  $this->resetForm();
         $routeFare =Routes::findOrFail($id);
         $this->editingId = $id;
         $this->departure_city = $routeFare->departure_city;
@@ -106,14 +134,15 @@ class BusRouteRegistration extends Component
 
     public function resetForm()
     {
-        $this->reset([
-            'departure_city',
-            'arrival_city',
-            'fare_per_seat',
-            'vehicle_type',
-            'editingId'
-        ]);
+        $this->departure_city = '';
+        $this->arrival_city = '';
+        $this->fare_per_seat = '';
+        $this->vehicle_type = '';
+        $this->editingId = null;
+
+        $this->resetValidation(); 
         $this->resetErrorBag();
+        $this->formId++;
     }
 
     public function render()

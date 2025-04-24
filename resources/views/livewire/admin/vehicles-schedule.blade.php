@@ -131,7 +131,7 @@
         
           <input type="text" wire:model.live='query' x-model="selectedVehicle" x-on:focus="open=true"
           x-on:click.away="open=false" name="bus_bo" class="editable" placeholder="vehicle no" required
-          x-ref="vehicleInput">
+          x-ref="vehicleInput" wire:key="{{ now()->timestamp }}">
 
          
           @endif
@@ -148,7 +148,7 @@
             @click="
                 selectedVehicle='{{$item}}';
                 $wire.set('query', '{{$item}}');
-                open=false
+                $nextTick(() => open=false);
             ">
             {{ $item }}
         </li>

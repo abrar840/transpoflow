@@ -103,7 +103,10 @@ class VehicleRegistration extends Component
         
         $this->editingVehicleId = $vehicle->registration_number;
        
-        $this->registration_number = $vehicle->registration_number;
+        $this->registration_number = strtoupper($vehicle->registration_number);
+
+
+
         $this->vehicle_type = $vehicle->vehicle_type;
         $this->seating_capacity = $vehicle->seating_capacity;
         $this->make = $vehicle->make;

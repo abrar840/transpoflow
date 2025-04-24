@@ -17,7 +17,7 @@ Route::view('/contact', 'contact')->name('contact');
 
 Route::view('/form', 'form')->name('form');
 
-Route::view('/admin', 'AdminPanel')->name('adminpanel');
+Route::view('/admin', 'AdminPanel')->name('AdminPanel');
 
 
 
@@ -38,9 +38,9 @@ Route::view('/vs', 'admin.vehicle-schedule')->name('schedule');
 
 
 
-// Route::view('dashboard', 'dashboard')
-//     ->middleware(['auth', 'verified'])
-//     ->name('dashboard');
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 
 

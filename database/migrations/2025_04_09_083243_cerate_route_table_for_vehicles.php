@@ -20,7 +20,8 @@ return new class extends Migration
         $table->timestamps();
         $table->softDeletes();
     
-        $table->unique(['departure_city', 'arrival_city']);
+        $table->unique(['departure_city', 'arrival_city', 'vehicle_type']);
+
     
         $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
     });

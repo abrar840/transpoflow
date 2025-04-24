@@ -20,7 +20,8 @@
                 <div class="input-container">
                     <label for="companyType">Company Type :</label>
                     <select id="companyType" class="input-field" required wire:model="type">
-                        <option value="" disabled selected>Select Company Type</option>
+                   
+                        <option value=""  selected>Select Company Type</option>
                         <option value="fleet" style="color: black;">Fleet Company</option>
                         <option value="shuttle" style="color: black;">Shuttle Company</option>
                         <option value="transport" style="color: black;">Transport Company</option>
@@ -75,7 +76,7 @@
 
                 </div>
 
-                <!-- Phone Number -->
+                {{-- <!-- Phone Number -->
                 <div class="input-container">
                     <label>Select Color Palette</label>
                     <div class="radio-group">
@@ -92,7 +93,7 @@
                             <div class="color-sample color-6"></div>
                         </label>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- logo -->
                 <div class="input-container">

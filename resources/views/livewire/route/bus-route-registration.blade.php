@@ -5,7 +5,7 @@
         <h1>Ticket Fare Configuration Form</h1>
 
         @if(session('message'))
-            <div class="alert alert-success mb-4">
+            <div class="alert alert-success mb-4  bg-blue-200 text-white px-2 py-1 rounded">
                 {{ session('message') }}
             </div>
         @endif
@@ -14,20 +14,20 @@
             
             <div class="cargo-container">
                 <!-- Add wire:key to all inputs -->
-                <input type="text" wire:model="departure_city" wire:key="departure-{{ $editingId ?? 'new' }}" 
-                       class="editable" placeholder="Departure City">
+                <input type="text" wire:model="departure_city" wire:key="departure-{{ $formId }}"
+                                       class="editable" placeholder="Departure City">
                 @error('departure_city') <span class="error">{{ $message }}</span> @enderror
         
-                <input type="text" wire:model="arrival_city" wire:key="arrival-{{ $editingId ?? 'new' }}" 
+                <input type="text" wire:model="arrival_city" wire:key="departure-{{ $formId }}"
                        class="editable" placeholder="Arrival City">
                 @error('arrival_city') <span class="error">{{ $message }}</span> @enderror
         
-                <input type="number" wire:model="fare_per_seat" wire:key="fare-{{ $editingId ?? 'new' }}" 
+                <input type="number" wire:model="fare_per_seat" wire:key="departure-{{ $formId }}" 
                        class="editable" step="0.01" placeholder="Fare Per Seat">
                 @error('fare_per_seat') <span class="error">{{ $message }}</span> @enderror
         
                 <br>
-                <select wire:model="vehicle_type" wire:key="vehicle-{{ $editingId ?? 'new' }}" class="editable">
+                <select wire:model="vehicle_type" wire:key="departure-{{ $formId }}" class="editable">
                     <option value="">Select Vehicle Type</option>
                     <option value="Economy Bus">Economy Bus</option>
                     <option value="Luxury Bus">Luxury Bus</option>
