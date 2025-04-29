@@ -7,12 +7,13 @@ use App\Models\Vehicle;
 use Livewire\Component;
 use App\Models\Routes;
 use App\Models\VehicleSchedule;
+use App\Models\CompanyService;
 use Illuminate\Support\Facades\Auth;
 
 class VehiclesSchedule extends Component
 {
 
-    
+
     public array $departureCities = [];
     public array $arrivalCities = [];
     public array $vehicleTypes = [];
@@ -33,23 +34,70 @@ class VehiclesSchedule extends Component
     public $editMode = false;
     public $scheduleId = null;
 
-    public $arrivalTime,$departureTime;
+    public $arrivalTime, $departureTime;
 
     public $schedules;
-    public $perpage=10;
- 
-    public function loadschedules(){
+    public $checkvehicle_presence = '';
+
+    public $companyServices;
+
+    public $CompanyhasFleetService = false;
+
+    public function loadschedules()
+    {
         $this->schedules = VehicleSchedule::with('vehicle', 'route')->get();
-       
-      
+
+
     }
     public function mount()
     {
         $this->initializeCompany();
         $this->loadInitialData();
         $this->loadschedules();
-        
+
+        $this->checkFleetModuleExistance();
+        if ($this->fleetEnabled()) {
+            $this->check_if_any_vehicle();
+        }
+
+
     }
+
+
+    // this function will block suggestion and regstration check for copanies who don thave selected fleet managenmnt intheir plan 
+//it will allows the tickcet managment run independentyly 
+    public function checkFleetModuleExistance()
+    {
+        $this->companyServices = $this->company->services;
+        foreach ($this->companyServices as $service) {
+            if (str_contains($service, 'FleetManagement')) {
+                $this->CompanyhasFleetService = true;
+                break;
+            }
+        }
+    }
+    public function fleetEnabled(): bool
+    {
+        return $this->CompanyhasFleetService;
+    }
+
+
+
+    //check if any vehicle registered or table is empty this for companies who are 
+
+
+    public function check_if_any_vehicle()
+    {
+        $this->checkvehicle_presence = Vehicle::where('company_id', $this->company->id)->get();
+        if ($this->checkvehicle_presence->isEmpty()) {
+
+            session()->flash("error", "company have no registered vehicles");
+        }
+    }
+
+
+
+
 
     //loading user data and company data 
     protected function initializeCompany(): void
@@ -137,20 +185,21 @@ class VehiclesSchedule extends Component
 
 
 
-    
 
-    //registered vehicle number search 
 
     public function updatedQuery()
     {
+
+
         if (strlen($this->query) < 1) {
             $this->suggestions = [];
+
             return;
         }
 
         // $this->resetErrorBag(); // Clears all errors
         // OR for specific field:
-        $this->resetErrorBag(['query']); 
+        $this->resetErrorBag(['query']);
         $this->suggestions = Vehicle::where('company_id', $this->company->id)
             ->where('registration_number', 'like', '%' . $this->query . '%')
             ->take(5)
@@ -159,8 +208,10 @@ class VehiclesSchedule extends Component
 
         if (!$this->suggestions && $this->query) {
             $this->addError('query', 'Vehicle not registered');
-           
+
         }
+
+
     }
 
 
@@ -173,146 +224,182 @@ class VehiclesSchedule extends Component
     }
 
 
-// validation rules for form input
+    // validation rules for form input
 
-protected $rules=[
+    protected $rules = [
 
-    'selectedDepartureCity' => 'required',
+        'selectedDepartureCity' => 'required',
         'selectedArrivalCity' => 'required',
         'selectedVehicleType' => 'required',
         'query' => 'required',
         'selectedDays' => 'required|array|min:1'
+
+    ];
+
+
+
+    public function saveSchedule()
+    {
+
+
+        $this->validate();
+        // Check if the vehicle number is in the suggestions
+
+        if ($this->fleetEnabled()) {
+
+            if (!in_array($this->query, $this->suggestions)) {
+                session()->flash('error', 'Please select a vehicle number from the suggestions.');
+                return;
+            }
+        }
+
+        try {
+            $route = Routes::where('company_id', $this->company->id)
+                ->where('departure_city', $this->selectedDepartureCity)
+                ->where('arrival_city', $this->selectedArrivalCity)
+                ->where('vehicle_type', $this->selectedVehicleType)
+                ->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            session()->flash('error', 'Route not found!');
+            return;
+        }
+
         
-];
- 
+        if ($this->fleetEnabled()) { // run below functionlity only if company have selecetd the fleet servoce 
+        try {
+            $vehicle = Vehicle::where('company_id', $this->company->id)
+                ->where('registration_number', $this->query)
+                ->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            session()->flash('error', 'Vehicle not found!');
+            return;
+        }}
 
 
-public function saveSchedule()
-{
 
 
-$this->validate();
-  // Check if the vehicle number is in the suggestions
-    if (!in_array($this->query, $this->suggestions)) {
-        session()->flash('error', 'Please select a vehicle number from the suggestions.');
-        return;
+        //check if vehicel is alredy registered and we are not in edit mode
+  
+        if ($this->fleetEnabled()) { 
+
+        if ($vehicle->scheduled == 1 && !$this->editMode) {
+            session()->flash('error', 'This vehicle is already scheduled');
+            return;
+        }
+
+        if ($vehicle->scheduled == 1 && $this->editMode && $this->editingVehicleId != $vehicle->id) {
+            session()->flash('error', 'This vehicle is already scheduled in another schedule');
+            return;
+        }
+
+        if ($vehicle->is_active == 0) {
+            session()->flash('error', 'This vehicle is currently not active');
+            return;
+        }
+
+
+        $vehicle->update(['scheduled' => 1]);
+
+        $registrationnumber = strtoupper($vehicle->registration_number);
+
+
+    }else{
+            
+        $registrationnumber = strtoupper($this->query);
     }
-    
-try{
-$route=Routes::where('company_id',$this->company->id)
-->where('departure_city',$this->selectedDepartureCity)
-->where('arrival_city',$this->selectedArrivalCity)
-->where('vehicle_type',$this->selectedVehicleType)
-->firstOrFail();}catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-    session()->flash('error', 'Route not found!');
-    return;
-}
-try{
-$vehicle=Vehicle::where('company_id',$this->company->id)
-->where('registration_number',$this->query)
-->firstOrFail();}catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-    session()->flash('error', 'Vehicle not found!');
-    return;
-}
-
-
-//check if vehicel is alredy registered and we are not in edit mode
-
-if($vehicle->scheduled==1 && !$this->editMode) {
-    session()->flash('error','this vehicle is alreday scheduled');
-    return;
-}
-
-
-
-
-$registrationnumber=strtoupper($vehicle->registration_number);
- 
-$data = [
-    'route_id'=>$route->id,
-    'vehicle_id'=>$registrationnumber,
-    'days_of_week'=>$this->selectedDays,
-    'departure_time'=>$this->departureTime,
-    'arrival_time'=>$this->arrivalTime
-];
-
-if($this->editMode){
-    $schedule=VehicleSchedule::findOrFail($this->scheduleId);
-    $schedule->update($data);
-    session()->flash('message', 'Schedule updated successfully!');
-
-}
-else {
-    VehicleSchedule::create($data);
-    session()->flash('message', 'Schedule created successfully!');
-}
-$this->clearFields();
-$this->loadschedules();
- 
-
-}
-public function editSchedule($id)
-{
-    $schedule = VehicleSchedule::with(['route','vehicle'])->findOrFail($id);
-    $this->scheduleId   = $id;
-    $this->editMode     = true;
-    $this->selectedDepartureCity = $schedule->route->departure_city;
-
-    // Immediately populate arrivalCities from that city:
-    $this->filterArrivalCities();
-
-    $this->selectedArrivalCity   = $schedule->route->arrival_city;
-
-    // Now populate vehicleType from those two:
-    $this->showVehicle();
-
-    $this->selectedVehicleType   = $schedule->route->vehicle_type;
-    $this->query                 = $schedule->vehicle->registration_number;
-    $this->selectedDays          = $schedule->days_of_week;
-    $this->departureTime         = $schedule->departure_time;
-    $this->arrivalTime           = $schedule->arrival_time;
-}
-
-
-public function deleteSchedule($scheduleId)
-{
-    $schedule = VehicleSchedule::findOrFail($scheduleId);
-    $schedule->delete();
-    $this->loadschedules();
-    session()->flash('message', 'Schedule deleted successfully!');
-   
-}
-
-public function clearFields()
-{
-    // Reset all properties
-    $this->reset([
-        'selectedDepartureCity',
-        'selectedArrivalCity',
-        'selectedVehicleType',
-        'query',
-        'departureTime',
-        'arrivalTime',
-        'selectedDays',
-        'editMode',
-        'scheduleId',
-        'arrivalCities',
-        'vehicleType',
-        'suggestions'
-    ]);
-    
-    // Reload initial data if needed
-    $this->loadInitialData();
-    
-    // Dispatch event for Alpine.js to handle
-    $this->dispatch('fields-reset');
-}
-
-
-
 
 
  
+
+
+        $data = [
+            'route_id' => $route->id,
+            'vehicle_id' => $registrationnumber,
+            'days_of_week' => $this->selectedDays,
+            'departure_time' => $this->departureTime,
+            'arrival_time' => $this->arrivalTime
+        ];
+
+        if ($this->editMode) {
+            $schedule = VehicleSchedule::findOrFail($this->scheduleId);
+            $schedule->update($data);
+            session()->flash('message', 'Schedule updated successfully!');
+
+        } else {
+            VehicleSchedule::create($data);
+            session()->flash('message', 'Schedule created successfully!');
+        }
+        $this->clearFields();
+        $this->loadschedules();
+
+
+    }
+    public function editSchedule($id)
+    {
+        $schedule = VehicleSchedule::with(['route', 'vehicle'])->findOrFail($id);
+
+        $this->scheduleId = $id;
+        $this->editMode = true;
+        $this->selectedDepartureCity = $schedule->route->departure_city;
+
+        // Immediately populate arrivalCities from that city:
+        $this->filterArrivalCities();
+
+        $this->selectedArrivalCity = $schedule->route->arrival_city;
+
+        // Now populate vehicleType from those two:
+        $this->showVehicle();
+
+        $this->selectedVehicleType = $schedule->route->vehicle_type;
+
+        $this->query = $schedule->vehicle->registration_number ?? '';
+
+        $this->selectedDays = $schedule->days_of_week;
+        $this->departureTime = $schedule->departure_time;
+        $this->arrivalTime = $schedule->arrival_time;
+
+    }
+
+
+    public function deleteSchedule($scheduleId)
+    {
+        $schedule = VehicleSchedule::findOrFail($scheduleId);
+        $schedule->delete();
+        $this->loadschedules();
+        session()->flash('message', 'Schedule deleted successfully!');
+
+    }
+
+    public function clearFields()
+    {
+        // Reset all properties
+        $this->reset([
+            'selectedDepartureCity',
+            'selectedArrivalCity',
+            'selectedVehicleType',
+            'query',
+            'departureTime',
+            'arrivalTime',
+            'selectedDays',
+            'editMode',
+            'scheduleId',
+            'arrivalCities',
+            'vehicleType',
+            'suggestions'
+        ]);
+
+        // Reload initial data if needed
+        $this->loadInitialData();
+
+        // Dispatch event for Alpine.js to handle
+        $this->dispatch('fields-reset');
+    }
+
+
+
+
+
+
     public function render()
     {
         return view('livewire.admin.vehicles-schedule');

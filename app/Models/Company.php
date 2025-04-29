@@ -25,10 +25,13 @@ class Company extends Model
         return $this->hasMany(Website::class);
     }
 
+  
+    // Define the relationship with services through the CompanyService pivot table
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'company_services');
+        return $this->belongsToMany(Service::class, 'company_services', 'company_id', 'service_id');
     }
+
 
     public function colorPalette()
     {

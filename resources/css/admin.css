@@ -388,8 +388,6 @@ body.dark {
   margin-bottom: 20px;
 }
 
-
- 
 .vehicle-container {
   width: 100%;
   overflow-x: auto;
@@ -440,7 +438,7 @@ body.dark {
 }
 
 .content main .box-info button:hover {
-  background-color:blue;
+  background-color: var(--dark-blue);
   transform: scale(1.05);
 }
 
@@ -903,8 +901,6 @@ button:hover {
   text-align: center;
   margin-top: 10px;
 }
-
-
 
 
 

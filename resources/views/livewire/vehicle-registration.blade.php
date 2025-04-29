@@ -1,7 +1,14 @@
  
    
       <section class="content">
+       
         <main>
+            <header class="management-header">
+                <h2 class="management-title">Vehicle Management System</h2>
+                <div class="header-actions">
+                    <button id="toggleFormBtn" onclick="toggleForm()">Register New Vehicle</button>
+                </div>
+            </header>
     
     
     <div  class="vehicle-box-info ">
@@ -201,5 +208,19 @@
     </div>
 </div>
 </main>
+<script>
+    function toggleForm() {
+        const form = document.getElementById("registrationForm");
+        const button = document.getElementById("toggleFormBtn");
+        
+        // Toggle visibility
+        if (form.style.display === "none" || form.style.display === "") {
+            form.style.display = "block";
+            button.textContent = "Hide Registration Form";
+        } else {
+            form.style.display = "none";
+            button.textContent = "Register New Vehicle";
+        }
+    }</script>
 </section>
  

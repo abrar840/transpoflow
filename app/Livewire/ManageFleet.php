@@ -8,6 +8,7 @@ class ManageFleet extends Component
 {
     public function render()
     {
-        return view('livewire.manage-fleet');
+        return view('livewire.manage-fleet')->layout('layouts.app');
+
     }
 }

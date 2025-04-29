@@ -67,8 +67,10 @@ class VehicleRegistration extends Component
     {
         $this->validate();
 
+        $registration=strtoupper($this->registration_number);
+ 
         $vehicleData = [
-            'registration_number' => $this->registration_number,
+            'registration_number' => $registration,
             'vehicle_type' => $this->vehicle_type,
             'seating_capacity' => $this->seating_capacity,
             'make' => $this->make,
@@ -169,6 +171,6 @@ class VehicleRegistration extends Component
         return view('livewire.vehicle-registration', [
             'vehicles' => $vehicles,
             'vehicleTypes' => ['Luxury Bus', 'Mini Bus', 'Van', 'Car', 'Truck', 'Other']
-        ]);
+        ])->layout('layouts.app');
     }
 }

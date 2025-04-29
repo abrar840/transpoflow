@@ -64,6 +64,8 @@ class BusRouteRegistration extends Component
         }
         $this->validate();
 
+     
+
    // Check if route with same cities and vehicle type already exists
    $existingRoute = Routes::where('company_id', $this->company->id)
    ->where('departure_city', $this->departure_city)

@@ -59,6 +59,7 @@
       </div>
 
       <div class="cargo-container">
+        
         <select name="departure_city" wire:model="selectedDepartureCity" wire:change="filterArrivalCities"
           class="editable" required>
           @if($editMode)
@@ -119,7 +120,7 @@
 
         <div x-data="{ open:false, selectedVehicle: ''}" class="relative w-full" x-ref="vehicleSearch">
 
-          @if($editMode)
+          @if(!$CompanyhasFleetService)
       
 
             <input type="text" wire:model='query' x-model="selectedVehicle" x-on:focus="open=true"

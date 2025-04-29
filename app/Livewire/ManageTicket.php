@@ -17,6 +17,6 @@ class ManageTicket extends Component
 
     public function render()
     {
-        return view('livewire.manage-ticket');
+        return view('livewire.manage-ticket')->layout('layouts.app');
     }
 }

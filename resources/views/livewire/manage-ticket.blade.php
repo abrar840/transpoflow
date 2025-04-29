@@ -5,6 +5,8 @@
         // You could add additional logic here if needed
     }
 }">
+ 
+
   <section class="content">
     <main>
       <!-- Updated header using Alpine.js -->

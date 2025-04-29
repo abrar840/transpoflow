@@ -1,7 +1,7 @@
 <div>
     
   
-  @livewire('side-bar')
+ 
   
       <section class="content">
         <nav>

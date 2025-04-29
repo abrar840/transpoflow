@@ -171,11 +171,35 @@
           <ion-icon name="chevron-forward"></ion-icon>
         </button>
 
-        <a href="signin.html" class="hero-btn has-after">
+
+        @auth
+        @if(auth()->user()->company)
+
+        <a href="/admin" class="hero-btn has-after">
           <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
 
-          <span class="label-2 text-center span">Start Now</span>
+          <span class="label-2 text-center span">{{auth()->user()->company->name}}</span>
         </a>
+        @else
+        <a href="/form" class="hero-btn has-after">
+          <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
+
+          <span class="label-2 text-center span">Create Now</span>
+        </a>
+        @endif
+
+        @endauth
+
+        @guest
+        <p class="hero-btn has-after">
+          <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
+
+          <span class="label-2 text-center span">login or register to start</span>
+        </p>
+        @endguest
+
+
+
 
       </section>
 
@@ -212,11 +236,11 @@
 
                 <div class="card-content">
 
-                 
+
 
 
                   @auth
-                  
+
                   @if (auth()->user()->company)
                   <h3 class="title-4 card-title">
                     <a href="/admin">{{ auth()->user()->company->name }}</a>
@@ -234,7 +258,8 @@
                   <h3 class="title-4 card-title">
                     <a href="{{ route('login') }}">Create One</a>
                   </h3>
-                  <a href="{{ route('login') }}" class="btn-text hover-underline label-2" wire:navigate>login to continue</a>
+                  <a href="{{ route('login') }}" class="btn-text hover-underline label-2" wire:navigate>login to
+                    continue</a>
                   @endguest
 
 
@@ -286,7 +311,7 @@
                     <a href="#">Cargo Managment System</a>
                   </h3>
 
-                  <a href="services.html" class="btn-text hover-underline label-2">View services</a>
+                  <a href="/services" class="btn-text hover-underline label-2">View services</a>
 
                 </div>
 

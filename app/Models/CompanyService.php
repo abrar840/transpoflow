@@ -13,4 +13,9 @@ class CompanyService extends Pivot
         'company_id',
         'service_id'
     ];
+
+
+
+
+    
 }

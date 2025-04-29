@@ -11,31 +11,27 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <!-- Combined Vite assets -->
-  @vite('resources/js/script.js')
+  
+  <!-- Additional CSS -->
+  @vite('resources/css/VehicleRegistration.css')
+  @vite('resources/css/admin.css')
+  
   @livewireStyles
 
   <style>
-    .wire-transition {
-      transition: opacity 300ms ease;
-    }
-
-    .wire-transition.in {
-      opacity: 1;
-    }
-
-    .wire-transition.out {
-      opacity: 0;
-    }
-
     .page-header .header-options {
       display: flex;
       gap: 1rem;
       margin-top: 0;
-
     }
 
     .page-header button {
@@ -48,22 +44,17 @@
       background: #3498db;
       color: white;
     }
+
+    /* Ensure icons are visible */
+    .fas, .fab {
+      font-style: normal;
+      font-size: inherit;
+    }
   </style>
 </head>
 
 <body class="font-sans antialiased">
-  <div class="min-h-screen bg-gray-100"x-data="{ show: false }"
-  x-init="show = true"
-  x-show="show"
-  x-transition:enter="transition ease-out duration-300"
-  x-transition:enter-start="opacity-0 translate-y-2"
-  x-transition:enter-end="opacity-100 translate-y-0"
-  x-transition:leave="transition ease-in duration-200"
-  x-transition:leave-start="opacity-100 translate-y-0"
-  x-transition:leave-end="opacity-0 translate-y-2">
-    <!-- Navigation Component -->
-    <livewire:layout.navigation />
-
+  <div class="min-h-screen bg-gray-100" x-data="{ show: false }">
     <!-- Page Heading -->
     @if (isset($header))
     <header class="bg-white shadow">
@@ -74,12 +65,16 @@
     @endif
 
     <!-- Page Content -->
-    <main>
-      {{ $slot }}
+    <main class="flex">
+      @livewire('side-bar')
+      <div class="flex-1 p-4">
+        {{ $slot }}
+      </div>
     </main>
   </div>
 
   @livewireScripts
+  @stack('scripts')
 </body>
 
 </html>
