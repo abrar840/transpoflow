@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\EndUser;
+namespace App\Livewire\Enduser;
 use App\Models\Company;
 use Livewire\Component;
 

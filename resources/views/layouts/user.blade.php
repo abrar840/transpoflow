@@ -8,6 +8,7 @@
     <title>{{ $title ?? 'User Page' }} - {{ config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/css/enduser/homepage.css', 'resources/js/app.js'])
+    
  
     @livewireStyles
     <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
@@ -21,6 +22,8 @@
         </div>
       </main>
 
-    @livewireScripts
-</body>
+      @livewireScripts
+  
+    </body>
+ 
 </html>

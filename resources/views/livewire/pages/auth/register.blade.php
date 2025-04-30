@@ -30,6 +30,9 @@ new #[Layout('layouts.guest')] class extends Component
 
         event(new Registered($user = User::create($validated)));
 
+        $user->assignRole('admin');
+        $user->givePermissionTo('editwebsite'); 
+
         Auth::login($user);
 
         $this->redirect(route('dashboard', absolute: false), navigate: true);

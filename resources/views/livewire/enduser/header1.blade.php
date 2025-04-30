@@ -7,21 +7,42 @@
     <nav class="navbar">
         <ul class="nav-links">
             <li><a href="{{ route('user-Home', ['company' => $company->name]) }}">Home</a></li>
-            {{-- <li><a href="{{ route('about-us', ['company' => $company->name]) }}">About Us</a></li>
-             --}}
-             @foreach($serviceNames as $service)
-             <li>
-                 <a href="{{ route('service-page', ['company' => $company->name, 'service' => Str::slug($service)]) }}">
-                     {{ $service }}
-                 </a>
-             </li>
-         @endforeach
-         
-            
-            {{-- <li><a href="{{ route('contact-us', ['company' => $company->name]) }}">Contact Us</a></li> --}}
+            @foreach($serviceNames as $service)
+                <li>
+                    <a href="{{ route('service-page', ['company' => $company->name, 'service' => Str::slug($service)]) }}">
+                        {{ $service }}
+                    </a>
+                </li>
+            @endforeach
         </ul>
     </nav>
-    <div class="sign-in">
-        <a href="signin.html" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
+    <div class="sign-in flex items-center space-x-4">
+        @guest('end_user')
+            <a href="signin.html" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
+        @endguest
+
+        @auth('end_user')
+        <div x-data="{ open: true }" class="relative">
+            <button @click="open = true" class="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full focus:outline-none">
+                <span>Profile</span>
+                
+               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <div x-show="open" x-cloak @click.away="open = false" class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50">
+               
+                
+            </div>
+           
+        </div>
+
+        <form method="POST" action="{{ route('Ulogout') }}">
+            @csrf
+            <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-yellow-100">Logout</button>
+        </form>
+        @endauth
     </div>
 </header>
+
+ 
