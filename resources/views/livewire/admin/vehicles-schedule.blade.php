@@ -246,12 +246,23 @@
         <th>Days</th>
         <th>Schedule</th>
         <th>Actions</th>
+        <th>status</th>
       </tr>
     </thead>
     <tbody>
       @forelse($schedules ?? [] as $index => $schedule)
 
-      <tr>
+      <tr>  <td>
+        @if($schedule->vehicle && $schedule->vehicle->scheduled == 0)
+            <span class="text-red-600 font-bold">
+                {{ $schedule->vehicle->registration_number }}
+                <br>
+                <small>This vehicle was unscheduled from registration by admin!</small>
+            </span>
+        @else
+            {{ $schedule->vehicle->registration_number ?? 'N/A' }}
+        @endif
+    </td>
         <td>{{ $index + 1 }}</td>
         <td>{{ $schedule->vehicle->registration_number ?? 'N/A' }}</td>
         <td>{{ $schedule->route->departure_city ?? 'N/A' }}</td>

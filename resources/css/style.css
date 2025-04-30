@@ -520,7 +520,7 @@ body.nav-active { overflow: hidden; }
 /*-----------------------------------*\
   #PRELOAD
 \*-----------------------------------*/
-
+/* 
 .preload {
   position: fixed;
   top: 0;
@@ -580,7 +580,7 @@ body.nav-active { overflow: hidden; }
   100% { background-position: 0%; }
 }
 
-
+ */
 
 
 

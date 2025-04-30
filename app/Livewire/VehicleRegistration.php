@@ -13,7 +13,7 @@ class VehicleRegistration extends Component
     use WithPagination;
 
     // Form Fields
-    public $registration_number;
+    public $registration_number=null;
     public $vehicle_type;
     public $seating_capacity;
     public $make;
@@ -30,6 +30,7 @@ class VehicleRegistration extends Component
     public $showForm = false;
 
     // Add these properties
+    public $vehicle;
     protected $user;
     public $company;
     public function rules()
@@ -98,27 +99,25 @@ class VehicleRegistration extends Component
     }
 
     public function editVehicle($registrationNumber)
-    { 
-        $vehicle = Vehicle::where('registration_number', $registrationNumber)
+    { $this->resetForm();
+            
+        $this->showForm = true;
+        $this->vehicle = Vehicle::where('registration_number', $registrationNumber)
                          ->where('company_id', $this->company->id)
                          ->firstOrFail();
         
-        $this->editingVehicleId = $vehicle->registration_number;
+        $this->editingVehicleId = $this->vehicle->registration_number;
        
-        $this->registration_number = strtoupper($vehicle->registration_number);
-
-
-
-        $this->vehicle_type = $vehicle->vehicle_type;
-        $this->seating_capacity = $vehicle->seating_capacity;
-        $this->make = $vehicle->make;
-        $this->model = $vehicle->model;
-        $this->year = $vehicle->year;
-        $this->is_active = $vehicle->is_active;
-        $this->scheduled = $vehicle->scheduled;
-        $this->notes = $vehicle->notes;
-        
-        $this->showForm = true;
+        $this->registration_number = strtoupper($this->vehicle->registration_number);
+        $this->vehicle_type = $this->vehicle->vehicle_type;
+        $this->seating_capacity = $this->vehicle->seating_capacity;
+        $this->make = $this->vehicle->make;
+        $this->model = $this->vehicle->model;
+        $this->year = $this->vehicle->year;
+        $this->is_active = $this->vehicle->is_active;
+        $this->scheduled = $this->vehicle->scheduled;
+        $this->notes = $this->vehicle->notes;
+    
     }
     public function deleteVehicle($registrationNumber)
     {

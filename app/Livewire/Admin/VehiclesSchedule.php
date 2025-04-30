@@ -41,6 +41,8 @@ class VehiclesSchedule extends Component
 
     public $companyServices;
 
+    
+public $editingVehicleId=null;
     public $CompanyhasFleetService = false;
 
     public function loadschedules()
@@ -270,6 +272,7 @@ class VehiclesSchedule extends Component
             $vehicle = Vehicle::where('company_id', $this->company->id)
                 ->where('registration_number', $this->query)
                 ->firstOrFail();
+
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             session()->flash('error', 'Vehicle not found!');
             return;
@@ -287,7 +290,8 @@ class VehiclesSchedule extends Component
             return;
         }
 
-        if ($vehicle->scheduled == 1 && $this->editMode && $this->editingVehicleId != $vehicle->id) {
+        if ($vehicle->scheduled == 1 && $this->editMode && $this->editingVehicleId != $vehicle->registration_number) {
+            dd($vehicle->id);
             session()->flash('error', 'This vehicle is already scheduled in another schedule');
             return;
         }
@@ -337,29 +341,27 @@ class VehiclesSchedule extends Component
     public function editSchedule($id)
     {
         $schedule = VehicleSchedule::with(['route', 'vehicle'])->findOrFail($id);
-
+    
         $this->scheduleId = $id;
+        $this->editingVehicleId = $schedule->vehicle_id ?? null;
         $this->editMode = true;
+        
+        // Set route information
         $this->selectedDepartureCity = $schedule->route->departure_city;
-
-        // Immediately populate arrivalCities from that city:
-        $this->filterArrivalCities();
-
+        $this->filterArrivalCities(); // This will populate arrival cities
         $this->selectedArrivalCity = $schedule->route->arrival_city;
-
-        // Now populate vehicleType from those two:
-        $this->showVehicle();
-
+        $this->showVehicle(); // This will populate vehicle types
         $this->selectedVehicleType = $schedule->route->vehicle_type;
-
+    
+        // Set vehicle information
         $this->query = $schedule->vehicle->registration_number ?? '';
-
+        $this->suggestions = [$this->query]; // Manually set suggestions to include the current vehicle
+    
+        // Set schedule information
         $this->selectedDays = $schedule->days_of_week;
         $this->departureTime = $schedule->departure_time;
         $this->arrivalTime = $schedule->arrival_time;
-
     }
-
 
     public function deleteSchedule($scheduleId)
     {

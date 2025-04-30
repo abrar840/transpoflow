@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.user')] class extends Component
 {
     public? Company $company = null;
     public string $name = '';
@@ -47,7 +47,7 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
   
-
+@vite('resources/css/enduser/signin_signup.css')
  
 
   <body>

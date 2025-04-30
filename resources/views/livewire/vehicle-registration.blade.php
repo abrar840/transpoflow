@@ -43,7 +43,8 @@
                 <div class="form-group">
                     <label for="registration_number">Registration Number</label>
                     <input type="text" wire:model="registration_number" id="registration_number" 
-                           class="form-input" placeholder="ABC-1234" required>
+                           class="form-input" placeholder="ABC-1234" required @if($editingVehicleId)@disabled(true)@endif>
+                       
                     @error('registration_number') <span class="form-error">{{$message}}</span> @enderror
                 </div>
                 
