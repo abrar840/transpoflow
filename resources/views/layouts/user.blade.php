@@ -8,16 +8,16 @@
     <title>{{ $title ?? 'User Page' }} - {{ config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/css/enduser/homepage.css', 'resources/js/app.js'])
-    
+    @vite('resources/css/enduser/signin_signup.css')
  
     @livewireStyles
     <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 </head>
-<body class="font-sans antialiased bg-gray-100">
+<body class="">
 
-    <main class="flex">
+    <main class="">
         
-        <div class="flex-1 p-4">
+        <div class="">
           {{ $slot }}
         </div>
       </main>

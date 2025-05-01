@@ -14,10 +14,13 @@ class ulogout
     public function __invoke(): RedirectResponse
     { 
         $companyName = session('company_name');
+        //dd($companyName);
         Auth::guard('end_user')->logout();
-        Session::invalidate();
-        Session::regenerateToken();
-    
-        return redirect()->route('user-Home');
+
+
+        // Session::invalidate();
+        // Session::regenerateToken();
+        return redirect()->route('user-Home', ['company' => $companyName]);
     }
+
 }

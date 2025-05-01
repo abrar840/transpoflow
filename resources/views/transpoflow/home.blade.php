@@ -243,7 +243,7 @@
 
                   @if (auth()->user()->company)
                   <h3 class="title-4 card-title">
-                    <a href="/admin">{{ auth()->user()->company->name }}</a>
+                    {{-- <a href="/admin">{{ auth()->user()->company->name }}</a> --}}
                   </h3>
                   <a href="/admin" class="btn-text hover-underline label-2" wire:navigate>admin panel</a>
                   @else

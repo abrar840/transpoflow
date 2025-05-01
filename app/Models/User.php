@@ -15,17 +15,20 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     use HasRoles;
 
+
+ 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
+  // app/Models/User.php
+protected $fillable = [
+    'name',
+    'email',
+    'password',
+    'company_id' // Make sure this is included
+];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -53,5 +56,9 @@ public function company()
 {
     return $this->hasOne(Company::class,'user_id','id');
 }
+
+
+
+ 
 
 }

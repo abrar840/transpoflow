@@ -1,7 +1,8 @@
 <?php
 
 use App\Models\User;
-
+use  Spatie\Permission\Models\Role;
+use Illuminate\Validation\Rule;
 use App\Models\Company;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -10,44 +11,64 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 new #[Layout('layouts.user')] class extends Component
+
+/** @var Company $company */
 {
-    public? Company $company = null;
+  
+public ?Company $company = null;
+    
+
     public string $name = '';
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
     public bool $terms = false;
+ 
+public function register()
+{
+    $this->validate([
+        'name' => 'required|string|max:255',
+        'email' => [
+            'required',
+            'email',
+            Rule::unique('users')->where(function ($query) {
+                return $query->where('company_id', $this->company->id);
+            }),
+        ],
+        'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+        'terms' => 'accepted',
+    ]);
 
-    public function register()
-    {   
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-        ]);
+    // Check if this email is already used by an admin in any company
+    $adminExists =User::where('email', $this->email)
+        ->whereHas('roles', function($q) {
+            $q->where('name', 'admin');
+        })
+        ->exists();
 
-        $user = User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-            'company_id' => $this->company?->id,
-           
-        ]);
-
-      
-        // dd($this->company->id);
-      
-        $user->assignRole('user');
-        Auth::guard('end_user')->login($user);
-
-        return redirect()->route('user-Home', ['company' => $this->company->name]);
+    if ($adminExists) {
+        $this->addError('email', 'This email is already registered as an admin and cannot be used as an end user.');
+        return;
     }
+
+    $user = User::create([
+        'name' => $this->name,
+        'email' => $this->email,
+        'password' => Hash::make($this->password),
+        'company_id' => $this->company->id,
+    ]);
+
+    $user->assignRole(Role::findByName('end_user','end_user'));
+
+    Auth::guard('end_user')->login($user);
+    session(['company_name' => $this->company->name]);
+    return redirect()->route('user-Home', ['company' => $this->company->name]);
+}
 };
 ?>
 
 <div>
-  
-@vite('resources/css/enduser/signin_signup.css')
+   
  
 
   <body>

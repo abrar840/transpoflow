@@ -122,6 +122,9 @@ Route::get('/{company:name}', Home::class)->name('user-Home');
         
 
 Route::middleware('guest:end_user')->group(function () {
+    
+Volt::route('/{company:name}/login', 'pages.auth.end-user-login')->name('end-user-login');
+          
     Volt::route('/{company:name}/register', 'pages.auth.end-user')
         ->name('end-user-register');
 });
@@ -131,7 +134,7 @@ Route::middleware('guest:end_user')->group(function () {
 
 // End user dashboard (end_user guard)
 Route::middleware(['auth:end_user'])->group(function () {
-    Route::get('/{company:name}/home', [Home::class, 'index'])->name('user-home');
+    Route::get('/{company:name}/home', Home::class)->name('user-home');
 });
 
 

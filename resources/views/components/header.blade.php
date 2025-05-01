@@ -99,5 +99,5 @@
     </div>
 </header>
 @auth
- <span class="text-white">{{ auth()->user()->name }}</span>
+ 
  @endauth
