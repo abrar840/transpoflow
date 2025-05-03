@@ -21,8 +21,9 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 
 Route::get('/{company:name}/service/{service}', function ($company, $service) {
     $company = Company::where('name', $company)->firstOrFail();
-
-    $serviceName = str_replace(' ', '', ucwords(str_replace('-', ' ', $service)));
+      
+    $serviceName = str_replace('Management','Booking',str_replace(' ', '', ucwords(str_replace('-', ' ', $service))));
+ 
     $serviceClass = "App\\Livewire\\Enduser\\" . $serviceName;
 
     if (class_exists($serviceClass)) {
@@ -58,7 +59,9 @@ Route::view('/aboutus', 'transpoflow/aboutus')->name('aboutus');
 
 Route::view('/contact', 'transpoflow/contact')->name('contact');
 
-Route::get('/form', BusinessForm::class)->name('form');
+// Route::get('/form', BusinessForm::class)->name('form');
+
+Route::view('/form', 'form')->name('form');
 
 Route::get('/admin', AdminPanel::class)->name('AdminPanel');
 Route::get('/CargoManagement', ManageCargo::class)->name('CargoManagement');

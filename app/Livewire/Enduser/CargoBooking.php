@@ -4,7 +4,8 @@ namespace App\Livewire\Enduser;
 
 use Livewire\Component;
 use app\models\Company;
-class TicketBooking extends Component
+
+class CargoBooking extends Component
 {
     public   $company;
 
@@ -23,6 +24,6 @@ class TicketBooking extends Component
 
     public function render()
     {
-        return view('livewire.enduser.ticket-booking')->layout('layouts.user');
+        return view('livewire.enduser.cargo-booking')->layout('layouts.user');
     }
 }

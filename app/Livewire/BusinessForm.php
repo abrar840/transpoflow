@@ -19,7 +19,7 @@ class BusinessForm extends Component
 
     //form field 
 
-    public $name, $type, $address, $email, $logo, $admin_uername, $num_employees, $admin_username, $user_id;
+    public $name, $type, $address, $email, $logo, $num_employees, $admin_username, $user_id;
 
     public $services = [];
 
@@ -47,7 +47,7 @@ class BusinessForm extends Component
         'name' => 'string|max:255|unique:companies,name',
         'type' => 'required|in:fleet,shuttle,transport',
         'email' => 'required|email|unique:companies,email',
-        'address' => 'nullable|string|max:255',
+        'address' => 'nullable|string|alpha_num|max:255',
         'logo' => 'nullable|image|max:2048',
         'admin_username' => 'required|string|max:225',
         'num_employees' => 'in:<5,5-20,20-100,100-250,>250',
@@ -58,6 +58,7 @@ class BusinessForm extends Component
 
 
     protected $messages = [
+        'admin_username'=> 'the admin user name may contain letters',
         'name.string' => 'The company name must be a string.',
         'name.max' => 'The company name may not be greater than 255 characters.',
         'name.unique' => 'This company name is already taken.',

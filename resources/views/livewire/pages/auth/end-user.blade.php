@@ -78,6 +78,10 @@ public function register()
       </h1>
   </header>
     <main>
+
+      @push('styles')
+      @vite('resources/css/enduser/signin_signup.css')
+      @endpush
     
       <div class="signup-form-container">
  

@@ -182,7 +182,7 @@ body {
   font-size: var(--fontSize-body-4);
   font-weight: var(--weight-regular);
   line-height: var(--lineHeight-5);
-  overflow: hidden;
+  overflow: auto;
   height: 300vh;
 }
 
@@ -520,7 +520,7 @@ body.nav-active { overflow: hidden; }
 /*-----------------------------------*\
   #PRELOAD
 \*-----------------------------------*/
-
+/* 
 .preload {
   position: fixed;
   top: 0;
@@ -582,7 +582,7 @@ body.nav-active { overflow: hidden; }
 
  
 
-
+ */
 
 /*-----------------------------------*\
   #TOPBAR
@@ -593,11 +593,10 @@ body.nav-active { overflow: hidden; }
 
 
 
-
 /*-----------------------------------*\
   #HEADER
 \*-----------------------------------*/
-
+/*
 .header .btn { display: none; }
 
 .header {
@@ -764,7 +763,7 @@ body.nav-active { overflow: hidden; }
 .overlay.active {
   opacity: 1;
   pointer-events: all;
-}
+}*/
 
 
 
@@ -2763,65 +2762,36 @@ body.nav-active { overflow: hidden; }
   #FORM-SECTION
 \*-----------------------------------*/
 
-.companyform-section {
-  background-image: url('../images/hero-slider-2.jpg'); /* Your background image path */
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: auto;
-}
-
-.companyform-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.65); /* Dark overlay for dimming */
-}
-
 .companyform-form {
   text-align: center;
-  max-width: 800px; /* Increased width for a professional form */
+  max-width: 800px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Glass effect background */
+  background-color: rgba(0, 0, 0, 0.4);
   padding: 40px 30px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px); /* Glass effect (blurred background) */
-  color: var(--white); /* White text */
-  overflow-y: auto; /* Allow scrolling in case of longer form */
-  max-height: 90vh; /* Limit the height to prevent overflow outside screen */
-}
-
-.companyform-form h3 {
-  font-size: var(--fontSize-title-2);
+  backdrop-filter: blur(10px);
   color: var(--white);
-  margin-bottom: 20px;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
+/* Fix input container to stack label and input vertically */
 .input-container {
   margin-bottom: 20px;
-  position: relative;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
 }
-
-
 
 .input-container label {
-  display: flex;
-  align-items: center;
   font-size: var(--fontSize-body);
   color: var(--quick-silver);
+  margin-bottom: 6px;
+  text-align: left;
+  font-weight: 500;
 }
-
 
 .input-field {
   width: 100%;
@@ -2832,6 +2802,7 @@ body.nav-active { overflow: hidden; }
   background-color: var(--light-gray);
   color: var(--white);
   transition: all 0.3s ease;
+  margin-bottom: 0;
 }
 
 .input-field:focus {
@@ -2840,75 +2811,19 @@ body.nav-active { overflow: hidden; }
   background-color: var(--dark-gray);
 }
 
-
-/* Style for gender container */
-.input-container {
-  margin: 15px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-
-
-
-
-.btn-submit {
-  background-color: var(--gold-crayola);
-  color: var(--eerie-black-3);
-  font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: var(--fontSize-button);
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn-submit:hover {
-  background-color: var(--white);
-}
-
-.signin-link {
-  margin-top: 20px;
-  color: var(--quick-silver);
-  font-size: var(--fontSize-body);
-}
-
-.signin-link-text {
-  color: var(--gold-crayola);
-  text-decoration: none;
-}
-
-.signin-link-text:hover {
-  text-decoration: underline;
-}
-
-/*-----------------------------------*\
-  RESPONSIVE STYLES
-\*-----------------------------------*/
-
+/* Responsive fix */
 @media (max-width: 768px) {
   .companyform-form {
-    width: 80%;
-    padding: 20px;
+    width: 95%;
+    padding: 16px;
   }
-
-  .companyform-form h3 {
-    font-size: var(--fontSize-title-2);
-  }
-
   .input-field {
     padding: 10px;
     font-size: var(--fontSize-body);
   }
-
-  .btn-submit {
-    padding: 10px 15px;
-    font-size: var(--fontSize-button);
-  
-  }
 }
+
+/* Keep your checkbox, color palette, and button styles as they are */
 
 /* ////////////////////////////////////////////////////////// */
 

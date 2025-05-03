@@ -73,6 +73,7 @@ public function mount($company)
         // $this->redirectIntended(default: route('home', absolute: false), navigate: true);
  ?>
 <main>
+  @vite('resources/css/enduser/theme1/signin_signup.css')
     <div class="login-form-container">
       <div class="login-form-wrapper">
         <div class="login-form-content">

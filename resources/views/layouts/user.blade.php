@@ -7,9 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? 'User Page' }} - {{ config('app.name') }}</title>
 
-    @vite(['resources/css/app.css', 'resources/css/enduser/homepage.css', 'resources/js/app.js'])
-    @vite('resources/css/enduser/signin_signup.css')
- 
+    @vite(['resources/css/app.css','resources/js/app.js'])
+    
+   
+    @stack('styles')
+  
+    
+    
+    
+
     @livewireStyles
     <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 </head>
@@ -23,6 +29,7 @@
       </main>
 
       @livewireScripts
+      @stack('scripts')
   
     </body>
  

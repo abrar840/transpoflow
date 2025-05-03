@@ -4,18 +4,20 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+    @push('styles')
+    @vite('resources/css/enduser/theme1/homepage.css')
+@endpush
 
   <body id="top">
 
-
+  
     @livewire('enduser.header1', ['company' => $company])
 
 
     <main>
       <article>
 
-        <section class="section hero" aria-label="home" id="home"
-          style="background-image:  url('{{ Vite::asset('resources/images/peakpx.jpg') }}')">
+        <section class="section hero" aria-label="home" id="home" style="background-image:  url('{{ Vite::asset('resources/images/peakpx.jpg') }}')">
           <div class="container">
 
             <div class="hero-content">
