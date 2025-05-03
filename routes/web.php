@@ -23,7 +23,7 @@ Route::get('/{company:name}/service/{service}', function ($company, $service) {
     $company = Company::where('name', $company)->firstOrFail();
       
     $serviceName = str_replace('Management','Booking',str_replace(' ', '', ucwords(str_replace('-', ' ', $service))));
- 
+    //   dd($serviceName);
     $serviceClass = "App\\Livewire\\Enduser\\" . $serviceName;
 
     if (class_exists($serviceClass)) {
