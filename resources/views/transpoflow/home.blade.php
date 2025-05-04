@@ -59,7 +59,7 @@
     - #TOP BAR
   -->
 
-  <x-topbar />
+ 
 
 
 
@@ -84,85 +84,69 @@
 
       <section class="hero text-center" aria-label="home" id="home">
 
-        <ul class="hero-slider" data-hero-slider>
-
-          <li class="slider-item active" data-hero-slider-item>
-
-            <div class="slider-bg">
-              <img src="images/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
-            </div>
-
-            <p class="label-2 section-subtitle slider-reveal">Seamless Transport</p>
-
-            <h1 class="display-1 hero-title slider-reveal">
-              Simplify your <br>
-              Transport Business
-            </h1>
-
-            <p class="body-2 hero-text slider-reveal">
-              Your Road to Effortless Management Begins Here!
-            </p>
-
-            <a href="#" class="btn btn-primary slider-reveal">
-              <span class="text text-1">View Our services</span>
-
-              <span class="text text-2" aria-hidden="true">View Our services</span>
-            </a>
-
-          </li>
-
-          <li class="slider-item" data-hero-slider-item>
-
-            <div class="slider-bg">
-              <img src="images/hero-slider-2.jpg" width="1880" height="950" alt="" class="img-cover">
-            </div>
-
-            <p class="label-2 section-subtitle slider-reveal">Effortless Management</p>
-
-            <h1 class="display-1 hero-title slider-reveal">
-              Create. Manage.<br>
-              Scale.
-            </h1>
-
-            <p class="body-2 hero-text slider-reveal">
-              Your Road to Effortless Management Begins Here!
-            </p>
-
-            <a href="#" class="btn btn-primary slider-reveal">
-              <span class="text text-1">View Our services</span>
-
-              <span class="text text-2" aria-hidden="true">View Our services</span>
-            </a>
-
-          </li>
-
-          <li class="slider-item" data-hero-slider-item>
-
-            <div class="slider-bg">
-              <img src="images/hero-slider-3.jpg" width="1880" height="950" alt="" class="img-cover">
-            </div>
-
-            <p class="label-2 section-subtitle slider-reveal">Manage Smarter</p>
-
-            <h1 class="display-1 hero-title slider-reveal">
-              Empowering Business to<br>
-              Move Smarter!
-            </h1>
-
-            <p class="body-2 hero-text slider-reveal">
-              Your Road to Effortless Management Begins Here!
-            </p>
-
-            <a href="#" class="btn btn-primary slider-reveal">
-              <span class="text text-1">View Our services</span>
-
-              <span class="text text-2" aria-hidden="true">View Our services</span>
-            </a>
-
-          </li>
-
-        </ul>
-
+        @php
+        $services = [
+            [
+                'image' => 'images/hero-slider-1.jpg',
+                'tagline' => 'Seamless Transport',
+                'title' => 'Simplify your <br> Transport Business',
+                'description' => 'Your Road to Effortless Management Begins Here!',
+            ],
+            [
+                'image' => 'images/hero-slider-2.jpg',
+                'tagline' => 'Effortless Management',
+                'title' => 'Create. Manage.<br> Scale.',
+                'description' => 'Your Road to Effortless Management Begins Here!',
+            ],
+            [
+                'image' => 'images/hero-slider-3.jpg',
+                'tagline' => 'Manage Smarter',
+                'title' => 'Empowering Business to<br> Move Smarter!',
+                'description' => 'Your Road to Effortless Management Begins Here!',
+            ],
+        ];
+    @endphp
+    
+    <ul class="hero-slider" data-hero-slider>
+        @foreach ($services as $index => $service)
+            <li class="slider-item {{ $loop->first ? 'active' : '' }}" data-hero-slider-item>
+    
+                <div class="slider-bg">
+                    <img src="{{ asset($service['image']) }}" width="1880" height="950" alt="" class="img-cover">
+                </div>
+    
+                <p class="label-2 section-subtitle slider-reveal">{{ $service['tagline'] }}</p>
+    
+                <h1 class="display-1 hero-title slider-reveal">
+                    {!! $service['title'] !!}
+                </h1>
+    
+                <p class="body-2 hero-text slider-reveal">
+                    {{ $service['description'] }}
+                </p>
+    
+                @guest
+                <a href="/login" class="btn btn-primary slider-reveal">
+                    <span class="text text-1" aria-hidden="true">signUP / signIn to continue</span>
+                </a>
+                @endguest
+    
+                @auth
+                @if(auth()->user()->company)
+                    <a href="/form" class="btn btn-primary slider-reveal">
+                        <span class="text text-1" aria-hidden="true">view : {{ auth()->user()->company->name }}</span>
+                    </a>
+                @else
+                    <a href="/form" class="btn btn-primary slider-reveal">
+                        <span class="text text-1" aria-hidden="true">Create-One</span>
+                    </a>
+                @endif
+                @endauth
+    
+            </li>
+        @endforeach
+    </ul>
+    
         <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
           <ion-icon name="chevron-back"></ion-icon>
         </button>

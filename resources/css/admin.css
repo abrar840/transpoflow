@@ -58,6 +58,41 @@ body.dark {
   scrollbar-width: none;
 }
 
+
+
+@media (max-width: 1000px) {
+  .sidebar {
+    left: -280px !important; /* Hide sidebar */
+    transition: left 0.3s;
+  }
+  .sidebar.active {
+    left: 0 !important; /* Show sidebar when active */
+  }
+  .sidebar-toggle-btn {
+    display: block !important;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2100;
+    background: #22223b;
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .content {
+    width: 100% !important;
+    left: 0 !important;
+  }
+}
+@media (min-width: 1001px) {
+  .sidebar-toggle-btn {
+    display: none !important;
+  }
+}
+
 .sidebar.hide {
   width: 60px;
 }

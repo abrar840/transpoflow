@@ -66,6 +66,9 @@
 
     <!-- Page Content -->
     <main class="flex">
+      <button id="sidebar-toggle" class="sidebar-toggle-btn" style="display:none;">
+        <i class="fas fa-bars"></i>
+    </button>
       @livewire('side-bar')
       <div class="flex-1 p-4">
         {{ $slot }}

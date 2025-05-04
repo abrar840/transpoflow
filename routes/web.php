@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\AdminPanelPreview;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Actions\Logout;
 use App\Livewire\Enduser\Home;
@@ -7,6 +8,8 @@ use App\Livewire\ManageFleet;
 use App\Livewire\ManageTicket;
 use App\Livewire\ManageCargo;
 use App\Livewire\AdminPanel;
+
+ 
 use App\Livewire\BusinessForm;
 use App\Livewire\VehicleRegistration;
 use Illuminate\Support\Str;
@@ -14,8 +17,18 @@ use Livewire\Volt\Volt;
 use App\Models\Company;
 
 
+require __DIR__.'/preview.php';
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+
+Route::get('/demo', AdminPanelPreview::class);
+
+// Route::get('/admin/preview', AdminPanel::class)->name('AdminPanel.preview');
+
+
+
+
+
 
 
 
@@ -64,6 +77,7 @@ Route::view('/contact', 'transpoflow/contact')->name('contact');
 Route::view('/form', 'form')->name('form');
 
 Route::get('/admin', AdminPanel::class)->name('AdminPanel');
+
 Route::get('/CargoManagement', ManageCargo::class)->name('CargoManagement');
  
 Route::get('/TicketManagement', ManageTicket::class)->name('TicketManagement');
@@ -172,4 +186,12 @@ Route::middleware(['auth:end_user'])->group(function () {
  
 use App\Livewire\Actions\Ulogout;
 Route::post('/Ulogout', Ulogout::class)->name('Ulogout');
+
+
+
+
+
+Route::get('/admin/demo', function () {
+    return view('admin.admin-panel-preview'); // A stripped-down version of the admin panel
+})->name('admin.demo.iframe');
 

@@ -1,5 +1,6 @@
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
+@vite("resources/css/style.css")
 <header class="header" data-header>
     <div class="container">
         <a href="#" class="logo">
