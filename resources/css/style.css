@@ -2795,9 +2795,10 @@ body.nav-active { overflow: hidden; }
 
 
 .companyform-container {
-  width: 100%;
+  width: 50%;
   height: 100%;
   position: relative;
+  margin: 0 auto; /* centers it horizontally */
 }
 
 
