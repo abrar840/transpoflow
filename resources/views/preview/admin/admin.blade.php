@@ -18,32 +18,32 @@
   </head>
   <body>
     <section class="sidebar">
-      <a href="admin.html" class="logo">
+      <a href="{{ route('demo.admin') }}" class="logo">
         <i class="fab fa-slack"></i>
         <span class="text">Admin Panel</span>
       </a>
-
+    
       <ul class="side-menu top">
-        <li class="active">
-          <a href="admin.html" class="nav-link">
+        <li class="{{ Route::is('demo.admin') ? 'active' : '' }}">
+          <a href="{{ route('demo.admin') }}" class="nav-link">
             <i class="fas fa-border-all"></i>
             <span class="text">Admin Dashboard</span>
           </a>
         </li>
-        <li >
-          <a href="fms.html" class="nav-link">
+        <li class="{{ Route::is('demo.fleet') ? 'active' : '' }}">
+          <a href="{{ route('demo.fleet') }}" class="nav-link">
             <i class="fas fa-road"></i>
-            <span class="text">Fleet Managment</span>
+            <span class="text">Fleet Management</span>
           </a>
         </li>
-        <li>
-          <a href="ticket.html" class="nav-link">
+        <li class="{{ Route::is('demo.ticket') ? 'active' : '' }}">
+          <a href="{{ route('demo.ticket') }}" class="nav-link">
             <i class="fas fa-ticket"></i>
             <span class="text">Ticket Management</span>
           </a>
         </li>
-        <li>
-          <a href="cms.html" class="nav-link">
+        <li class="{{ Route::is('demo.cargo') ? 'active' : '' }}">
+          <a href="{{ route('demo.cargo') }}" class="nav-link">
             <i class="fas fa-truck"></i>
             <span class="text">Cargo Management</span>
           </a>
@@ -55,7 +55,7 @@
           </a>
         </li>
       </ul>
-
+    
       <ul class="side-menu">
         <li>
           <a href="#">
@@ -71,6 +71,7 @@
         </li>
       </ul>
     </section>
+    
 
     <section class="content">
         <button id="sidebar-toggle" class="sidebar-toggle-btn" style="display:none;">

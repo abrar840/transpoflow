@@ -8,7 +8,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
-            max-width: 1500px;
+            max-width:1800px;
             margin: 40px auto;
             background: #f8fafc;
             border-radius: 16px;
@@ -16,7 +16,8 @@
             overflow: hidden;
         }
         .demo-description {
-            flex: 1 1 350px;
+            width:50px;
+            flex: 1 1 100px;
             padding: 3rem 2rem;
             background: linear-gradient(135deg, #191566 0%, #191a58 100%);
             color: #fff;
@@ -132,7 +133,7 @@
     <div class="demo-preview">
         @if($showLivePreview)
             <iframe 
-                src="{{ route('AdminPanel.preview') }}" 
+                src="{{ route('demo.admin') }}" 
                 frameborder="0"
                 loading="lazy"
             ></iframe>

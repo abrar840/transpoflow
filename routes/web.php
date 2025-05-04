@@ -21,9 +21,9 @@ require __DIR__.'/preview.php';
 
 use App\Http\Controllers\Auth\VerifyEmailController;
 
-Route::get('/demo', AdminPanelPreview::class);
+Route::get('/preview', AdminPanelPreview::class);
 
-// Route::get('/admin/preview', AdminPanel::class)->name('AdminPanel.preview');
+ 
 
 
 
