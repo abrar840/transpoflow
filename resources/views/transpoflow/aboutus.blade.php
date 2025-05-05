@@ -28,10 +28,7 @@
 </head>
 <body class="loaded">
   
-  <!-- 
-    - #TOP BAR
-  -->
-  <x-topbar/>
+
   <!-- 
     - #HEADER
   -->
@@ -82,20 +79,20 @@
         <h3 class="title-4">Meet Our Team</h3>
         <div class="team-cards">
           <div class="team-card">
-            <img src="assets/images/badge-1.png" alt="Team Member 1" class="team-image">
-            <h4 class="team-name">John Doe</h4>
+            <img src="images/t1.jpeg" alt="Team Member 1" class="team-image">
+            <h4 class="team-name">Saqlain Ahmad</h4>
             <p class="team-role">CEO & Founder</p>
           </div>
   
           <div class="team-card">
-            <img src="assets/images/hero-slider-2.jpg" alt="Team Member 2" class="team-image">
-            <h4 class="team-name">Jane Smith</h4>
+            <img src="images/t2.jpg" alt="Team Member 2" class="team-image">
+            <h4 class="team-name">Shoaib Khalid</h4>
             <p class="team-role">CTO</p>
           </div>
   
           <div class="team-card">
-            <img src="assets/images/menu-3.png" alt="Team Member 3" class="team-image">
-            <h4 class="team-name">Alice Brown</h4>
+            <img src="images/t3.jpg" alt="Team Member 3" class="team-image">
+            <h4 class="team-name">Abrar Ahmed</h4>
             <p class="team-role">Head of Operations</p>
           </div>
         </div>

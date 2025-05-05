@@ -16,7 +16,7 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="./favic on.svg" type="image/svg+xml">
 
   <!-- 
     - google font link
@@ -127,7 +127,7 @@
     
                 @guest
                 <a href="/login" class="btn btn-primary slider-reveal">
-                    <span class="text text-1" aria-hidden="true">signUP / signIn to continue</span>
+                    <span class="text text-1" aria-hidden="true">Create Website</span>
                 </a>
                 @endguest
     
@@ -240,7 +240,7 @@
 
                   @guest
                   <h3 class="title-4 card-title">
-                    <a href="{{ route('login') }}">Create One</a>
+                    <a href="{{ route('login') }}"></a>
                   </h3>
                   <a href="{{ route('login') }}" class="btn-text hover-underline label-2" wire:navigate>login to
                     continue</a>
@@ -304,11 +304,7 @@
 
           </ul>
 
-          <img src="images/shape-1.png" width="246" height="412" loading="lazy" alt="shape"
-            class="shape shape-1 move-anim">
-          <img src="images/shape-2.png" width="343" height="345" loading="lazy" alt="shape"
-            class="shape shape-2 move-anim">
-
+         
         </div>
       </section>
 
@@ -357,7 +353,7 @@
 
           </figure>
 
-          <img src="images/shape-3.png" width="197" height="194" loading="lazy" alt="" class="shape">
+          
 
         </div>
       </section>
@@ -382,7 +378,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="aadmin-dashboard"
+                  <img src="images/service-1.jpg" width="100" height="100" loading="lazy" alt="aadmin-dashboard"
                     class="img-cover">
                 </figure>
 
@@ -411,7 +407,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="tms" class="img-cover">
+                  <img src="images/service-2.jpg" width="100" height="100" loading="lazy" alt="tms" class="img-cover">
                 </figure>
 
                 <div>
@@ -437,7 +433,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="cms" class="img-cover">
+                  <img src="images/service-3.jpg" width="100" height="100" loading="lazy" alt="cms" class="img-cover">
                 </figure>
 
                 <div>
@@ -462,7 +458,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="fms" class="img-cover">
+                  <img src="images/service-4.jpg" width="100" height="100" loading="lazy" alt="fms" class="img-cover">
                 </figure>
 
                 <div>
@@ -490,7 +486,7 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="csm" class="img-cover">
+                  <img src="images/service-6.png" width="100" height="100" loading="lazy" alt="csm" class="img-cover">
                 </figure>
 
                 <div>
@@ -524,10 +520,7 @@
             <span class="text text-2" aria-hidden="true">View All services</span>
           </a>
 
-          <img src="images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
-            class="shape shape-2 move-anim">
-          <img src="images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
-            class="shape shape-3 move-anim">
+       
 
         </div>
       </section>
