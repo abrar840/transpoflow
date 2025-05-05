@@ -21,7 +21,7 @@
                         @case('TicketManagement')
                             <i class="fas fa-ticket"></i>
                             @break
-                        @case('Customer Support')
+                        @case('CustomerSupport')
                             <i class="fas fa-headset"></i>
                             
                             @break

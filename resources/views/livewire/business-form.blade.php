@@ -1,13 +1,22 @@
 <div>
+    @vite("resources/css/style.css")
 <form wire:submit.prevent="submit">
 <section class="companyform-section">
     <div class="companyform-container">
         <div class="companyform-form">
             <h3>Enter Company Information</h3>
             <br>
-            <form action="/form" method="POST">
+          
                 <!-- Full Name -->
+
+
                 @error('email') <span class="error">{{ $message }}</span> @enderror
+
+                  <div class="inpu-container">
+                    <label for="">theme :</label>
+                    {{$theme}}
+                  </div>
+
                 <div class="input-container">
                     <label for="">Company Name :</label>
                     <input type="text" class="input-field" placeholder="" required wire:model='name'>
@@ -136,7 +145,7 @@
                 <div style="text-align: center; margin-top: 20px;">
                     <button type="submit" class="btn-submit">Start Creating My Website</button>
                 </div>
-            </form>
+        
 
         </div>
     </div>

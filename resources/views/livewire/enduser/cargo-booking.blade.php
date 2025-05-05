@@ -1,9 +1,15 @@
 <div>
     <main>
         @livewire('enduser.header1', ['company' => $company])
+        @if($theme->theme==='light')
+        @push('styles')
+        @vite('resources/css/enduser/theme1/cargo.css')
+       @endpush
+       @else
        @push('styles')
-        @vite("resources/css/enduser/theme1/cargo.css")
-        @endpush
+       @vite('resources/css/enduser/theme2/cargo.css')
+       @endpush
+       @endif
         @push('scripts')
     @vite('resources/js/enduser/theme1/ticketbooking.js')
 @endpush

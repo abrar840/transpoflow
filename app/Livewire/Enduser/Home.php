@@ -9,12 +9,14 @@ class Home extends Component
 {
 
 
+    public $theme = 'light';
     public $company;
 
     public function mount(Company $company)
     {
         $this->company = $company;
 
+         
 
         if (!$this->company) {
             abort(404); // Company not found, show 404 page
@@ -22,6 +24,7 @@ class Home extends Component
         // dd($this->company->name);
         // Store company id in session
         // session(['company_id' => $this->company->id]);
+        $this->theme = $company->theme ?? 'light';
     }
 
     public function render()

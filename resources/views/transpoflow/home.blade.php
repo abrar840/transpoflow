@@ -133,11 +133,11 @@
     
                 @auth
                 @if(auth()->user()->company)
-                    <a href="/form" class="btn btn-primary slider-reveal">
+                    <a href="/p" class="btn btn-primary slider-reveal">
                         <span class="text text-1" aria-hidden="true">view : {{ auth()->user()->company->name }}</span>
                     </a>
                 @else
-                    <a href="/form" class="btn btn-primary slider-reveal">
+                    <a href="/p" class="btn btn-primary slider-reveal">
                         <span class="text text-1" aria-hidden="true">Create-One</span>
                     </a>
                 @endif
@@ -165,7 +165,7 @@
           <span class="label-2 text-center span">{{auth()->user()->company->name}}</span>
         </a>
         @else
-        <a href="/form" class="hero-btn has-after">
+        <a href="/p" class="hero-btn has-after">
           <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
 
           <span class="label-2 text-center span">Create Now</span>
@@ -232,9 +232,9 @@
                   <a href="/admin" class="btn-text hover-underline label-2" wire:navigate>admin panel</a>
                   @else
                   <h3 class="title-4 card-title">
-                    <a href="/form">Create One</a>
+                    <a href="/p">Create One</a>
                   </h3>
-                  <a href="/form" class="btn-text hover-underline label-2" wire:navigate>click to continue</a>
+                  <a href="/p" class="btn-text hover-underline label-2" wire:navigate>click to continue</a>
                   @endif
                   @endauth
 
@@ -260,7 +260,7 @@
             <li>
               <div class="service-card">
 
-                <a href="#" class="has-before hover:shine">
+                <a href="/preview" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
                     <img src="images/service-2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
                       class="img-cover">
@@ -270,10 +270,10 @@
                 <div class="card-content">
 
                   <h3 class="title-4 card-title">
-                    <a href="#">Admin Dashboard</a>
+                    <a href="/preview">Admin Dashboard</a>
                   </h3>
 
-                  <a href="services.html" class="btn-text hover-underline label-2">View services</a>
+                  <a href="/preview" class="btn-text hover-underline label-2">View demo</a>
 
                 </div>
 
@@ -292,7 +292,7 @@
                 <div class="card-content">
 
                   <h3 class="title-4 card-title">
-                    <a href="#">Cargo Managment System</a>
+                    <a href="#"></a>
                   </h3>
 
                   <a href="/services" class="btn-text hover-underline label-2">View services</a>
@@ -390,7 +390,7 @@
 
                   <div class="title-wrapper">
                     <h3 class="title-3">
-                      <a href="#" class="card-title">Admin Dashboard</a>
+                      <a href="/preview" class="card-title">Admin Dashboard</a>
                     </h3>
 
                     <span class="badge label-1">HOT</span>

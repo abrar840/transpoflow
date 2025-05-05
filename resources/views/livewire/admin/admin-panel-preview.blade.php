@@ -3,6 +3,18 @@
 
 <div class="demo-preview-container">
     <style>
+
+.preview-placeholder i.fa-spinner {
+    font-size: 2rem;
+    color: #4f46e5;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
         .demo-preview-container {
             height:90vh;
             display: flex;
@@ -19,7 +31,7 @@
             width:50px;
             flex: 1 1 100px;
             padding: 3rem 2rem;
-            background: linear-gradient(135deg, #191566 0%, #191a58 100%);
+            background: linear-gradient(135deg, hsl(245, 33%, 8%) 0%, #000000 100%);
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -111,6 +123,26 @@
     </style>
 
     <div class="demo-description">
+        <a href="{{ url('/') }}" class="exit-btn" style="
+        position: absolute;
+        top: 18px;
+        right: 28px;
+        z-index: 2000;
+        background: #070606;
+        color: #ececf1;
+        border: none;
+        border-radius: 50px;
+        padding: 8px 22px 8px 16px;
+        font-weight: bold;
+        font-size: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    ">
+        <i class="fa fa-arrow-left"></i> Exit
+    </a>
         <h1>
             <i class="fa fa-bus-alt" style="margin-right:10px;"></i>
             TranspoFlow Admin Panel Preview
