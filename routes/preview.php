@@ -25,3 +25,7 @@ Route::get('/demo/fleet', function () {
 Route::get('/demo/cargo', function () {
     return view('preview.admin.cargo-management');
 })->name('demo.cargo');
+ 
+
+
+ 

@@ -186,7 +186,7 @@
                 <div class="action-buttons">
                     <button wire:click="togglePreview" class="preview-btn">
                         <i class="fas fa-eye"></i>
-                        <span class="text">{{ $previewMode ? 'Exit Preview' : 'Preview Mode' }}</span>
+                         
                     </button>
                     <button wire:click="exportData" class="download-btn">
                         <i class="fas fa-file-export"></i>
@@ -199,11 +199,7 @@
                 </div>
             </div>
 
-            @if($previewMode)
-                <div class="preview-alert">
-                    <i class="fas fa-info-circle"></i> You are in preview mode showing sample data
-                </div>
-            @endif
+           
 
             <div class="box-info">
                 <li>

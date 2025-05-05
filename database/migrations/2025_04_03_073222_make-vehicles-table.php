@@ -25,6 +25,8 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->boolean('scheduled')->default(false);
             $table->text('notes')->nullable();
+            $table->integer('available_seats')->default(0); // or ->nullable()
+
             $table->timestamps();
             $table->softDeletes();
         });

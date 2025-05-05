@@ -80,6 +80,7 @@ class VehicleRegistration extends Component
             'is_active' => $this->is_active,
             'scheduled' => !$this->scheduled,
             'notes' => $this->notes,
+            'available_seats'=>$this->seating_capacity,
             'company_id' => $this->company->id
         ];
            

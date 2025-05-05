@@ -2,11 +2,16 @@
 
     @livewire('enduser.header1', ['company' => $company])
 
-    @push('styles')
-     
-    @vite("resources/css/enduser/theme1/contact.css")
-
-    @endpush
+   
+ @if($theme->theme==='light')
+ @push('styles')
+ @vite('resources/css/enduser/theme1/contact.css')
+@endpush
+@else
+@push('styles')
+@vite('resources/css/enduser/theme2/contact.css')
+@endpush
+@endif
    <!-- Main Content -->
    <main>
 
@@ -18,52 +23,32 @@
                 Got a technical issue? Want to send feedback about a beta feature?
                 Need details about our Business plan? Let us know.
             </p>
-            <form action="./messageSent.html" class="contact-form">
+            <form wire:submit.prevent="submit" class="contact-form">
+                @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        class="form-input"
-                        placeholder="Anishhhhhh"
-                        required
-                    />
+                    <input wire:model="name" type="text" class="form-input" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Your email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="form-input"
-                        placeholder="name@flowbite.com"
-                        required
-                    />
+                    <input wire:model="email" type="email" class="form-input" required>
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        class="form-input"
-                        placeholder="Let us know how we can help you"
-                        required
-                    />
+                    <input wire:model="subject" type="text" class="form-input" required>
                 </div>
                 <div class="form-group">
                     <label for="message">Your message</label>
-                    <textarea
-                        id="message"
-                        rows="6"
-                        name="message"
-                        class="form-textarea"
-                        placeholder="Leave a comment..."
-                    ></textarea>
+                    <textarea wire:model="message" rows="6" class="form-textarea" required></textarea>
                 </div>
                 <button type="submit" class="submit-button">Send message</button>
             </form>
+            
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
         </div>
     </section>
 </main>

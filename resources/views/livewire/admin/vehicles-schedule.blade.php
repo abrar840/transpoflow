@@ -260,7 +260,7 @@
                 <small>This vehicle was unscheduled from registration by admin!</small>
             </span>
         @else
-            {{ $schedule->vehicle->registration_number ?? 'N/A' }}
+            {{-- {{ $schedule->vehicle->registration_number ?? 'N/A' }} --}}
         @endif
     </td>
         <td>{{ $index + 1 }}</td>

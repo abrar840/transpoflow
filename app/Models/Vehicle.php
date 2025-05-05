@@ -26,7 +26,8 @@ class Vehicle extends Model
         'year',
         'is_active',
         'scheduled',
-        'notes'
+        'notes',
+        'available_seats'
     ];
 
     // Attribute Casting

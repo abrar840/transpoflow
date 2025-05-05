@@ -52,4 +52,15 @@ public function routes()
     {
         return $this->hasMany(Routes::class);
     }
+
+
+
+
+
+    public function theme()
+    {
+        return $this->hasOne(CompanyTheme::class);
+    }
+    
 }
+

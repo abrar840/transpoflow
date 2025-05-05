@@ -1,23 +1,7 @@
 
 <div>
   
-    <section class="sidebar">
-      <a href="admin.html" class="logo">
-        <i class="fab fa-slack"></i>
-        <span class="text">Admin Panel</span>
-      </a>
-      <ul class="side-menu top">
-        <li><a href="admin.html"><i class="fas fa-border-all"></i><span>Admin Dashboard</span></a></li>
-        <li><a href="fms.html"><i class="fas fa-road"></i><span>Fleet Management</span></a></li>
-        <li><a href="ticket.html"><i class="fas fa-ticket"></i><span>Ticket Management</span></a></li>
-        <li class="active"><a href="cms.html"><i class="fas fa-truck"></i><span>Cargo Management</span></a></li>
-        <li><a href="#"><i class="fas fa-people-group"></i><span>Customer Support</span></a></li>
-      </ul>
-      <ul class="side-menu">
-        <li><a href="#"><i class="fas fa-cog"></i><span>Settings</span></a></li>
-        <li><a href="#" class="logout"><i class="fas fa-right-from-bracket"></i><span>Logout</span></a></li>
-      </ul>
-    </section>
+    
     
     <section class="content">
       <main>

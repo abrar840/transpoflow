@@ -9,25 +9,59 @@ use App\Livewire\ManageTicket;
 use App\Livewire\ManageCargo;
 use App\Livewire\AdminPanel;
 
- 
 use App\Livewire\BusinessForm;
 use App\Livewire\VehicleRegistration;
 use Illuminate\Support\Str;
 use Livewire\Volt\Volt;
 use App\Models\Company;
+use App\Livewire\ThemePreviewer;
 
 
-require __DIR__.'/preview.php';
+
+
 
 use App\Http\Controllers\Auth\VerifyEmailController;
 
-Route::get('/preview', AdminPanelPreview::class);
 
+Route::get('/p', ThemePreviewer::class);
  
 
+Route::get('/home-preview', function () {
+    $theme = request()->get('theme', 'theme1');
+    return view('preview.end-user.homepage', ['theme' => $theme]);
+})->name('home.preview');
+
+
+Route::get('/cargo-preview', function () {
+    $theme = request()->get('theme', 'theme1');
+    return view('preview.end-user.cargo', ['theme' => $theme]);
+})->name('cargobooking.preview');
 
 
 
+
+Route::get('/ticket-preview', function () {
+    $theme = request()->get('theme', 'theme1');
+    return view('preview.end-user.ticketbooking', ['theme' => $theme]);
+})->name('ticketbooking.preview');
+
+
+
+Route::get('/contact-preview', function () {
+    $theme = request()->get('theme', 'theme1');
+    return view('preview.end-user.contact', ['theme' => $theme]);
+})->name('contactus.preview');
+
+
+
+
+Route::get('/about-preview', function () {
+    $theme = request()->get('theme', 'theme1');
+    return view('preview.end-user.aboutus', ['theme' => $theme]);
+})->name('aboutus.preview');
+
+
+ 
 
 
 
@@ -38,7 +72,7 @@ Route::get('/{company:name}/service/{service}', function ($company, $service) {
     $serviceName = str_replace('Management','Booking',str_replace(' ', '', ucwords(str_replace('-', ' ', $service))));
     //   dd($serviceName);
     $serviceClass = "App\\Livewire\\Enduser\\" . $serviceName;
-
+ 
     if (class_exists($serviceClass)) {
         return app()->call($serviceClass . '@__invoke', ['company' => $company, 'service' => $service]);
     }
@@ -49,10 +83,15 @@ Route::get('/{company:name}/service/{service}', function ($company, $service) {
 
 
 
+Route::get('/CustomerSupport', \App\Livewire\Admin\MessageInbox::class)
+    
+    ->name('CustomerSupport');
 
 
+Route::get('/form', BusinessForm::class)->name('form');
 
 
+Route::get('/form', BusinessForm::class)->name('companyform');
 
  
 
@@ -72,9 +111,7 @@ Route::view('/aboutus', 'transpoflow/aboutus')->name('aboutus');
 
 Route::view('/contact', 'transpoflow/contact')->name('contact');
 
-// Route::get('/form', BusinessForm::class)->name('form');
-
-Route::view('/form', 'form')->name('form');
+// Route::view('/form', 'form')->name('form');
 
 Route::get('/admin', AdminPanel::class)->name('AdminPanel');
 
@@ -191,7 +228,9 @@ Route::post('/Ulogout', Ulogout::class)->name('Ulogout');
 
 
 
-Route::get('/admin/demo', function () {
-    return view('admin.admin-panel-preview'); // A stripped-down version of the admin panel
-})->name('admin.demo.iframe');
+// Route::get('/admin/demo', function () {
+//     return view('admin.admin-panel-preview'); // A stripped-down version of the admin panel
+// })->name('admin.demo.iframe');
 
+
+require __DIR__.'/preview.php';

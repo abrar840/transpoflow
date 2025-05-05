@@ -11,7 +11,8 @@ use App\Models\Company;
 use App\Models\Service;
 use App\Models\CompanyService;
 use App\Models\ColorPalette;
-use App\Models\CompanyColor;
+
+use App\Models\CompanyTheme;
 class BusinessForm extends Component
 {
 
@@ -28,16 +29,18 @@ class BusinessForm extends Component
     // Data for dropdowns
     public $availableServices;
     public $colorPalettes;
-
+    public $theme = 'light';
     // Initialize data
-    public function mount()
+    public function mount($theme = 'light')
     {
         // Fetch data for dropdowns once when the component is loaded
         $this->user_id = auth()->user()->id;
         $this->email = auth()->user()->email;
-         if(auth()->user()->company){
-        return redirect((route('AdminPanel')));
-         }
+      
+        
+if (auth()->user()->company && auth()->user()->company->exists) {
+    return redirect(route('AdminPanel'));
+}
 
 
         $this->availableServices = Service::all();
@@ -108,7 +111,8 @@ class BusinessForm extends Component
 
 
             $this->attachServices($company);
-            //  $this->attachColorPalette($company);                             //color paltte functionality curently non functional
+
+             $this->attachColorPalette($company);                             //color paltte functionality curently non functional
         });
 
         // Flash success message
@@ -116,7 +120,7 @@ class BusinessForm extends Component
 
         // Reset form fields
         $this->reset();
-        redirect()->route("AdminPanel");
+       // redirect()->route("AdminPanel");
 
         
     }
@@ -171,9 +175,9 @@ class BusinessForm extends Component
     // Attach Selected Color Palette to Company
     protected function attachColorPalette($company)
     {
-        CompanyColor::create([
+        CompanyTheme::create([
             'company_id' => $company->id,
-            'color_palette_id' => $this->colorPalette,
+            'theme' => $this->theme,
         ]);
     }
 
@@ -183,7 +187,7 @@ class BusinessForm extends Component
     {
         return view('livewire.business-form', [
             'availableSerivces' => $this->availableServices,
-            'colorPalettes' => $this->colorPalettes,
-        ]);
+            
+        ])->layout('layouts.user');
     }
 }
