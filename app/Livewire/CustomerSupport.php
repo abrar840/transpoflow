@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Message;
 
-class MessageInbox extends Component
+class CustomerSupport extends Component
 {
     public $messages;
     public $selectedMessage;
@@ -31,7 +31,7 @@ class MessageInbox extends Component
 
     public function render()
     {
-        return view('livewire.admin.message-inbox')
-            ->layout('layouts.user');
+        return view('livewire.customer-support')
+            ->layout('layouts.app');
     }
 }

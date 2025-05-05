@@ -4,7 +4,7 @@ use App\Livewire\Admin\AdminPanelPreview;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Actions\Logout;
 use App\Livewire\Enduser\Home;
-use App\Livewire\ManageFleet;
+
 use App\Livewire\ManageTicket;
 use App\Livewire\ManageCargo;
 use App\Livewire\AdminPanel;
@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 use Livewire\Volt\Volt;
 use App\Models\Company;
 use App\Livewire\ThemePreviewer;
-
+use App\Livewire\CustomerSupport;
 
 
 
@@ -23,8 +23,17 @@ use App\Livewire\ThemePreviewer;
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 
+
+
+
+Route::get('/preview', AdminPanelPreview::class);
+
 Route::get('/p', ThemePreviewer::class);
  
+
+Route::get('/CustomerSupport', CustomerSupport::class);
+
+
 
 Route::get('/home-preview', function () {
     $theme = request()->get('theme', 'theme1');
@@ -72,7 +81,7 @@ Route::get('/{company:name}/service/{service}', function ($company, $service) {
     $serviceName = str_replace('Management','Booking',str_replace(' ', '', ucwords(str_replace('-', ' ', $service))));
     //   dd($serviceName);
     $serviceClass = "App\\Livewire\\Enduser\\" . $serviceName;
- 
+   
     if (class_exists($serviceClass)) {
         return app()->call($serviceClass . '@__invoke', ['company' => $company, 'service' => $service]);
     }
@@ -83,9 +92,7 @@ Route::get('/{company:name}/service/{service}', function ($company, $service) {
 
 
 
-Route::get('/CustomerSupport', \App\Livewire\Admin\MessageInbox::class)
-    
-    ->name('CustomerSupport');
+
 
 
 Route::get('/form', BusinessForm::class)->name('form');
@@ -110,7 +117,7 @@ Route::view('/aboutus', 'transpoflow/aboutus')->name('aboutus');
 
 
 Route::view('/contact', 'transpoflow/contact')->name('contact');
-
+Route::view('/test', 'test')->name('contact');
 // Route::view('/form', 'form')->name('form');
 
 Route::get('/admin', AdminPanel::class)->name('AdminPanel');

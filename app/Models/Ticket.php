@@ -61,7 +61,7 @@ class Ticket extends Model
 
     public function route(): BelongsTo
     {
-        return $this->belongsTo(Route::class);
+        return $this->belongsTo(Routes::class);
     }
 
     public function vehicle(): BelongsTo

@@ -133,7 +133,7 @@
     
                 @auth
                 @if(auth()->user()->company)
-                    <a href="/p" class="btn btn-primary slider-reveal">
+                    <a href="/admin" class="btn btn-primary slider-reveal">
                         <span class="text text-1" aria-hidden="true">view : {{ auth()->user()->company->name }}</span>
                     </a>
                 @else
@@ -260,7 +260,7 @@
             <li>
               <div class="service-card">
 
-                <a href="/preview" class="has-before hover:shine">
+                <a href="{{route('demo.admin')}}" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
                     <img src="images/service-2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
                       class="img-cover">
@@ -270,10 +270,10 @@
                 <div class="card-content">
 
                   <h3 class="title-4 card-title">
-                    <a href="/preview">Admin Dashboard</a>
+                    <a href="{{route('demo.admin')}}">Admin Dashboard</a>
                   </h3>
 
-                  <a href="/preview" class="btn-text hover-underline label-2">View demo</a>
+                  <a href="{{route('demo.admin')}}" class="btn-text hover-underline label-2">View demo</a>
 
                 </div>
 
