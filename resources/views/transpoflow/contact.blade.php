@@ -28,10 +28,7 @@
 </head>
 <body class="loaded">
   
-  <!-- 
-    - #TOP BAR
-  -->
-  <x-topbar/>
+
 
   <!-- 
     - #HEADER

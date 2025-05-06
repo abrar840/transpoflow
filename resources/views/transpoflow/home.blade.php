@@ -377,16 +377,18 @@
             <li>
               <div class="services-card hover:card">
 
-                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/service-1.jpg" width="100" height="100" loading="lazy" alt="aadmin-dashboard"
-                    class="img-cover">
-                </figure>
+
+              <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+  <img src="images/service-2.png" width="100" height="100" loading="lazy" alt="admin-dashboard"
+    class="img-cover">
+</figure>
+
 
                 <div>
 
                   <div class="title-wrapper">
                     <h3 class="title-3">
-                      <a href="/preview" class="card-title">Admin Dashboard</a>
+                      <a href="#" class="card-title">Admin Dashboard</a>
                     </h3>
 
                     <span class="badge label-1">HOT</span>
@@ -407,7 +409,8 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/service-2.jpg" width="100" height="100" loading="lazy" alt="tms" class="img-cover">
+                  <img src="images/service-3.jpg" width="100" height="100" loading="lazy" alt="tms"
+                    class="img-cover">
                 </figure>
 
                 <div>
@@ -433,7 +436,8 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/service-3.jpg" width="100" height="100" loading="lazy" alt="cms" class="img-cover">
+                  <img src="images/service-4.png" width="100" height="100" loading="lazy" alt="cms"
+                    class="img-cover">
                 </figure>
 
                 <div>
@@ -458,7 +462,8 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/service-4.jpg" width="100" height="100" loading="lazy" alt="fms" class="img-cover">
+                  <img src="images/service-5.jpg" width="100" height="100" loading="lazy" alt="fms"
+                    class="img-cover">
                 </figure>
 
                 <div>
@@ -486,7 +491,8 @@
               <div class="services-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/service-6.png" width="100" height="100" loading="lazy" alt="csm" class="img-cover">
+                  <img src="images/service-6.png" width="100" height="100" loading="lazy" alt="csm"
+                    class="img-cover">
                 </figure>
 
                 <div>
@@ -520,7 +526,7 @@
             <span class="text text-2" aria-hidden="true">View All services</span>
           </a>
 
-       
+          
 
         </div>
       </section>
@@ -599,9 +605,7 @@
 
           </ul>
 
-          <img src="images/shape-7.png" width="208" height="178" loading="lazy" alt="shape" class="shape shape-1">
-
-          <img src=".images/shape-8.png" width="120" height="115" loading="lazy" alt="shape" class="shape shape-2">
+         
 
         </div>
       </section>
