@@ -120,7 +120,7 @@ if (auth()->user()->company && auth()->user()->company->exists) {
 
         // Reset form fields
         $this->reset();
-       // redirect()->route("AdminPanel");
+        redirect()->route("AdminPanel");
 
         
     }

@@ -1,3 +1,4 @@
+<!-- filepath: resources/views/livewire/customer-support.blade.php -->
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-6">Customer Messages</h1>
     
@@ -5,14 +6,14 @@
         <!-- Message List -->
         <div class="col-span-1 bg-white rounded-lg shadow p-4">
             <h2 class="text-xl font-semibold mb-4">Inbox</h2>
-            <div class="space-y-2">
+            <div class="space-y-2 max-h-96 overflow-y-auto">
                 @foreach($messages as $message)
                     <div 
                         wire:click="viewMessage({{ $message->id }})"
                         class="p-3 border rounded cursor-pointer {{ $message->read ? 'bg-gray-50' : 'bg-blue-50' }}"
                     >
-                        <div class="font-medium">{{ $message->subject }}</div>
-                        <div class="text-sm text-gray-600">{{ $message->name }} ({{ $message->email }})</div>
+                        <div class="font-medium truncate">{{ $message->subject }}</div>
+                        <div class="text-sm text-gray-600 truncate">{{ $message->name }} ({{ $message->email }})</div>
                         <div class="text-xs text-gray-500">{{ $message->created_at->diffForHumans() }}</div>
                     </div>
                 @endforeach
@@ -20,7 +21,7 @@
         </div>
         
         <!-- Message Detail -->
-        <div class="col-span-2 bg-white rounded-lg shadow p-4">
+        <div class="col-span-2 bg-white rounded-lg shadow p-4 min-h-[300px]">
             @if($selectedMessage)
                 <div class="mb-4">
                     <button 
@@ -30,13 +31,13 @@
                         Delete
                     </button>
                 </div>
-                <h2 class="text-xl font-semibold">{{ $selectedMessage->subject }}</h2>
-                <div class="text-sm text-gray-600 mb-4">
+                <h2 class="text-xl font-semibold break-words">{{ $selectedMessage->subject }}</h2>
+                <div class="text-sm text-gray-600 mb-4 break-words">
                     From: {{ $selectedMessage->name }} ({{ $selectedMessage->email }})<br>
                     Company: {{ $selectedMessage->company->name }}<br>
                     Date: {{ $selectedMessage->created_at->format('M d, Y H:i') }}
                 </div>
-                <div class="border-t pt-4">
+                <div class="border-t pt-4 break-words whitespace-pre-line">
                     {{ $selectedMessage->message }}
                 </div>
             @else

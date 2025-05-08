@@ -13,7 +13,7 @@
         <ul class="side-menu top">
             @foreach($serviceNames as $name)
             <li class="{{ request()->is($name) ? 'active' : '' }}">
-                <a href="/{{ $name }}" class="nav-link" wire:navigate>
+                <a href="/{{ $name }}" class="nav-link" >
                     @switch($name)
                         @case('FleetManagement')
                             <i class="fas fa-road"></i>

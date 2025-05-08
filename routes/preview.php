@@ -25,8 +25,3 @@ Route::get('/demo/fleet', function () {
 Route::get('/demo/cargo', function () {
     return view('preview.admin.cargo-management');
 })->name('demo.cargo');
-
-use App\Livewire\CustomerSupport;
-
-Route::get('/Customer',CustomerSupport::class)->name('CustomerSupport');
- 

@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 </head>
 <body class="">
-
+  @livewire('enduser.header1', ['company' => $company])
     <main class="">
         
         <div class="">

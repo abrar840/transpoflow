@@ -1,4 +1,4 @@
-<!-- filepath: c:\xampp\htdocs\fyp\resources\views\livewire\enduser\header1.blade.php -->
+<!-- filepath: resources/views/livewire/enduser/header1.blade.php -->
 <header class="header">
     @vite("resources/css/enduser/theme1/header.css")
     <div class="logo flex items-center space-x-3">
@@ -19,23 +19,21 @@
     </nav>
     <div class="sign-in flex items-center space-x-4">
         @guest('end_user')
-            <a href="signin.html" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
+            <a href="{{ route('end-user-login', ['company' => $company->name]) }}" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
+            <a href="{{ route('end-user-register', ['company' => $company->name]) }}" class="sign-in-btn ml-2" style="text-decoration: none;">Register</a>
         @endguest
 
         @auth('end_user')
         <div x-data="{ open: true }" class="relative">
             <button @click="open = true" class="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full focus:outline-none">
                 <span>Profile</span>
-                
-               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                 </svg>
             </button>
             <div x-show="open" x-cloak @click.away="open = false" class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50">
-               
-                
+                <!-- Profile dropdown content here -->
             </div>
-           
         </div>
 
         <form method="POST" action="{{ route('Ulogout',[$company->name]) }}">
@@ -45,5 +43,3 @@
         @endauth
     </div>
 </header>
-
- 

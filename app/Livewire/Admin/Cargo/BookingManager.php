@@ -1,36 +1,27 @@
 <?php
 
-
-namespace App\Livewire\EndUser;
+namespace App\Livewire\Admin\Cargo;
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
-use App\Models\CargoBook;
-use App\Models\Company;
-use App\Models\CargoRoute;
-use App\Models\CargoServiceType;
+// app/Http/Livewire/Cargo/BookingManager.php
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
- 
-
-class CargoBooking extends Component
-{ 
 
 
+use App\Models\CargoBook;
+use App\Models\CargoRoute;
+use App\Models\CargoServiceType;
 
- 
+class BookingManager extends Component
+{
     // Form Fields
     public $shipper_name, $shipper_phone, $shipper_address, $shipper_city;
     public $consignee_name, $consignee_phone, $consignee_address, $consignee_city;
     public $item_description, $quantity = 1;
     public $weight, $length, $width, $height;
     public $service_type;
-    public $tracking_number;
-    public $tracking_status;
-    public $theme='light';
     public $insurance = 'no';
-    public $user_request;
 
     // Calculated Values
     public $base_fare = 0;
@@ -48,30 +39,8 @@ class CargoBooking extends Component
     public $search;
     public $destination = null;
 
-    
-
-    public function mount(Company $company)
-    {   $this->theme = $company->theme ?? 'light';
-        $this->company = $company;
-         
-        session(['end_user_guard' => $company]);
-
-
-           if(!$company){
-        $this->company = session('end_user_guard');
-
-    }
-
-
-        if (!$this->company) {
-            abort(404); // Company not found, show 404 page
-        }
-
-        // Check if company has a theme (assuming relation: $company->theme or $company->companyTheme)
-        
-
-        // $this->user_request=$user;
-        
+    public function mount()
+    {
         $this->company = auth()->user()->company;
         $this->availableCities = CargoRoute::where('company_id', $this->company->id)
             ->distinct()
@@ -83,34 +52,15 @@ class CargoBooking extends Component
         $this->serviceTypes = CargoServiceType::where('company_id', $this->company->id)
             ->where('is_active', true)
             ->get();
-
-
-            $this->loadUserBookings();
     }
-
-
-
-
-    public function loadUserBookings()
-    {
-        $this->bookings = CargoBook::where('company_id', $this->company->id)
-            ->where('user_id', auth('end_user')->id())
-            ->latest()
-            ->get();
-    }
-
-
-
-
-
-
-
-
 
 
     public function findDestination()
     {
-            $this->destination = CargoRoute::where('company_id', $this->company->id)
+
+
+
+        $this->destination = CargoRoute::where('company_id', $this->company->id)
             ->where('departure_city', $this->shipper_city)
             ->distinct()
             ->pluck('arrival_city')
@@ -147,23 +97,7 @@ class CargoBooking extends Component
             'length' => 'required|numeric|min:1',
             'width' => 'required|numeric|min:1',
             'height' => 'required|numeric|min:1'
-        ], [
-            'shipper_city.required' => 'The shipper city is required.',
-            'consignee_city.required' => 'The consignee city is required.',
-            'weight.required' => 'The weight is required.',
-            'weight.numeric' => 'The weight must be a number.',
-            'weight.min' => 'The weight must be at least 0.1.',
-            'length.required' => 'The length is required.',
-            'length.numeric' => 'The length must be a number.',
-            'length.min' => 'The length must be at least 1.',
-            'width.required' => 'The width is required.',
-            'width.numeric' => 'The width must be a number.',
-            'width.min' => 'The width must be at least 1.',
-            'height.required' => 'The height is required.',
-            'height.numeric' => 'The height must be a number.',
-            'height.min' => 'The height must be at least 1.',
         ]);
-        
 
         $volume = $this->length * $this->width * $this->height;
 
@@ -198,7 +132,7 @@ class CargoBooking extends Component
         // dd("hi");
         $booking = CargoBook::create([
             'company_id' => $this->company->id,
-            'user_id' => auth('end_user')->user()->id,
+            'user_id' => auth()->user()->id,
             'tracking_number' => 'CRG-' . strtoupper(uniqid()),
 
             // Shipper info
@@ -229,10 +163,8 @@ class CargoBooking extends Component
             'status' => 'pending'
         ]);
 
-        //$this->resetForm();
-       
+        $this->resetForm();
         session()->flash('message', 'Booking created! Tracking #: ' . $booking->tracking_number);
-       
     }
 
     public function resetForm()
@@ -246,26 +178,26 @@ class CargoBooking extends Component
     public $editingStatus = [];
     public $statusOptions = ['pending', 'in_transit', 'dispatched', 'delivered'];
 
-    public function checkStatus()
+    public function updateStatus($bookingId)
     {
         $this->validate([
-            'tracking_number' => 'required'
+            'editingStatus.' . $bookingId => 'required|in:' . implode(',', $this->statusOptions)
         ]);
 
-        $booking = CargoBook::where('tracking_number', $this->tracking_number)
-            // ->where('user_id', auth('end_user')->id())
-            ->first();
+        $booking = CargoBook::findOrFail($bookingId);
+        $booking->update(['status' => $this->editingStatus[$bookingId]]);
 
-        if ($booking) {
-            $this->tracking_status = $booking->status;
-        } else {
-            $this->dispatch('tracking-error', message: 'Booking not found');
-        }
+        session()->flash('status_message', 'Status updated successfully!');
+        $this->loadBookings(); // Refresh the bookings list
     }
 
-
-
-
+    public function loadBookings()
+    {
+        $this->bookings = CargoBook::where('company_id', $this->company->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+    }
 
 
 
@@ -297,11 +229,15 @@ class CargoBooking extends Component
 
     public function render()
     {
-             return view('livewire.enduser.cargo-booking', [
-                    'theme' => $this->theme,
-                ])->layout('layouts.user', [
-        'company' => $this->company,
-       
-    ]);
+        // In your render() method
+        $this->bookings = CargoBook::with(['user'])
+            ->where('company_id', $this->company->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+
+
             
-}}
+        return view('livewire.admin.cargo.booking-manager');
+    }
+}

@@ -1,6 +1,10 @@
 <?php
 
 use App\Livewire\Admin\AdminPanelPreview;
+
+use App\Livewire\Admin\Cargo\CargoDashboard;
+use App\Livewire\Admin\Cargo\RouteManager;
+
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Actions\Logout;
 use App\Livewire\Enduser\Home;
@@ -17,13 +21,12 @@ use App\Models\Company;
 use App\Livewire\ThemePreviewer;
 use App\Livewire\CustomerSupport;
 
-
-
+ 
 
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 
-
+Route::get('/cargo', RouteManager::class);
 
 
 Route::get('/preview', AdminPanelPreview::class);
@@ -122,7 +125,7 @@ Route::view('/test', 'test')->name('contact');
 
 Route::get('/admin', AdminPanel::class)->name('AdminPanel');
 
-Route::get('/CargoManagement', ManageCargo::class)->name('CargoManagement');
+Route::view('/CargoManagement', 'admin.cargo.dashboardCall')->name('CargoManagement');
  
 Route::get('/TicketManagement', ManageTicket::class)->name('TicketManagement');
 
@@ -238,6 +241,8 @@ Route::post('/Ulogout', Ulogout::class)->name('Ulogout');
 // Route::get('/admin/demo', function () {
 //     return view('admin.admin-panel-preview'); // A stripped-down version of the admin panel
 // })->name('admin.demo.iframe');
+
+ 
 
 
 require __DIR__.'/preview.php';
