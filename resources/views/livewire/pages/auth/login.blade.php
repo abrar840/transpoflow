@@ -43,12 +43,18 @@ $this->redirectIntended(default: route('home', absolute: false), navigate: true)
 
     }
 }; ?>
+
+
 <div class="signin-section">
+
+    
     @if (session('status'))
     <div class="mb-4 text-green-600">
         {{ session('status') }}
     </div>
+
 @endif
+
     <div class="signin-container">
         <div class="signin-form">
             <h3>Sign In</h3>
@@ -67,13 +73,18 @@ $this->redirectIntended(default: route('home', absolute: false), navigate: true)
                     @error('form.password') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <!-- Remember Me -->
-                <div class="block mt-4">
-                    <label for="remember" class="inline-flex items-center">
-                        <input wire:model="form.remember" id="remember" type="checkbox"
-                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                        <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                    </label>
-                </div>
+                <div class="block mt-4 text-left ps-4">
+  <label for="remember" class="inline-flex items-center text-lg">
+    <input 
+      wire:model="form.remember"
+      id="remember" 
+      type="checkbox"
+      class="w-5 h-5 me-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" 
+      name="remember">
+    <span class="text-lg text-white">Remember me</span>
+  </label>
+</div>
+
                 <!-- Session Status/Error -->
                 @if (session('status'))
                     <div class="mb-4 text-green-600">

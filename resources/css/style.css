@@ -183,7 +183,7 @@ body {
   font-weight: var(--weight-regular);
   line-height: var(--lineHeight-5);
   overflow:scroll;
-  height: 300vh;
+  min-height: 100vh;
 }
 
 body.loaded { overflow: overlay; }
@@ -335,14 +335,14 @@ body.nav-active { overflow: hidden; }
   text-transform: uppercase;
   letter-spacing: var(--letterSpacing-5);
   max-width: max-content;
-  border: 2px solid var(--gold-crayola);
+  border: solid ;
   padding: 12px 45px;
   overflow: hidden;
   z-index: 1;
 }
 
 .btn::before {
-  content: "";
+  
   position: absolute;
   bottom: 100%;
   left: 50%;
@@ -363,7 +363,7 @@ body.nav-active { overflow: hidden; }
   left: 50%;
   transform: translateX(-50%);
   min-width: max-content;
-  color: var(--smoky-black-1);
+  color: var(--gold-crayola);
 }
 
 .btn:is(:hover, :focus-visible)::before { bottom: -50%; }
@@ -1601,7 +1601,10 @@ body.nav-active { overflow: hidden; }
   /**
    * TOPBAR
    */
-
+.topbar {
+color: white;
+background-color:black ;
+}
   .topbar-item:not(.link) { display: flex; }
 
   .topbar .item-2 { margin-inline-end: auto; }
@@ -2472,35 +2475,32 @@ body.nav-active { overflow: hidden; }
 /*-----------------------------------*\
   #SIGNIN-SECTION
 \*-----------------------------------*/
-
 .signin-section {
-  background-image: url('../images/hero-slider-3.jpg'); /* Use your own image path */
-  background-size: cover;
-  background-position: center;
+ 
   position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  
 }
 
 .signin-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.65); /* Dark overlay for dimming */
+  background-color: hsla(30, 8%, 5%,1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 .signin-form {
   text-align: center;
   max-width: 400px; /* Increased box width */
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Glass effect background */
+  background-color: rgba(41, 40, 40, 0.4); /* Glass effect background */
   padding: 40px 30px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
@@ -2609,7 +2609,7 @@ body.nav-active { overflow: hidden; }
 \*-----------------------------------*/
 
 .signup-section {
-  background-image: url('../images/hero-slider-2.jpg'); /* Your background image path */
+ 
   background-size: cover;
   background-position: center;
   position: relative;
@@ -2629,14 +2629,14 @@ body.nav-active { overflow: hidden; }
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.65); /* Dark overlay for dimming */
+  background-color:hsla(30, 8%, 5%,1); /* Dark overlay for dimming */
 }
 
 .signup-form {
   text-align: center;
   max-width: 600px; /* Increased width for a professional form */
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Glass effect background */
+  background-color: rgba(41, 40, 40, 0.4); /* Glass effect background */
   padding: 40px 30px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);

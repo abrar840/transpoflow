@@ -203,8 +203,7 @@
           <h2 class="headline-1 section-title">Our Top Services</h2>
 
           <p class="section-text">
-            Empowering your transport business with cutting-edge tools, AI-powered solutions, and seamless management
-            services.
+          
           </p>
 
           <ul class="grid-list">
@@ -326,10 +325,9 @@
             <h2 class="headline-1 section-title">Our Journey Towards Revolutionizing Transport Management</h2>
 
             <p class="section-text">
-              At TRANSPO FLOW, we started with a simple vision: to make transport management smarter, easier, and more
-              efficient. By combining innovative technology with AI-driven solutions, we empower businesses to
-              streamline operations, enhance customer experiences, and drive growth. Our passion for excellence and
-              commitment to innovation continues to shape the future of transport management, one company at a time.
+            At TranspoFlow, we started with a simple goal: to make transport management easier, smarter, and more efficient.
+            By using modern technology, we help businesses improve their daily operations, offer better services to customers, and grow faster.
+            Our focus on quality and innovation is helping shape the future of transport management, one company at a time.
             </p>
 
             <a href="aboutus.html" class="btn btn-primary">

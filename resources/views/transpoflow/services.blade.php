@@ -28,10 +28,7 @@
 </head>
 <body class="loaded">
   
-  <!-- 
-    - #TOP BAR
-  -->
-   <x-topbar/>
+
 
   <!-- 
     - #HEADER
@@ -57,7 +54,7 @@
       <div class="grid-list">
         <div class="service-card">
           <div class="card-icon">
-            <img src="images/admin-panel.jpg" alt="Admin Dashboard" class="img-cover">
+            <img src="images/aadmin.png" alt="Admin Dashboard" class="img-cover">
           </div>
           
           <h3 class="title-4 card-title">Admin Dashboard</h3>
@@ -73,7 +70,7 @@
 
         <div class="service-card">
           <div class="card-icon">
-            <img src="images/tms.jpg" alt="Ticket Management System" class="img-cover">
+            <img src="images\ticket.png" alt="Ticket Management System" class="img-cover">
           </div>
           
           <h3 class="title-4 card-title">Ticket Management System</h3>
@@ -89,7 +86,7 @@
 
         <div class="service-card">
           <div class="card-icon">
-            <img src="images/cms.jpg" alt="Corporate Events" class="img-cover">
+            <img src="images/cargo.png" alt="Corporate Events" class="img-cover">
           </div>
           
           <h3 class="title-4 card-title">Cargo Managment System</h3>
@@ -105,7 +102,7 @@
 
         <div class="service-card">
           <div class="card-icon">
-            <img src="images/fms.jpg" alt="Fleet Management System" class="img-cover">
+            <img src="images/fleet-management.png" alt="Fleet Management System" class="img-cover">
           </div>
           
           <h3 class="title-4 card-title">Fleet Management System</h3>
@@ -120,7 +117,7 @@
         </div>
         <div class="service-card">
           <div class="card-icon">
-            <img src="images/csm.jpg" alt="Customer Support Managment" class="img-cover">
+            <img src="images/customer-support.png" alt="Customer Support Managment" class="img-cover">
           </div>
           
           <h3 class="title-4 card-title">Customer Support Managment</h3>
@@ -135,8 +132,7 @@
         </div>
       </div>
 
-      <img src="/api/placeholder/200/200" alt="shape" class="shape shape-1 move-anim">
-      <img src="/api/placeholder/200/200" alt="shape" class="shape shape-2 move-anim">
+    
     </div>
   </section>
 

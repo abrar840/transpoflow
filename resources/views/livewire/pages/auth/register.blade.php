@@ -39,6 +39,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 <section class="signup-section">
+<x-topbar/>
     <div class="signup-container">
       <div class="signup-form">
         <h3>Create an Account</h3>

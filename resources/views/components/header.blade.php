@@ -54,18 +54,14 @@
       
 
         @guest
-        <div class="flex space-x-4">
-            <a href="{{ route('login') }}" class="btn btn-secondary">
-                <span class="text text-1">Sign In</span>
-                <span class="text text-2" aria-hidden="true">Sign In</span>
-            </a>
-    
-            <a href="{{ route('register') }}" class="btn btn-secondary">
-                <span class="text text-1">Sign Up</span>
-                <span class="text text-2" aria-hidden="true">Sign Up</span>
-            </a>
-        </div>
-    @endguest
+    <a href="{{ route('login') }}" class="btn btn-secondary inline-block">
+        <span class="text text-1">Sign In</span>
+    </a>
+@endguest
+
+
+
+
 
     <!-- User Menu - Only show when authenticated -->
     @auth

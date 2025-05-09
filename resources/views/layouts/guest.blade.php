@@ -18,17 +18,11 @@
         @vite('resources/css/signin_signup.css')
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <div class="logo flex items-center space-x-3">
-                    <img src="{{ Vite::asset('resources/images/bus.svg') }}" alt="Company Logo" class="w-10 h-10">
-                    <p class="text-2xl font-extrabold text-yellow-500 uppercase">Transpo FLOW</p>
-                </div>
-            </div>
+     
 
             <div class="w-full">
                 {{ $slot }}
             </div>
-        </div>
+      
     </body>
 </html>
