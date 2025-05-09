@@ -50,6 +50,6 @@ class CustomerSupport extends Component
 
     public function render()
     {
-        return view('livewire.enduser.customer-support')->layout('layouts.user');
+        return view('livewire.enduser.customer-support')->layout('layouts.user', [ 'company' => $this->company, ]);
     }
 }

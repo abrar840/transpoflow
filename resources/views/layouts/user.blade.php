@@ -20,7 +20,14 @@
     <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 </head>
 <body class="">
+  @php
+  $hideHeaderRoutes = ['end-user-login', 'end-user-register'];
+@endphp
+
+@if (!in_array(Route::currentRouteName(), $hideHeaderRoutes))
   @livewire('enduser.header1', ['company' => $company])
+@endif
+
     <main class="">
         
         <div class="">

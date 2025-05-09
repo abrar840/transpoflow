@@ -49,6 +49,8 @@ class CargoBook extends Model
     public static function calculateCharges(array $data): array
     {
         $company = Company::find($data['company_id']);
+
+        
         
         // Get base fare from route
         $baseFare = CargoRoute::where('company_id', $company->id)
@@ -70,7 +72,7 @@ class CargoBook extends Model
             ->where('max_volume', '>=', $data['volume'])
             ->first();
             
-        $volumeCharge = $volumeTier ? $data['volume'] * $volumeTier->rate_per_cm3 : 0;
+        $volumeCharge = $volumeTier ? $data['volume']/5000 * $volumeTier->rate_per_cm3 : 0;
         
         // Calculate service charge
         $serviceCharge = 0;
@@ -81,13 +83,25 @@ class CargoBook extends Model
                 
             $serviceCharge = $service ? ($baseFare * $service->surcharge_percentage / 100) : 0;
         }
-        
+         
+
+
+
         return [
             'base_fare' => $baseFare,
             'weight_charge' => $weightCharge,
             'volume_charge' => $volumeCharge,
             'service_charge' => $serviceCharge,
-            'total_amount' => $baseFare + max($weightCharge, $volumeCharge) + $serviceCharge
+            'total_amount' => $baseFare + max($weightCharge, $volumeCharge) + $serviceCharge * $data['quantity']
         ];
     }
+
+
+    public function images()
+    {
+        return $this->hasMany(CargoImage::class);
+    }
+
+
+
 }

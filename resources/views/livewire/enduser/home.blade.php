@@ -28,8 +28,7 @@ elseif($theme->theme === 'dark'){
 
   <body id="top">
 
-  
-    @livewire('enduser.header1', ['company' => $company])
+ 
  
 
     <main>

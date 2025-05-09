@@ -1,5 +1,7 @@
 <!-- filepath: resources/views/livewire/enduser/header1.blade.php -->
 <header class="header">
+    @aware(['company'])
+
     @vite("resources/css/enduser/theme1/header.css")
     <div class="logo flex items-center space-x-3">
         <img src="{{ Vite::asset('resources/images/bus.svg') }}" alt="Company Logo" class="w-10 h-10">

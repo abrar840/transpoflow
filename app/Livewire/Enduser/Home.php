@@ -31,6 +31,6 @@ class Home extends Component
     {
 
 
-        return view('livewire.enduser.home')->layout('layouts.user');
+        return view('livewire.enduser.home')->layout('layouts.user', [ 'company' => $this->company, ]);
     }
 }

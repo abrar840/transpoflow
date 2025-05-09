@@ -115,7 +115,7 @@ public function register()
                 <button id="signup-submit" type="submit">Sign Up</button>
                 <br />
                 <span>Already have an account?</span>
-                <a style="color: lightseagreen" href="signin.html">Login</a>
+                <a style="color: lightseagreen" href="{{ route('end-user-login', ['company' => $company->name]) }}">Login</a>
               </div>
             </form>
           </div>
