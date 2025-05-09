@@ -2795,6 +2795,15 @@ height:1500px;
 }
 
 
+.error {
+  color: #e53e3e;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 6px;
+  display: block;
+  letter-spacing: 0.02em;
+}
+
 .companyform-container {
   width: 50%;
   height:100%;

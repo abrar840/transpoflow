@@ -11,7 +11,7 @@ class MessageInbox extends Component
     public $selectedMessage;
 
     public function mount()
-    {
+    { 
         $this->messages = Message::with(['company', 'user'])
             ->latest()
             ->get();

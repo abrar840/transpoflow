@@ -82,7 +82,7 @@ public function register()
       @push('styles')
       @vite('resources/css/enduser/signin_signup.css')
       @endpush
-    
+     
       <div class="signup-form-container">
  
         <div class="signup-form-wrapper">

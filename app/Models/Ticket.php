@@ -20,12 +20,10 @@ class Ticket extends Model
         'passenger_name',
         'passenger_cnic',
         'passenger_phone',
-        'passenger_email',
+         
         'passenger_gender',
         'travel_date',
-        'departure_time',
-        'arrival_time',
-        'seat_number',
+         
         'fare',
         'discount',
         'total_amount',
@@ -39,8 +37,8 @@ class Ticket extends Model
 
     protected $casts = [
         'travel_date' => 'date',
-        'departure_time' => 'datetime:H:i',
-        'arrival_time' => 'datetime:H:i',
+        'departure_time' => 'time',
+        'arrival_time' => 'time',
         'valid_until' => 'date',
         'booking_date' => 'datetime',
         'fare' => 'decimal:2',
@@ -78,7 +76,7 @@ class Ticket extends Model
     public function scopeValid($query)
     {
         return $query->where('valid_until', '>=', now())
-                    ->where('status', 'confirmed');
+                     ->where('status', 'confirmed');
     }
 
     public function scopeForUser($query, $userId)
@@ -86,7 +84,7 @@ class Ticket extends Model
         return $query->where('user_id', $userId);
     }
 
-    // Helper methods
+    // Helpers
     public function isExpired(): bool
     {
         return $this->valid_until < now();
@@ -101,4 +99,13 @@ class Ticket extends Model
     {
         return number_format($this->fare, 2);
     }
+
+
+
+    public function seats()
+    {
+        return $this->hasMany(TicketSeat::class);
+    }
+    
+
 }

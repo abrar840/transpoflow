@@ -7,6 +7,9 @@ use App\Models\Company;
 use App\Models\Routes;
 use App\Models\VehicleSchedule;
 use App\Models\Ticket;
+use App\Models\TicketSeat;
+
+
 use App\Models\Bus;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -49,6 +52,11 @@ class TicketBooking extends Component
     public $arrivalCities = [];
     public $cities = [];
     public $routes;
+
+    public $seatTaken;
+     
+
+
 
     public function mount(Company $company)
     {
@@ -120,45 +128,68 @@ class TicketBooking extends Component
     public function selectSchedule($scheduleId)
     {
         $this->selectedSchedule = VehicleSchedule::with(['vehicle', 'route'])->find($scheduleId);
-        $this->bookedSeats = Ticket::where('schedule_id', $scheduleId)
-            ->pluck('seat_number')
-            ->toArray();
+        $this->bookedTicket = Ticket::where('schedule_id', $scheduleId);
+          $this->bookedSeats=$this->bookedTicket->seats->seat_number->toArray();;
+        
+       
+            
     }
-
     public function bookTicket()
     {
+        // Check authentication
+        $user = auth('end_user')->user();
+        if (!$user) {
+            return redirect()->route('end-user-login', ['company' => $this->company->name]);
+        }
+    
         $this->validate([
             'passengerName' => 'required|string|max:255',
             'passengerPhone' => 'required|string|max:20',
             'passengerEmail' => 'required|email|max:255',
-            'selectedSeat' => 'required|integer|min:1|max:'.$this->selectedSchedule->bus->total_seats,
+            'selectedSeat' => [
+                'required',
+                'integer',
+                'min:1',
+                'max:' . $this->selectedSchedule->vehicle->seating_capacity,
+                function ($attribute, $value, $fail) {
+                    $isTaken = TicketSeat::whereHas('ticket', function($query) {
+                            $query->where('schedule_id', $this->selectedSchedule->id);
+                        })
+                        ->where('seat_number', $value)
+                        ->exists();
+                    
+                    if ($isTaken) {
+                        $fail('This seat has already been booked.');
+                    }
+                },
+            ],
         ]);
-        
-        // Check if seat is already booked (race condition protection)
-        $seatTaken = Ticket::where('schedule_id', $this->selectedSchedule->id)
-            ->where('seat_number', $this->selectedSeat)
-            ->exists();
-            
-        if ($seatTaken) {
-            $this->addError('selectedSeat', 'This seat has already been booked. Please select another seat.');
-            return;
-        }
-        
-        DB::transaction(function() {
+    
+        DB::transaction(function () use ($user) {
+            // Create the ticket
             $this->ticket = Ticket::create([
                 'ticket_number' => 'TKT-' . Str::upper(Str::random(8)),
-                'user_id' => auth('end_user')->id(),
+                'user_id' => $user->id,
+                'company_id' => $this->company->id,
+                'vehicle_id' => $this->selectedSchedule->vehicle_id,
                 'schedule_id' => $this->selectedSchedule->id,
                 'route_id' => $this->selectedSchedule->route_id,
                 'passenger_name' => $this->passengerName,
                 'passenger_phone' => $this->passengerPhone,
                 'passenger_email' => $this->passengerEmail,
-                'seat_number' => $this->selectedSeat,
+                'travel_date' => $this->date, // Make sure $this->date is set
+                'seat_number' => $this->selectedSeat, // Still keeping this for backward compatibility
                 'fare' => $this->selectedSchedule->fare,
                 'status' => 'confirmed',
                 'booking_date' => now(),
             ]);
-            
+    
+            // Create the ticket seat record
+            TicketSeat::create([
+                'ticket_id' => $this->ticket->id,
+                'seat_number' => $this->selectedSeat
+            ]);
+    
             $this->bookingConfirmed = true;
         });
     }

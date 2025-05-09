@@ -47,13 +47,13 @@ new #[Layout('layouts.guest')] class extends Component
           <!-- Username -->
           <div class="input-container">
             <input type="text" wire:model="name" class="input-field" placeholder="Username" required autofocus autocomplete="name" />
-            @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+            @error('name') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
           </div>
 
           <!-- Email Address -->
           <div class="input-container">
             <input type="email" wire:model="email" class="input-field" placeholder="Email Address" required autocomplete="username" />
-            @error('email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+            @error('email') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
           </div>
 
           <!-- Password -->
@@ -62,7 +62,7 @@ new #[Layout('layouts.guest')] class extends Component
             <span class="password-toggle" id="toggleSignupPassword">
               <i class="fa fa-eye"></i>
             </span>
-            @error('password') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+            @error('password') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
           </div>
 
           <!-- Confirm Password -->
@@ -71,7 +71,7 @@ new #[Layout('layouts.guest')] class extends Component
             <span class="password-toggle" id="toggleConfirmPassword">
               <i class="fa fa-eye"></i>
             </span>
-            @error('password_confirmation') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+            @error('password_confirmation') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
           </div>
 
           <!-- Terms & Conditions -->

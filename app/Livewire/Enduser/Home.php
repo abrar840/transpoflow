@@ -16,7 +16,7 @@ class Home extends Component
     {
         $this->company = $company;
 
-         
+        
 
         if (!$this->company) {
             abort(404); // Company not found, show 404 page

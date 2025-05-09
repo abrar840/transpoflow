@@ -10,6 +10,15 @@ body {
   flex-direction: column;
 }
 
+
+.error {
+  color: #e53e3e;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 4px;
+  display: block;
+}
+
 /* Glass-Morphism Header */
 /* General Header Styles */
 .header {
