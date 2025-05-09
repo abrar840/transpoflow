@@ -1,6 +1,5 @@
 <div>
-
-    @livewire('enduser.header1', ['company' => $company])
+ 
 
    
  @if($theme->theme==='light')

@@ -48,7 +48,7 @@
 
   <div class="preload" data-preaload>
     <div class="circle"></div>
-    <p class="text">TRanspoflow</p>
+    <p class="text">Transpoflow</p>
   </div>
 
 

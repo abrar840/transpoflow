@@ -285,9 +285,13 @@
   }
   
   .calculate-btn {
+    margin-left: 25vw;
+    text-align: center;
+    padding: 8px;
+    width: 300px;
     background-color: var(--primary-color);
     color: white;
-  }
+}
   
   .calculate-btn:hover {
     background-color: var(--secondary-color);

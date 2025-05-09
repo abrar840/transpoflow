@@ -228,6 +228,6 @@ class TicketBooking extends Component
 
     public function render()
     {
-        return view('livewire.enduser.ticket-booking')->layout('layouts.user');
+        return view('livewire.enduser.ticket-booking')->layout('layouts.user', [ 'company' => $this->company, ]);
     }
 }
