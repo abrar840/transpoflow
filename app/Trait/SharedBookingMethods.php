@@ -8,6 +8,21 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 trait SharedBookingMethods
 {
+
+//for showing the form with detail of a record 
+
+public $showingDetails = false;
+public $currentBooking = null;
+
+
+
+
+
+
+
+
+
+
     //
    //update function run on value change so any tricker after calculation is not able to change weight or size ....
 
@@ -94,6 +109,20 @@ protected function handleImageUpload()
 }
 
 
+
+//function for showing form that will display the details of a 
+public function showBookingDetails($bookingId){
+
+    $this->currentBooking=CargoBook::with('user')->find($bookingId);
+    $this->showingDetails=true;
+}
+
+
+public function closeDetails()
+{
+    $this->showingDetails = false;
+    $this->currentBooking = null;
+}
 
 
 }

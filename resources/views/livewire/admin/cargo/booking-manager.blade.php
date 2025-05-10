@@ -613,12 +613,15 @@
                         
 
                         </td>
-                        <td>
+                        <td class="flex flex-row ">
                             <button wire:click="downloadSlip('{{ $booking->id }}')" class="btn btn-primary btn-sm">
                                 Download Slip
                             </button>
                             <button wire:click="confirmDelete('{{ $booking->id }}')" class="btn btn-danger btn-sm ml-2">
                                 Delete
+                            </button>
+                            <button wire:click="showBookingDetails('{{ $booking->id }}')" class="btn btn-info btn-sm ml-2">
+                                View Details
                             </button>
                         </td>
                         
@@ -643,5 +646,107 @@
         </div>
     </div>
 </div>
+
 @endif
+
+
+{{--now here our visual model for showing the detils of clicked record--}}
+@if($showingDetails)
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold">Booking Details - {{ $currentBooking->tracking_number ?? '' }}</h3>
+                <button wire:click="closeDetails" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            @if($currentBooking)
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Left Column - Booking Info -->
+                <div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Shipper Information</h4>
+                        <div class="space-y-1">
+                            <p><strong>Name:</strong> {{ $currentBooking->shipper_name }}</p>
+                            <p><strong>Phone:</strong> {{ $currentBooking->shipper_phone }}</p>
+                            <p><strong>Address:</strong> {{ $currentBooking->shipper_address }}</p>
+                            <p><strong>City:</strong> {{ $currentBooking->shipper_city }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Consignee Information</h4>
+                        <div class="space-y-1">
+                            <p><strong>Name:</strong> {{ $currentBooking->consignee_name }}</p>
+                            <p><strong>Phone:</strong> {{ $currentBooking->consignee_phone }}</p>
+                            <p><strong>Address:</strong> {{ $currentBooking->consignee_address }}</p>
+                            <p><strong>City:</strong> {{ $currentBooking->consignee_city }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Shipment Details</h4>
+                        <div class="space-y-1">
+                            <p><strong>Item:</strong> {{ $currentBooking->item_description }}</p>
+                            <p><strong>Quantity:</strong> {{ $currentBooking->quantity }}</p>
+                            <p><strong>Weight:</strong> {{ $currentBooking->weight }} kg</p>
+                            <p><strong>Dimensions:</strong> L:{{ $currentBooking->length }}cm W:{{ $currentBooking->width }}cm H:{{ $currentBooking->height }}cm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Images and Charges -->
+                <div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Cargo Images</h4>
+                        @if($currentBooking->images && count($currentBooking->images) > 0)
+                            <div class="grid grid-cols-2 gap-3">
+                                @foreach($currentBooking->images as $image)
+                                <div class="border rounded overflow-hidden">
+                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="Cargo Image" class="w-full h-40 object-cover">
+                                </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-gray-500">No images available for this booking</p>
+                        @endif
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded">
+                        <h4 class="font-medium text-lg mb-2">Pricing</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Base Fare:</span>
+                                <span>Rs {{ number_format($currentBooking->base_fare, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Weight Charge:</span>
+                                <span>Rs {{ number_format($currentBooking->weight_charge, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Volume Charge:</span>
+                                <span>Rs {{ number_format($currentBooking->volume_charge, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Service Charge:</span>
+                                <span>Rs {{ number_format($currentBooking->service_charge, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between font-bold border-t pt-2 mt-2">
+                                <span>Total Amount:</span>
+                                <span>Rs {{ number_format($currentBooking->total_amount, 2) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+@endif
+
 </div>

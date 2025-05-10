@@ -12,4 +12,9 @@ class CargoImage extends Model
     {
         return $this->belongsTo(CargoBook::class);
     }
+
+    protected $casts = [
+        'images' => 'array',
+        // other casts...
+    ];
 }

@@ -111,7 +111,8 @@ public $tempImagePaths = [];
             'consignee_city' => $this->consignee_city,
             'weight' => $this->weight,
             'volume' => $volume,
-            'service_type' => $this->service_type
+            'service_type' => $this->service_type,
+            'quantity'=>$this->quantity
         ]);
 
         $this->base_fare = $charges['base_fare'];
@@ -192,6 +193,7 @@ public $tempImagePaths = [];
 
         $this->resetForm();
         session()->flash('message', 'Booking created! Tracking #: ' . $booking->tracking_number);
+        $this->loadBookings();
     }
 
     public function resetForm()
@@ -201,12 +203,26 @@ public $tempImagePaths = [];
 
 
 ///on cnagoig weigt and voluyme or citities reset tte vlaues 
+
 public function updated($propertyName)
 {
     // Reset calculations when input values change
     if (in_array($propertyName, ['shipper_city', 'consignee_city', 'weight', 'length', 'width', 'height', 'service_type'])) {
         $this->resetCalculations();
     }
+}
+
+//this functionis for when user change vlaue to check differnt weights and volume
+private function resetCalculations()
+{
+    $this->reset([
+        'base_fare',
+        'weight_charge',
+        'volume_charge',
+        'service_charge',
+        'total_amount',
+        'quantity'
+    ]);
 }
 
 
