@@ -89,7 +89,12 @@
             @livewire('admin.cargo.volume-config', key('volume')) 
         @elseif($activeTab === 'services')
             @livewire('admin.cargo.service-type-config', key('services'))
-        @endif
+        
+        @elseif($activeTab === 'cargo')
+        @vite("resources/css/admin.css")
+        @livewire("side-bar")
+        @livewire('admin.cargo.booking-manager')
+    @endif
     </div>
     
 </div>

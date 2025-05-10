@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cargo_bookings', function (Blueprint $table) {
+        Schema::create('cargo_books', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained();
             $table->foreignId('user_id')->constrained(); // Booking agent
@@ -43,7 +43,7 @@ return new class extends Migration
             $table->decimal('total_amount', 10, 2);
             
             // Status
-            $table->enum('status', ['pending', 'dispatched', 'in_transit', 'delivered'])->default('pending');
+            $table->enum('status', ['pending', 'dispatched', 'in_transit', 'delivered','canceled'])->default('pending');
             
             $table->timestamps();
         });

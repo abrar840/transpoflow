@@ -12,7 +12,8 @@ class CargoDashboard extends Component
         'routes' => 'City Routes',
         'weight' => 'Weight Tiers', 
         'volume' => 'Volume Tiers',
-        'services' => 'Service Types'
+        'services' => 'Service Types',
+        'cargo' => 'Cargo Booking'
     ];
 
     public function switchTab($tab)

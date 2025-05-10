@@ -21,7 +21,7 @@
 </head>
 <body class="">
   @php
-  $hideHeaderRoutes = ['end-user-login', 'end-user-register'];
+  $hideHeaderRoutes = ['end-user-login', 'end-user-register','form','companyform'];
 @endphp
 
 @if (!in_array(Route::currentRouteName(), $hideHeaderRoutes))

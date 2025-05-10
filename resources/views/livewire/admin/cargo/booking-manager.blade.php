@@ -247,6 +247,86 @@
             strong {
                 font-weight: 600;
             }
+
+
+/* Image Upload Styles */
+.file-upload-label {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #f8f9fa;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: #4CAF50;
+            background-color: #f0fdf4;
+        }
+
+        .image-preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .image-preview-item {
+            position: relative;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s;
+        }
+
+        .image-preview-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 6px 8px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .delete-image-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .image-preview-item:hover .delete-image-btn {
+            opacity: 1;
+        }
+
+        .delete-image-btn:hover {
+            background: #dc2626;
+        }
+
+            
         </style>
         <h1>Cargo Booking</h1>
 
@@ -373,6 +453,56 @@
                             @endforeach
                         </select>
                     </div>
+
+
+                                <!-- Image Upload Section -->
+                                <div class="form-group full-width">
+                                    <label class="form-label file-upload-label">
+                                        <span>Upload Cargo Images (Max 5)</span>
+                                        <input type="file" wire:model="images" multiple accept="image/*" class="d-none">
+                                    </label>
+
+                                    <p class="text-sm text-gray-500 mt-1">Supported formats: JPG, PNG. Max 2MB per
+                                        image.</p>
+
+                                    <!-- Image Preview with Delete Option -->
+                                    <div class="image-preview-container mt-4">
+                                        @foreach($uploadedImages as $index => $image)
+                                        <div class="image-preview-item relative group">
+                                            <img src="{{($image['url'])}}" alt="Preview"
+                                                class="h-full w-full object-cover">
+
+                                            <!-- Image Info -->
+                                            <div class="image-info">
+                                                <span class="text-xs">{{ $image['name'] }}</span>
+                                                {{-- <span class="text-xs">{{ $image['size'] }}</span> --}}
+                                            </div>
+
+                                            <!-- Delete Button -->
+                                            <button type="button" wire:click="removeImage({{ $index }})"
+                                                class="delete-image-btn" title="Remove image">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        @endforeach
+                                    </div>
+
+                                    @error('images.*') <span class="text-red-500 text-xs">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+
+
+
+
+
+
                 </div>
 
                 <button type="submit" class="btn btn-primary">
@@ -397,6 +527,13 @@
                         <p>Service Charge: <strong>Rs {{ number_format($service_charge, 2) }}</strong></p>
                     </div>
                 </div>
+
+
+
+
+
+
+                
                 <div class="row mt-2">
                     <div class="col-md-12">
                         <h5>Total Charges: <strong>Rs {{ number_format($total_amount, 2) }}</strong></h5>
@@ -476,15 +613,140 @@
                         
 
                         </td>
-                        <td>
+                        <td class="flex flex-row ">
                             <button wire:click="downloadSlip('{{ $booking->id }}')" class="btn btn-primary btn-sm">
                                 Download Slip
                             </button>
+                            <button wire:click="confirmDelete('{{ $booking->id }}')" class="btn btn-danger btn-sm ml-2">
+                                Delete
+                            </button>
+                            <button wire:click="showBookingDetails('{{ $booking->id }}')" class="btn btn-info btn-sm ml-2">
+                                View Details
+                            </button>
                         </td>
+                        
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    @if($confirmingDeletion)
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <h3 class="text-lg font-medium mb-4">Confirm Deletion</h3>
+        <p class="mb-4">Are you sure you want to delete this booking? This action cannot be undone.</p>
+        <div class="flex justify-end space-x-3">
+            <button wire:click="$set('confirmingDeletion', false)" class="btn btn-secondary">
+                Cancel
+            </button>
+            <button wire:click="deleteBooking" class="btn btn-danger">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+@endif
+
+
+{{--now here our visual model for showing the detils of clicked record--}}
+@if($showingDetails)
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold">Booking Details - {{ $currentBooking->tracking_number ?? '' }}</h3>
+                <button wire:click="closeDetails" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            @if($currentBooking)
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Left Column - Booking Info -->
+                <div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Shipper Information</h4>
+                        <div class="space-y-1">
+                            <p><strong>Name:</strong> {{ $currentBooking->shipper_name }}</p>
+                            <p><strong>Phone:</strong> {{ $currentBooking->shipper_phone }}</p>
+                            <p><strong>Address:</strong> {{ $currentBooking->shipper_address }}</p>
+                            <p><strong>City:</strong> {{ $currentBooking->shipper_city }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Consignee Information</h4>
+                        <div class="space-y-1">
+                            <p><strong>Name:</strong> {{ $currentBooking->consignee_name }}</p>
+                            <p><strong>Phone:</strong> {{ $currentBooking->consignee_phone }}</p>
+                            <p><strong>Address:</strong> {{ $currentBooking->consignee_address }}</p>
+                            <p><strong>City:</strong> {{ $currentBooking->consignee_city }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Shipment Details</h4>
+                        <div class="space-y-1">
+                            <p><strong>Item:</strong> {{ $currentBooking->item_description }}</p>
+                            <p><strong>Quantity:</strong> {{ $currentBooking->quantity }}</p>
+                            <p><strong>Weight:</strong> {{ $currentBooking->weight }} kg</p>
+                            <p><strong>Dimensions:</strong> L:{{ $currentBooking->length }}cm W:{{ $currentBooking->width }}cm H:{{ $currentBooking->height }}cm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Images and Charges -->
+                <div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-lg mb-2">Cargo Images</h4>
+                        @if($currentBooking->images && count($currentBooking->images) > 0)
+                            <div class="grid grid-cols-2 gap-3">
+                                @foreach($currentBooking->images as $image)
+                                <div class="border rounded overflow-hidden">
+                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="Cargo Image" class="w-full h-40 object-cover">
+                                </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-gray-500">No images available for this booking</p>
+                        @endif
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded">
+                        <h4 class="font-medium text-lg mb-2">Pricing</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Base Fare:</span>
+                                <span>Rs {{ number_format($currentBooking->base_fare, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Weight Charge:</span>
+                                <span>Rs {{ number_format($currentBooking->weight_charge, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Volume Charge:</span>
+                                <span>Rs {{ number_format($currentBooking->volume_charge, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Service Charge:</span>
+                                <span>Rs {{ number_format($currentBooking->service_charge, 2) }}</span>
+                            </div>
+                            <div class="flex justify-between font-bold border-t pt-2 mt-2">
+                                <span>Total Amount:</span>
+                                <span>Rs {{ number_format($currentBooking->total_amount, 2) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+@endif
+
 </div>

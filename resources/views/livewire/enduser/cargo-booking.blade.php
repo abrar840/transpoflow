@@ -464,20 +464,20 @@
                                     @error('consignee_address') <div class="error">{{ $message }}</div> @enderror
                                 </div>
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label class="form-label">Email Address</label>
                                     <input type="email" wire:model="consignee_email" class="form-input">
                                     @error('consignee_email') <div class="error">{{ $message }}</div> @enderror
-                                </div>
+                                </div> --}}
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label class="form-label">Delivery Option</label>
                                     <select wire:model="delivery_option" class="form-select">
                                         <option value="Company Office">Company Office</option>
                                         <option value="Home">Home</option>
                                     </select>
                                     @error('delivery_option') <div class="error">{{ $message }}</div> @enderror
-                                </div>
+                                </div> --}}
                             </div>
                         </section>
 

@@ -5,16 +5,23 @@ namespace App\Livewire\Admin\Cargo;
 use Livewire\Component;
 // app/Http/Livewire/Cargo/BookingManager.php
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use App\Trait\SharedBookingMethods;
 
 
 
 use App\Models\CargoBook;
 use App\Models\CargoRoute;
+
+use Livewire\WithFileUploads;
+use App\Models\CargoImage;
+
 use App\Models\CargoServiceType;
 
+
+
 class BookingManager extends Component
-{
+{use SharedBookingMethods;
+       use WithFileUploads; 
     // Form Fields
     public $shipper_name, $shipper_phone, $shipper_address, $shipper_city;
     public $consignee_name, $consignee_phone, $consignee_address, $consignee_city;
@@ -22,7 +29,8 @@ class BookingManager extends Component
     public $weight, $length, $width, $height;
     public $service_type;
     public $insurance = 'no';
-
+    public $images;
+    public $volume;
     // Calculated Values
     public $base_fare = 0;
     public $weight_charge = 0;
@@ -34,11 +42,17 @@ class BookingManager extends Component
     public $availableCities = [];
     public $serviceTypes = [];
     public $bookings = [];
+
+    public $uploadedImages = [];
+public $tempImagePaths = [];
     public $company;
 
     public $search;
     public $destination = null;
 
+    public $confirmingDeletion = false;         //delete record confirmation from pop up window
+    public $bookingToDelete = null;              //booking is to get deleted
+   
     public function mount()
     {
         $this->company = auth()->user()->company;
@@ -46,12 +60,12 @@ class BookingManager extends Component
             ->distinct()
             ->pluck('departure_city')
             ->toArray();
-
-
-
+    
         $this->serviceTypes = CargoServiceType::where('company_id', $this->company->id)
             ->where('is_active', true)
             ->get();
+            
+        $this->loadRoutes(); // Load initial data
     }
 
 
@@ -69,17 +83,7 @@ class BookingManager extends Component
 
 
 
-
-    public function downloadSlip($bookingId)
-    {
-        $booking = CargoBook::findOrFail($bookingId);
-        $pdf = Pdf::loadView('pdf.bookingSlip', compact('booking'));
-        
-        return response()->streamDownload(
-            fn () => print($pdf->output()),
-            "booking-slip-{$booking->tracking_number}.pdf"
-        );
-    }
+ 
 
 
 
@@ -107,7 +111,8 @@ class BookingManager extends Component
             'consignee_city' => $this->consignee_city,
             'weight' => $this->weight,
             'volume' => $volume,
-            'service_type' => $this->service_type
+            'service_type' => $this->service_type,
+            'quantity'=>$this->quantity
         ]);
 
         $this->base_fare = $charges['base_fare'];
@@ -127,7 +132,7 @@ class BookingManager extends Component
             'item_description' => 'required'
         ]);
 
-        $volume = $this->length * $this->width * $this->height;
+        $this->volume = $this->length * $this->width * $this->height;
         // dd(auth()->user()->id);
         // dd("hi");
         $booking = CargoBook::create([
@@ -149,7 +154,7 @@ class BookingManager extends Component
 
             // Shipment details
             'weight' => $this->weight,
-            'volume' => $volume,
+            'volume' => $this->volume,
             'item_description' => $this->item_description,
             'quantity' => $this->quantity,
 
@@ -163,14 +168,65 @@ class BookingManager extends Component
             'status' => 'pending'
         ]);
 
+
+
+
+ 
+
+            
+            foreach ($this->uploadedImages as $image) {
+                $savedPath = $this->handleImageUpload();
+                
+                if ($savedPath) {
+                    CargoImage::create([
+                        'cargo_book_id' => $booking->id,
+                        'image_path' => $savedPath,
+                        'caption' => 'Cargo Image'
+                    ]);
+                }
+            }          
+        
+  // Clear temporary data
+  $this->uploadedImages = [];
+  $this->tempImagePaths = [];
+
+
         $this->resetForm();
         session()->flash('message', 'Booking created! Tracking #: ' . $booking->tracking_number);
+        $this->loadBookings();
     }
 
     public function resetForm()
     {
         $this->resetExcept(['availableCities', 'serviceTypes', 'company', 'bookings']);
     }
+
+
+///on cnagoig weigt and voluyme or citities reset tte vlaues 
+
+public function updated($propertyName)
+{
+    // Reset calculations when input values change
+    if (in_array($propertyName, ['shipper_city', 'consignee_city', 'weight', 'length', 'width', 'height', 'service_type'])) {
+        $this->resetCalculations();
+    }
+}
+
+//this functionis for when user change vlaue to check differnt weights and volume
+private function resetCalculations()
+{
+    $this->reset([
+        'base_fare',
+        'weight_charge',
+        'volume_charge',
+        'service_charge',
+        'total_amount',
+        'quantity'
+    ]);
+}
+
+
+
 
 
     //make staus editbale 
@@ -213,8 +269,7 @@ class BookingManager extends Component
                     ->orWhere('status', 'like', '%' . $this->search . '%');
             });
         }
-
-        $this->routes = $query->latest()->get();
+        $this->bookings = $query->latest()->limit(10)->get();
     }
 
 
@@ -227,14 +282,36 @@ class BookingManager extends Component
 
 
 
+public function confirmDelete($bookingId){
+
+    $this->bookingToDelete = $bookingId;
+    $this->confirmingDeletion = true;
+
+}
+
+
+
+public function deleteBooking(){
+
+    CargoBook::find($this->bookingToDelete)->delete();
+    $this->confirmingDeletion = false;
+    $this->bookingToDelete = null;
+    $this->loadBookings(); // Refresh the list
+    session()->flash('message', 'Booking deleted successfully');
+
+}
+
+
+
+
     public function render()
     {
         // In your render() method
-        $this->bookings = CargoBook::with(['user'])
-            ->where('company_id', $this->company->id)
-            ->latest()
-            ->limit(10)
-            ->get();
+        // $this->bookings = CargoBook::with(['user'])
+        //     ->where('company_id', $this->company->id)
+        //     ->latest()
+        //     ->limit(10)
+        //     ->get();   tis was overriding te serc result that why its is now moved to mount mehtoid and commented here 
 
 
             

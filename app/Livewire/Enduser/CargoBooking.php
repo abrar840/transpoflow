@@ -3,19 +3,19 @@
 namespace App\Livewire\EndUser;
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
+use Livewire\WithFileUploads;   
 use App\Models\CargoBook;
 use App\Models\Company;
 use App\Models\CargoRoute;
 use App\Models\CargoServiceType;
-use Barryvdh\DomPDF\Facade\Pdf;
+
 use App\Models\CargoImage;
 use Illuminate\Support\Facades\Storage;
-
+use App\Trait\SharedBookingMethods;
 class CargoBooking extends Component
 {
     use WithFileUploads; // This must be present for file uploads
-
+    use SharedBookingMethods;
     // Image upload properties
     public $images = [];
     public $calcultion_details;
@@ -98,23 +98,7 @@ class CargoBooking extends Component
     }
 
     // Image Upload Methods
-    public function updatedImages()
-    {
-        $this->validate([
-            'images.*' => 'image|max:2048', // 2MB max per image
-        ]);
-    
-        foreach ($this->images as $image) {
-            $tempPath = $image->store('tmp/cargo-images', 'public');
-            $this->uploadedImages[] = [
-                'name' => $image->getClientOriginalName(),
-                'temp_path' => $tempPath,
-              
-                'url' => Storage::url($tempPath), // Use Storage::url() instead
-            ];
-        }
-        $this->images = []; // Clear the uploaded files array
-    }
+   
 
     public function removeImage($index)
     {
@@ -237,7 +221,7 @@ class CargoBooking extends Component
         ]);
 
         // Process images
-        foreach ($this->uploadedImages as $image) {
+ 
 
             
             foreach ($this->uploadedImages as $image) {
@@ -250,13 +234,8 @@ class CargoBooking extends Component
                         'caption' => 'Cargo Image'
                     ]);
                 }
-            }
-
-            
-
-          
-            
-        }
+            }          
+        
 
         // Clear temporary data
         $this->uploadedImages = [];
@@ -333,24 +312,7 @@ return $this->redirect(
     
 
  
-    protected function handleImageUpload()
-    {
-        foreach ($this->uploadedImages as $image) {
-            $newPath = str_replace('tmp/', '', $image['temp_path']);
-            
-            // Ensure directory exists
-            if (!Storage::disk('public')->exists(dirname($newPath))) {
-                Storage::disk('public')->makeDirectory(dirname($newPath));
-            }
-            
-            // Move the file
-            Storage::disk('public')->move($image['temp_path'], $newPath);
-            
-            
-            return $newPath;
-        }
-        return null;
-    }
+//andle image uplaode is defien in trait 
     
 
     public function resetForm()
@@ -384,43 +346,11 @@ return $this->redirect(
 
 
 
-//update function run on value change so any tricker after calculation is not able to change weight or size ....
-
-public function updated($propertyName)
-{
-    // Reset calculations when input values change
-    if (in_array($propertyName, ['shipper_city', 'consignee_city', 'weight', 'length', 'width', 'height', 'service_type'])) {
-        $this->resetCalculations();
-    }
-}
-
-//this functionis for when user change vlaue to check differnt weights and volume
-private function resetCalculations()
-{
-    $this->reset([
-        'base_fare',
-        'weight_charge',
-        'volume_charge',
-        'service_charge',
-        'total_amount',
-        'quantity'
-    ]);
-}
 
 
 
 
 
-public function downloadSlip($bookingId)
-{
-    $booking = CargoBook::findOrFail($bookingId);
-    $pdf = Pdf::loadView('pdf.bookingSlip', compact('booking'));
-    
-    return response()->streamDownload(
-        fn () => print($pdf->output()),
-        "booking-slip-{$booking->tracking_number}.pdf"
-    );
-}
 
 
 
