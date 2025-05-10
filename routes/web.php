@@ -29,9 +29,9 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 Route::get('/cargo', RouteManager::class);
 
 
-Route::get('/preview', AdminPanelPreview::class);
+Route::get('/preview', AdminPanelPreview::class)->name('admin-panel-preview');
 
-Route::get('/p', ThemePreviewer::class);
+Route::get('/p', ThemePreviewer::class)->name('theme-preview');
  
 
 Route::get('/CustomerSupport', CustomerSupport::class);

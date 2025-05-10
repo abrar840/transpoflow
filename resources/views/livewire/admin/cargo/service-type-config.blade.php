@@ -98,7 +98,7 @@
         }
         
         .btn-primary {
-            background-color: #4CAF50;
+            background-color: #007BFF;
             color: white;
         }
         
@@ -116,7 +116,7 @@
         }
         
         .btn-success {
-            background-color: #28a745;
+            background-color: #007BFF;
             color: white;
         }
         

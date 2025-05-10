@@ -67,12 +67,12 @@
     }
     
     .btn-primary {
-        background-color: #4CAF50;
+        background-color:#007BFF;
         color: white;
     }
     
     .btn-primary:hover {
-        background-color: #45a049;
+        background-color: #007BFF;
     }
     
     .btn-secondary {

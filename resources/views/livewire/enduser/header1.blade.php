@@ -22,7 +22,7 @@
     <div class="sign-in flex items-center space-x-4">
         @guest('end_user')
             <a href="{{ route('end-user-login', ['company' => $company->name]) }}" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
-            <a href="{{ route('end-user-register', ['company' => $company->name]) }}" class="sign-in-btn ml-2" style="text-decoration: none;">Register</a>
+            
         @endguest
 
         @auth('end_user')

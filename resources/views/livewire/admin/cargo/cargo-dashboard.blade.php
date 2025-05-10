@@ -12,12 +12,12 @@
         
         .dashboard-header {
             padding: 20px;
-            background-color: #3c91e6;
+            background-color: #007BFF;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-left: 250px;
+            margin-left: 280px;
         }
         
         .dashboard-header h1 {
@@ -28,7 +28,7 @@
         .cargo-tabs {
             display: flex;
             border-bottom: 1px solid #ddd;
-            margin-left: 250px;
+            margin-left: 280px;
         }
         
         .cargo-tabs button {
@@ -40,6 +40,7 @@
             color: #555;
             border-bottom: 3px solid transparent;
             transition: all 0.3s;
+            color: #007BFF;
         }
         
         .cargo-tabs button:hover {

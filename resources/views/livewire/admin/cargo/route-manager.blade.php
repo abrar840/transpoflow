@@ -61,7 +61,7 @@
         }
         
         .save-btn {
-            background-color: #4CAF50;
+            background-color: #007BFF;
             color: white;
             border: none;
             padding: 8px 15px;
@@ -72,7 +72,7 @@
         }
         
         .save-btn:hover {
-            background-color: #45a049;
+            background-color: #007BFF;
         }
         
         .edit-btn {
