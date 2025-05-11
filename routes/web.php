@@ -165,8 +165,8 @@ Route::view('profile', 'profile')
 
 
 
-require __DIR__.'/auth.php';
-Route::get('/{company:name}', Home::class)->name('user-Home');
+
+// Route::get('/{company:name}', Home::class)->name('user-Home');
 
 
 
@@ -197,8 +197,9 @@ Volt::route('/{company:name}/login', 'pages.auth.end-user-login')->name('end-use
 
 
 // End user dashboard (end_user guard)
-Route::middleware(['auth:end_user'])->group(function () {
-    Route::get('/{company:name}/home', Home::class)->name('user-home');
+Route::middleware(['check.company.admin'])->group(function () {
+    require __DIR__.'/auth.php';
+    Route::get('/{company:name}', Home::class)->name('user-home');
 });
 
 

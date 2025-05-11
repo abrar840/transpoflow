@@ -62,7 +62,7 @@ public function register()
 
     Auth::guard('end_user')->login($user);
     session(['company_name' => $this->company->name]);
-    return redirect()->route('user-Home', ['company' => $this->company->name]);
+    return redirect()->route('user-home', ['company' => $this->company->name]);
 }
 };
 ?>

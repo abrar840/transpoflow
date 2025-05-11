@@ -9,7 +9,7 @@
     </div>
     <nav class="navbar">
         <ul class="nav-links">
-            <li><a href="{{ route('user-Home', ['company' => $company->name]) }}" >Home</a></li>
+            <li><a href="{{ route('user-home', ['company' => $company->name]) }}" >Home</a></li>
             @foreach($serviceNames as $service)
                 <li>
                     <a href="{{ route('service-page', ['company' => $company->name, 'service' => $service]) }}" >
