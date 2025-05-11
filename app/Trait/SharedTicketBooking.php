@@ -161,11 +161,14 @@ trait SharedTicketBooking
     public function bookTicket()
     {
         // Check authentication
+           if (request()->routeIs('service-page')){
         $user = auth('end_user')->user();
         if (!$user) {
             return redirect()->route('end-user-login', ['company' => $this->company->name]);
         }
-
+    }else{
+         $user = auth()->user();
+    }
         $this->validate([
             'passengerName' => 'required|string|max:255',
             'passengerPhone' => 'required|string|max:20',
