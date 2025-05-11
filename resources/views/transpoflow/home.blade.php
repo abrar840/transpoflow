@@ -239,7 +239,7 @@
 
                   @guest
                   <h3 class="title-4 card-title">
-                    <a href="{{ route('login') }}"></a>
+                    <a href="{{ route('login') }}">Create One</a>
                   </h3>
                   <a href="{{ route('login') }}" class="btn-text hover-underline label-2" wire:navigate>login to
                     continue</a>
@@ -291,7 +291,7 @@
                 <div class="card-content">
 
                   <h3 class="title-4 card-title">
-                    <a href="#"></a>
+                    <a href="#">Our Services</a>
                   </h3>
 
                   <a href="/services" class="btn-text hover-underline label-2">View services</a>

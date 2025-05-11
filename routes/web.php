@@ -120,7 +120,7 @@ Route::view('/aboutus', 'transpoflow/aboutus')->name('aboutus');
 
 
 Route::view('/contact', 'transpoflow/contact')->name('contact');
-Route::view('/test', 'test')->name('contact');
+Route::view('/test', 'test')->name('t');
 // Route::view('/form', 'form')->name('form');
 
 Route::get('/admin', AdminPanel::class)->name('AdminPanel');

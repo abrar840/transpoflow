@@ -124,6 +124,21 @@ public $tempImagePaths = [];
 
     public function createBooking()
     {
+            if(!auth('end_user')){
+          return redirect()->route('end_user_login');
+
+            }
+
+
+
+
+
+
+
+
+
+
+
         $this->validate([
             'shipper_name' => 'required',
             'shipper_phone' => 'required',
