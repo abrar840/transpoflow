@@ -39,4 +39,9 @@ class Routes extends Model
     {
         return $this->hasMany(VehicleSchedule::class);
     }
+
+    public function ticket()
+    {
+        return $this->hasMny(Ticket::class);
+    }
 }
