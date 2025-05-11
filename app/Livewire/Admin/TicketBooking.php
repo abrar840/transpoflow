@@ -24,6 +24,29 @@ class TicketBooking extends Component
         $this->loadInitialData();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     public function getTicketsProperty()
     {
         return Ticket::with(['route', 'schedule', 'vehicle', 'seats'])
@@ -42,6 +65,22 @@ class TicketBooking extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function render()
     {

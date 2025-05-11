@@ -457,6 +457,13 @@
             <!-- Selected Bus Details -->
             @if($selectedSchedule && $selectedScheduleForm)
             <div class="selected-bus overlay-box">
+
+  <button class="absolute top-4 right-4 text-white text-2xl hover:text-red-500 z-50"
+                            wire:click.away="$set('selectedSchedule', null)" aria-label="Close">
+                            &times;
+                        </button>
+
+
                 <h3>Your Selection</h3>
                 <div class="bus-details">
                     <div class="ticke-info">
