@@ -42,14 +42,6 @@
 
 <body id="top">
 
-  <!-- 
-    - #PRELOADER
-  -->
-
-  <div class="preload" data-preaload>
-    <div class="circle"></div>
-    <p class="text">Transpoflow</p>
-  </div>
 
 
 
@@ -225,7 +217,7 @@
                   @auth
 
                   @if (auth()->user()->company)
-                  <h3 class="title-4 card-title">
+                  <h3 class="title-4 card-title">Let's Start
                     {{-- <a href="/admin">{{ auth()->user()->company->name }}</a> --}}
                   </h3>
                   <a href="/admin" class="btn-text hover-underline label-2" wire:navigate>admin panel</a>
@@ -291,7 +283,7 @@
                 <div class="card-content">
 
                   <h3 class="title-4 card-title">
-                    <a href="#"></a>
+                    <a href="#">Our Services</a>
                   </h3>
 
                   <a href="/services" class="btn-text hover-underline label-2">View services</a>
