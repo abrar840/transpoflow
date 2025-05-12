@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  background-color: var(--background-dark);
+  background-color: #0A0F2C;
   color: var(--gray-light);
   font-size: 20px;
   line-height: 1.7;
@@ -169,12 +169,13 @@ body {
 .contact-title {
   font-size: 2.8rem;
   margin-bottom: 10px;
+  color: #F5A623;
 }
 
 .contact-subtitle {
   font-size: 2.1rem;
   margin-bottom: 40px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #E5E5E5 ;
 }
 
 .contact-form {
@@ -219,7 +220,7 @@ body {
 }
 
 .submit-button {
-  background-color: #995AF2;
+  background-color: #F5A623;
   color: white;
   border: none;
   padding: 15px 30px;
@@ -230,7 +231,7 @@ body {
 }
 
 .submit-button:hover {
-  background-color: #995AF2;
+  background-color: #F5A623;
 }
 
 
