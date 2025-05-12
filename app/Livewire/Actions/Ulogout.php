@@ -20,7 +20,7 @@ class ulogout
 
         // Session::invalidate();
         // Session::regenerateToken();
-        return redirect()->route('user-Home', ['company' => $companyName]);
+        return redirect()->route('user-home', ['company' => $companyName]);
     }
 
 }

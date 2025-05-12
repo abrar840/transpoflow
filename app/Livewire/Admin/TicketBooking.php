@@ -97,6 +97,16 @@ class TicketBooking extends Component
             $this->paymentStatus = 'failed';
             $this->addError('bookingError', 'Failed to create booking: ' . $e->getMessage());
         }
+
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -140,7 +150,26 @@ class TicketBooking extends Component
     }
 
 
+public function searchTickets()
+{
+    $this->validate([
+        'searchTerm' => 'required|min:3'
+    ]);
+        //   dd($this->searchTerm);
+    $this->searchResults = Ticket::where('user_id', auth()->id())
+        ->where(function($query) {
+            $query->where('ticket_number', 'like', '%'.$this->searchTerm.'%')
+                  ->orWhere('passenger_name', 'like', '%'.$this->searchTerm.'%')
+                  ->orWhere('passenger_phone', 'like', '%'.$this->searchTerm.'%')
+                   ->orWhere('booking_date', 'like', '%'.$this->searchTerm.'%');
+        })
+        ->with(['vehicle', 'route', 'schedule'])
+        ->get();
 
+       
+
+    $this->showSearchResults = true;
+}
 
 
 

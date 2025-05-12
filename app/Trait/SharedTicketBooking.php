@@ -169,15 +169,22 @@ public function searchSchedules()
     }
     public function bookTicket()
     {
-        // Check authentication
-           if (auth('end_user')->user()){
-        $user = auth('end_user')->user();
-        if (!$user) {
-            return redirect()->route('end-user-login', ['company' => $this->company->name]);
-        }
-    }else{
-         $user = auth()->user();
+       // Check authentication
+if (auth('end_user')->user()) {
+    $user = auth('end_user')->user();
+
+    if (!$user) {
+        return redirect()->route('end-user-login', ['company' => $this->company->name]);
+    } elseif ($user->company_id !== $this->company->id) {
+        return redirect()->route('end-user-login', ['company' => $this->company->name]);
     }
+}
+
+
+       
+       
+
+    
         $this->validate([
             'passengerName' => 'required|string|max:255',
             'passengerPhone' => 'required|string|max:20',
@@ -333,7 +340,7 @@ public function searchTickets()
     $this->validate([
         'searchTerm' => 'required|min:3'
     ]);
-
+        //   dd($this->searchTerm);
     $this->searchResults = Ticket::where('user_id', auth('end_user')->id())
         ->where(function($query) {
             $query->where('ticket_number', 'like', '%'.$this->searchTerm.'%')
@@ -342,8 +349,9 @@ public function searchTickets()
                    ->orWhere('booking_date', 'like', '%'.$this->searchTerm.'%');
         })
         ->with(['vehicle', 'route', 'schedule'])
-        ->latest()
         ->get();
+
+        dd($this->searchResults);
 
     $this->showSearchResults = true;
 }

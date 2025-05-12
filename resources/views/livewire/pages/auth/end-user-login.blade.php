@@ -15,7 +15,35 @@ new #[Layout('layouts.user')] class extends Component
 public function mount($company)
 {
     $this->company = \App\Models\Company::where('name', $company)->firstOrFail();
+    $this->showform();
 }
+
+
+
+public function showform(){
+
+  $user = Auth::guard('end_user')->user();
+
+  if($user){
+
+if($user->company==$this->company){
+
+
+
+  $this->redirectIntended(route('user-home', ['company' => $this->company->name]), navigate: true);
+
+}}
+
+
+
+
+
+
+
+
+}
+
+
 
 
 

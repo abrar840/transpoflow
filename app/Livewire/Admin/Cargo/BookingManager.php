@@ -124,17 +124,23 @@ public $tempImagePaths = [];
 
     public function createBooking()
     {
-            if(!auth('end_user')){
-          return redirect()->route('end_user_login');
+        //     if(!auth('end_user')){
+        //   return redirect()->route('end_user_login');
 
-            }
-
-
+        //     }
 
 
 
+                // Check authentication
+if (auth('end_user')->user()) {
+    $user = auth('end_user')->user();
 
-
+    if (!$user) {
+        return redirect()->route('end-user-login', ['company' => $this->company->name]);
+    } elseif ($user->company_id !== $this->company->id) {
+        return redirect()->route('end-user-login', ['company' => $this->company->name]);
+    }
+}
 
 
 

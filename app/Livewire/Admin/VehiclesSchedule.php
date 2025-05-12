@@ -45,12 +45,7 @@ class VehiclesSchedule extends Component
     public $editingVehicleId = null;
     public $CompanyhasFleetService = false;
 
-    public function loadschedules()
-    {
-        $this->schedules = VehicleSchedule::with('vehicle', 'route')->get();
-
-
-    }
+   
     public function mount()
     {
         $this->initializeCompany();
@@ -116,6 +111,28 @@ class VehiclesSchedule extends Component
             session()->flash('error', 'No company associated with your account');
         }
     }
+
+
+
+public function loadSchedules()
+{
+    // Fetch all route IDs for the company
+    $routeIds = Routes::where('company_id', $this->company->id)->pluck('id');
+
+    // Fetch all schedules where the route_id is in the fetched route IDs
+    $this->schedules = VehicleSchedule::with('vehicle', 'route')
+        ->whereIn('route_id', $routeIds)
+        ->get();
+}
+
+
+
+
+
+
+
+
+
 
 
     //load departure cities initiallyy
