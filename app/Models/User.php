@@ -52,11 +52,15 @@ protected $fillable = [
         ];
     }
     // In User model (app/Models/User.php)
+// public function company()
+// {
+//     return $this->hasOne(Company::class,'user_id','id');
+// }
+
 public function company()
 {
-    return $this->hasOne(Company::class,'user_id','id');
+    return $this->belongsTo(Company::class); // assumes 'company_id' is in users table
 }
-
 
 
  

@@ -41,8 +41,8 @@ class VehiclesSchedule extends Component
 
     public $companyServices;
 
-    
-public $editingVehicleId=null;
+
+    public $editingVehicleId = null;
     public $CompanyhasFleetService = false;
 
     public function loadschedules()
@@ -266,54 +266,55 @@ public $editingVehicleId=null;
             return;
         }
 
-        
-        if ($this->fleetEnabled()) { // run below functionlity only if company have selecetd the fleet servoce 
-        try {
-            $vehicle = Vehicle::where('company_id', $this->company->id)
-                ->where('registration_number', $this->query)
-                ->firstOrFail();
 
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            session()->flash('error', 'Vehicle not found!');
-            return;
-        }}
+        if ($this->fleetEnabled()) { // run below functionlity only if company have selecetd the fleet servoce 
+            try {
+                $vehicle = Vehicle::where('company_id', $this->company->id)
+                    ->where('registration_number', $this->query)
+                    ->firstOrFail();
+
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                session()->flash('error', 'Vehicle not found!');
+                return;
+            }
+        }
 
 
 
 
         //check if vehicel is alredy registered and we are not in edit mode
-  
-        if ($this->fleetEnabled()) { 
 
-        if ($vehicle->scheduled == 1 && !$this->editMode) {
-            session()->flash('error', 'This vehicle is already scheduled');
-            return;
+        if ($this->fleetEnabled()) {
+
+            if ($vehicle->scheduled == 1 && !$this->editMode) {
+                session()->flash('error', 'This vehicle is already scheduled');
+                return;
+            }
+
+            if ($vehicle->scheduled == 1 && $this->editMode && $this->editingVehicleId != $vehicle->registration_number) {
+                dd($vehicle->id);
+                session()->flash('error', 'This vehicle is already scheduled in another schedule');
+                return;
+            }
+
+            if ($vehicle->is_active == 0) {
+                session()->flash('error', 'This vehicle is currently not active');
+                return;
+            }
+
+
+            $vehicle->update(['scheduled' => 1]);
+
+            $registrationnumber = strtoupper($vehicle->registration_number);
+
+
+        } else {
+
+            $registrationnumber = strtoupper($this->query);
         }
 
-        if ($vehicle->scheduled == 1 && $this->editMode && $this->editingVehicleId != $vehicle->registration_number) {
-            dd($vehicle->id);
-            session()->flash('error', 'This vehicle is already scheduled in another schedule');
-            return;
-        }
-
-        if ($vehicle->is_active == 0) {
-            session()->flash('error', 'This vehicle is currently not active');
-            return;
-        }
 
 
-        $vehicle->update(['scheduled' => 1]);
-
-        $registrationnumber = strtoupper($vehicle->registration_number);
-
-
-    }else{
-            
-        $registrationnumber = strtoupper($this->query);
-    }
-
-
- 
 
 
         $data = [
@@ -341,22 +342,22 @@ public $editingVehicleId=null;
     public function editSchedule($id)
     {
         $schedule = VehicleSchedule::with(['route', 'vehicle'])->findOrFail($id);
-    
+
         $this->scheduleId = $id;
         $this->editingVehicleId = $schedule->vehicle_id ?? null;
         $this->editMode = true;
-        
+
         // Set route information
         $this->selectedDepartureCity = $schedule->route->departure_city;
         $this->filterArrivalCities(); // This will populate arrival cities
         $this->selectedArrivalCity = $schedule->route->arrival_city;
         $this->showVehicle(); // This will populate vehicle types
         $this->selectedVehicleType = $schedule->route->vehicle_type;
-    
+
         // Set vehicle information
         $this->query = $schedule->vehicle->registration_number ?? '';
         $this->suggestions = [$this->query]; // Manually set suggestions to include the current vehicle
-    
+
         // Set schedule information
         $this->selectedDays = $schedule->days_of_week;
         $this->departureTime = $schedule->departure_time;
@@ -366,9 +367,17 @@ public $editingVehicleId=null;
     public function deleteSchedule($scheduleId)
     {
         $schedule = VehicleSchedule::findOrFail($scheduleId);
+        $vehicleId = $schedule->vehicle_id;
+         $schedule->delete();
+        // Set vehicle status to 'inactive'
+        $vehicle = Vehicle::findOrFail($vehicleId);
+        $vehicle->scheduled = 0;
+        $vehicle->save();
+
         $schedule->delete();
         $this->loadschedules();
         session()->flash('message', 'Schedule deleted successfully!');
+
 
     }
 

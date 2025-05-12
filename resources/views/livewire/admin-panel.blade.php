@@ -1,175 +1,177 @@
 <div>
     <style>
         body {
-          margin: 0;
-          font-family: Arial, sans-serif;
-          background: #f6f6f9;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f6f6f9;
         }
-    
-    
-    
-    
-    
+
+
+
+
+
         nav {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          gap: 15px;
-          padding: 15px;
-          background: #fff;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-    
-        .menu-btn, .switch-mode, .notification, .profile {
-          flex-shrink: 0;
+
+        .menu-btn,
+        .switch-mode,
+        .notification,
+        .profile {
+            flex-shrink: 0;
         }
-    
+
         .form-input {
-          flex: 1;
-          min-width: 200px;
+            flex: 1;
+            min-width: 200px;
         }
-    
+
         .form-input input {
-          width: 100%;
-          padding: 8px;
+            width: 100%;
+            padding: 8px;
         }
-    
+
         main {
-          padding: 15px;
+            padding: 15px;
         }
-    
+
         .head-title {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          gap: 15px;
-          margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
         }
-    
+
         .action-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-    
+
         .box-info {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: 15px;
-          margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
         }
-    
+
         .box-info li {
-          background: #fff;
-          padding: 15px;
-          border-radius: 8px;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          list-style: none;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            list-style: none;
         }
-    
+
         .sidebar-toggle-btn {
-          display: none;
-          background: transparent;
-          border: none;
-          color: #444;
-          font-size: 1.5rem;
-          position: fixed;
-          top: 15px;
-          left: 15px;
-          z-index: 1000;
-          cursor: pointer;
+            display: none;
+            background: transparent;
+            border: none;
+            color: #444;
+            font-size: 1.5rem;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            cursor: pointer;
         }
-    
+
         @media (max-width: 1000px) {
-          .sidebar-toggle-btn {
-            display: block;
-          }
+            .sidebar-toggle-btn {
+                display: block;
+            }
         }
-    
-        @media (max-width: 480px) {
-          nav {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px;
-            padding: 10px;
-          }
-    
-          .head-title {
-            flex-direction: column;
-            gap: 8px;
-          }
-    
-          .action-buttons {
-            flex-direction: column;
-            gap: 8px;
-          }
-    
-          .box-info {
-            grid-template-columns: 1fr !important;
-          }
-        }
-
-
-
 
         @media (max-width: 480px) {
-          nav {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px;
-            padding: 10px;
-          }
-    
-          .head-title {
-            flex-direction: column;
-            gap: 8px;
-          }
-    
-          .action-buttons {
-            flex-direction: column;
-            gap: 8px;
-          }
-    
-          .box-info {
-            grid-template-columns: 1fr !important;
-          }
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .head-title {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .box-info {
+                grid-template-columns: 1fr !important;
+            }
         }
 
-      </style>
-        
-    
+
+
+
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .head-title {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .box-info {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+
+
 
     <section class="content">
-     
 
-            <button id="sidebar-toggle" class="sidebar-toggle-btn" style="display:none;">
-                <i class="fas fa-bars menu-btn"></i>
-            </button>
-       
-       
-            {{-- <form action="#">
-                <div class="form-input">
-                    <input type="search" placeholder="search..." />
-                    <button class="search-btn">
-                        <i class="fas fa-search search-icon"></i>
-                    </button>
-                </div>
-            </form> --}}
-{{-- 
-            <input type="checkbox" hidden id="switch-mode" />
-            <label for="switch-mode" class="switch-mode"></label>
 
-            <a href="#" class="notification">
-                <i class="fas fa-bell"></i>
-                <span class="num">28</span>
-            </a>
+        <button id="sidebar-toggle" class="sidebar-toggle-btn" style="display:none;">
+            <i class="fas fa-bars menu-btn"></i>
+        </button>
 
-            <a href="#" class="profile">
-                <img src="profile.png" alt="" />
-            </a>
+
+        {{-- <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="search..." />
+                <button class="search-btn">
+                    <i class="fas fa-search search-icon"></i>
+                </button>
+            </div>
+        </form> --}}
+        {{--
+        <input type="checkbox" hidden id="switch-mode" />
+        <label for="switch-mode" class="switch-mode"></label>
+
+        <a href="#" class="notification">
+            <i class="fas fa-bell"></i>
+            <span class="num">28</span>
+        </a>
+
+        <a href="#" class="profile">
+            <img src="profile.png" alt="" />
+        </a>
         </nav> --}}
 
         <main>
@@ -182,24 +184,38 @@
                         <li><a href="#" class="active">Overview Panel</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="action-buttons">
-                    <button wire:click="togglePreview" class="preview-btn">
-                        <i class="fas fa-eye"></i>
-                         
-                    </button>
-                    <button wire:click="exportData" class="download-btn">
-                        <i class="fas fa-file-export"></i>
-                        <span class="text">Export Data</span>
-                    </button>
+                    {{-- <button wire:click="togglePreview" class="">
+                        {{-- <i class="fas fa-eye"></i>
+
+                    </button> --}}
                     <a href="#" class="download-btn">
                         <i class="fas fa-globe"></i>
                         <span class="text">View Website</span>
                     </a>
+
+
+
+                    <div x-data={open:false} @click.away="open=false">
+                        <button @click="open=true" class="download-btn">
+                            <i class="fas fa-file-export"></i>
+                            <span class="text">Export Data</span>
+                        </button>
+
+                        <div x-show=open x-transition>
+                            @livewire('Admin.CompanyDataExport')
+                        </div>
+
+                    </div>
+
+
                 </div>
+
+
             </div>
 
-           
+
 
             <div class="box-info">
                 <li>
@@ -244,11 +260,15 @@
                         <div class="bar" style="width: {{ $stats['performance'] }}%; background: #4caf50;">
                             {{ $stats['performance'] }}%
                         </div>
-                        <div class="bar" style="width: {{ $stats['vehicle_count'] ? ($stats['active_vehicles']/$stats['vehicle_count'])*100 : 0 }}%; background: #2196f3;">
-                            {{ $stats['vehicle_count'] ? round(($stats['active_vehicles']/$stats['vehicle_count'])*100) : 0 }}% Active
+                        <div class="bar"
+                            style="width: {{ $stats['vehicle_count'] ? ($stats['active_vehicles']/$stats['vehicle_count'])*100 : 0 }}%; background: #2196f3;">
+                            {{ $stats['vehicle_count'] ? round(($stats['active_vehicles']/$stats['vehicle_count'])*100)
+                            : 0 }}% Active
                         </div>
-                        <div class="bar" style="width: {{ $stats['vehicle_count'] ? ($stats['scheduled_vehicles']/$stats['vehicle_count'])*100 : 0 }}%; background: #ff9800;">
-                            {{ $stats['vehicle_count'] ? round(($stats['scheduled_vehicles']/$stats['vehicle_count'])*100) : 0 }}% Scheduled
+                        <div class="bar"
+                            style="width: {{ $stats['vehicle_count'] ? ($stats['scheduled_vehicles']/$stats['vehicle_count'])*100 : 0 }}%; background: #ff9800;">
+                            {{ $stats['vehicle_count'] ?
+                            round(($stats['scheduled_vehicles']/$stats['vehicle_count'])*100) : 0 }}% Scheduled
                         </div>
                     </div>
                 </div>
@@ -260,13 +280,13 @@
                     </div>
                     <div class="box-info distribution">
                         @foreach($this->getVehicleTypesDistribution() as $type => $count)
-                            <li>
-                                <i class="fas fa-{{ $this->getVehicleIcon($type) }}"></i>
-                                <span class="text">
-                                    <h3>{{ $count }}</h3>
-                                    <p>{{ ucfirst($type) }}</p>
-                                </span>
-                            </li>
+                        <li>
+                            <i class="fas fa-{{ $this->getVehicleIcon($type) }}"></i>
+                            <span class="text">
+                                <h3>{{ $count }}</h3>
+                                <p>{{ ucfirst($type) }}</p>
+                            </span>
+                        </li>
                         @endforeach
                     </div>
                 </section>
@@ -276,16 +296,16 @@
                         <h3>Manage Company Info</h3>
                     </div>
                     @if (session()->has('company_updated'))
-                        <div class="alert alert-success" style="margin-bottom: 1rem;">
-                            {{ session('company_updated') }}
-                        </div>
+                    <div class="alert alert-success" style="margin-bottom: 1rem;">
+                        {{ session('company_updated') }}
+                    </div>
                     @endif
                     <form wire:submit.prevent="updateCompany">
                         <div class="form-group">
                             <label>Company Name</label>
                             <input type="text" wire:model="editCompany.name" placeholder="Company Name" />
                         </div>
-                       
+
                         <div class="form-group">
                             <label>Company Type</label>
                             <select wire:model="editCompany.type">
@@ -336,5 +356,5 @@
             });
         });
     </script>
-@endpush
+    @endpush
 </div>

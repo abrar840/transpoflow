@@ -17,6 +17,7 @@ use App\Models\TicketSeat;
  
 use App\Models\Bus;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -120,30 +121,38 @@ trait SharedTicketBooking
         }
     }
 
-    public function searchSchedules()
-    {
-        $this->validate([
-            'selectedDepartureCity' => 'required',
-            'selectedArrivalCity' => 'required',
-            'date' => 'required|date|after_or_equal:today',
-        ]);
+public function searchSchedules()
+{
+    $this->validate([
+        'selectedDepartureCity' => 'required',
+        'selectedArrivalCity' => 'required',
+        'date' => 'required|date|after_or_equal:today',
+    ]);
 
-        $fifteenDaysAgo = now()->subDays(15);
+    // Get full day name (e.g. "Thursday")
+    $dayName = Carbon::parse($this->date)->format('l');
+    
+    $this->availableSchedules = VehicleSchedule::with(['vehicle', 'route'])
+        ->whereHas('route', function ($query) {
+            $query->where('departure_city', $this->selectedDepartureCity)
+                  ->where('arrival_city', $this->selectedArrivalCity);
+        })
+        ->get()
+        ->filter(function ($schedule) use ($dayName) {
+            // Handle both string and array formats with proper trimming
+            $days = is_array($schedule->days_of_week) 
+                ? $schedule->days_of_week
+                : json_decode($schedule->days_of_week, true);
+            
+            return collect($days)
+                ->map(fn($day) => trim($day))
+                ->contains($dayName);
+        })
+        ->values(); // Reset array keys
 
-        $this->availableSchedules = VehicleSchedule::with(['vehicle', 'route'])
-            ->whereHas('route', function ($query) {
-                $query->where('departure_city', $this->selectedDepartureCity)
-                    ->where('arrival_city', $this->selectedArrivalCity);
-            })
-            ->where('created_at', '>=', $fifteenDaysAgo)
-            // ->whereDate('date', $this->date) // Make sure you have a 'date' column
-            // ->where('status', 'active')
-            ->get();
-
-
-        $this->searched = true;
-        $this->selectedSchedule = null;
-    }
+    $this->searched = true;
+    $this->selectedSchedule = null;
+}
 
     public function selectSchedule($scheduleId)
     {
@@ -161,7 +170,7 @@ trait SharedTicketBooking
     public function bookTicket()
     {
         // Check authentication
-           if (request()->routeIs('service-page')){
+           if (auth('end_user')->user()){
         $user = auth('end_user')->user();
         if (!$user) {
             return redirect()->route('end-user-login', ['company' => $this->company->name]);

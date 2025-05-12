@@ -31,29 +31,9 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   @vite('resources/css/style.css')
 
-  <!-- 
-    - preload images
-  -->
-  <link rel="preload" as="image" href="images/hero-slider-1.jpg">
-  <link rel="preload" as="image" href="images/hero-slider-2.jpg">
-  <link rel="preload" as="image" href="images/hero-slider-3.jpg">
-
 </head>
 
 <body id="top">
-
-  <!-- 
-    - #PRELOADER
-  -->
-
-  <div class="preload" data-preaload>
-    <div class="circle"></div>
-    <p class="text">Transpoflow</p>
-  </div>
-
-
-
-
 
   <!-- 
     - #TOP BAR
@@ -239,7 +219,7 @@
 
                   @guest
                   <h3 class="title-4 card-title">
-                    <a href="{{ route('login') }}">Create One</a>
+                    <a href="{{ route('login') }}"></a>
                   </h3>
                   <a href="{{ route('login') }}" class="btn-text hover-underline label-2" wire:navigate>login to
                     continue</a>
