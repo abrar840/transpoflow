@@ -125,7 +125,7 @@
                 <div class="input-container">
                     <label for="numEmployees">Number of Employees</label>
                     <select id="numEmployees" class="input-field" required wire:model="num_employees">
-                        <option value="" disabled selected>Select Number of Employees</option>
+                        <option value="" >Select Number of Employees</option>
                         <option value="<5" style="color: black;">Less than 5</option>
                         <option value="5-20" style="color: black;">5 to 20</option>
                         <option value="20-100" style="color: black;">20 to 100</option>

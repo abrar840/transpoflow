@@ -29,4 +29,11 @@ class VehicleSchedule extends Model
     return $this->belongsTo(Vehicle::class, 'vehicle_id', 'registration_number');
 }
 
+
+
+  public function ticket()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 }

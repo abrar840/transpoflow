@@ -7,10 +7,10 @@
      <title>Document</title>
 </head>
 <body>
-    @vite("resources/css/admin.css")
-      @livewire("side-bar")
+    {{-- @vite("resources/css/admin.css")
+      @livewire("side-bar") --}}
    
-   
+   jnfnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
      {{-- @livewire('Admin.Cargo.RouteManager') --}}
 {{--  
      @livewire('Admin.Cargo.WeightConfig') --}}
@@ -24,6 +24,8 @@
      @livewire('Admin.Cargo.ServiceTypeConfig') --}}
 
      {{-- @livewire('Admin.Cargo.cargo-dashboard') --}}
-     @livewire('Admin.Cargo.BookingManager')
+     {{-- @livewire('Admin.Cargo.BookingManager') --}}
+           {{-- @livewire('VehicleRegistration')  --}}
+    
 </body>
 </html>

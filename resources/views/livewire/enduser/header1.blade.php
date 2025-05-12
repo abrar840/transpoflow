@@ -9,7 +9,7 @@
     </div>
     <nav class="navbar">
         <ul class="nav-links">
-            <li><a href="{{ route('user-Home', ['company' => $company->name]) }}" >Home</a></li>
+            <li><a href="{{ route('user-home', ['company' => $company->name]) }}" >Home</a></li>
             @foreach($serviceNames as $service)
                 <li>
                     <a href="{{ route('service-page', ['company' => $company->name, 'service' => $service]) }}" >
@@ -20,12 +20,15 @@
         </ul>
     </nav>
     <div class="sign-in flex items-center space-x-4">
-        @guest('end_user')
+       
+        {{-- @guest('end_user')
+          
             <a href="{{ route('end-user-login', ['company' => $company->name]) }}" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
             
         @endguest
 
         @auth('end_user')
+        @if($isauth)
         <div x-data="{ open: true }" class="relative">
             <button @click="open = true" class="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full focus:outline-none">
                 <span>Profile</span>
@@ -42,6 +45,7 @@
             @csrf
             <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-yellow-100">Logout</button>
         </form>
+        @endif
         @endauth
     </div>
 </header>

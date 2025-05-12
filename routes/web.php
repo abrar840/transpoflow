@@ -120,7 +120,11 @@ Route::view('/aboutus', 'transpoflow/aboutus')->name('aboutus');
 
 
 Route::view('/contact', 'transpoflow/contact')->name('contact');
+<<<<<<< HEAD
 Route::view('/test', 'test')->name('test');
+=======
+Route::view('/test', 'test')->name('t');
+>>>>>>> branch-1
 // Route::view('/form', 'form')->name('form');
 
 Route::get('/admin', AdminPanel::class)->name('AdminPanel');
@@ -129,8 +133,10 @@ Route::view('/CargoManagement', 'admin.cargo.dashboardCall')->name('CargoManagem
  
 Route::get('/TicketManagement', ManageTicket::class)->name('TicketManagement');
 
-Route::get('/FleetManagement', VehicleRegistration::class)->name('vehicleRegistraion');
+// Route::get('/FleetManagement', VehicleRegistration::class)->name('vehicleRegistraion');
 
+
+Route::view('/FleetManagement', 'fleetmanagement')->name('vehicleRegistraion');
 
 
 Route::view('/routeregister', 'admin.RouteRegister')->name('RouteRegister');
@@ -165,8 +171,8 @@ Route::view('profile', 'profile')
 
 
 
-require __DIR__.'/auth.php';
-Route::get('/{company:name}', Home::class)->name('user-Home');
+
+// Route::get('/{company:name}', Home::class)->name('user-Home');
 
 
 
@@ -185,20 +191,23 @@ Route::get('/{company:name}', Home::class)->name('user-Home');
 // });
         
 
-Route::middleware('guest:end_user')->group(function () {
+Route::middleware('guest:end_user')->group(function () {});
     
+
+
 Volt::route('/{company:name}/login', 'pages.auth.end-user-login')->name('end-user-login');
           
     Volt::route('/{company:name}/register', 'pages.auth.end-user')
         ->name('end-user-register');
-});
+
 
 
 
 
 // End user dashboard (end_user guard)
-Route::middleware(['auth:end_user'])->group(function () {
-    Route::get('/{company:name}/home', Home::class)->name('user-home');
+Route::middleware(['check.company.admin'])->group(function () {
+    require __DIR__.'/auth.php';
+    Route::get('/{company:name}', Home::class)->name('user-home');
 });
 
 
