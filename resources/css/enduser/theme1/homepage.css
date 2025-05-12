@@ -246,7 +246,7 @@ body {
 }
 
 .btn-link > * {
-  transform: translateX(-22px);
+  transform: translateX(-2px);
   transition: var(--transition);
 }
 

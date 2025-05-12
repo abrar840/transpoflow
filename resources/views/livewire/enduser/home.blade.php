@@ -45,7 +45,7 @@ elseif($theme->theme === 'dark'){
               </h2>
 
               <p class="hero-text">
-                Reliable Transport & Cargo Solutions – On Time, Every Time!
+              Reliable Services – Always Timely and Efficient!
               </p>
 
               <a href="#" class="btn-outline">View Services</a>
@@ -81,11 +81,11 @@ elseif($theme->theme === 'dark'){
 
               <p class="section-subtitle">Why Choose Us</p>
 
-              <h2 class="h2 section-title">Your Trusted Partner in Transport & Cargo Services</h2>
+              <h2 class="h2 section-title">Your Trusted Partner in Seamless Mobility Solutions</h2>
 
               <p class="section-text">
-                We are a professional logistics and cargo service provider, committed to delivering efficiency,
-                reliability, and excellence in every move we make.
+              We are a professional service provider committed to delivering reliability, efficiency, and excellence across all areas of transport.
+              Whether it's booking, scheduling, or managing fleets, our solutions are designed to support smooth operations and customer satisfaction.
               </p>
 
               <ul class="about-list">
@@ -96,7 +96,7 @@ elseif($theme->theme === 'dark'){
                   </div>
 
                   <p class="about-text">
-                    Beyond Logistics, Beyond Limits
+                  Driven by Passion
                   </p>
                 </li>
 
@@ -106,7 +106,7 @@ elseif($theme->theme === 'dark'){
                   </div>
 
                   <p class="about-text">
-                    nnovation, Dedication, and Technology
+                  Defined by Quality
                   </p>
                 </li>
 
@@ -116,7 +116,7 @@ elseif($theme->theme === 'dark'){
                   </div>
 
                   <p class="about-text">
-                    Safety, Quality & Professionalism
+                  Focused on You
                   </p>
                 </li>
 
@@ -130,15 +130,7 @@ elseif($theme->theme === 'dark'){
                   </p>
                 </li>
 
-                <li class="about-item">
-                  <div class="about-icon">
-                    <ion-icon name="chevron-forward"></ion-icon>
-                  </div>
-
-                  <p class="about-text">
-                    Quality never goes out of style. safety, quality, professionalism.
-                  </p>
-                </li>
+                
 
                 <li class="about-item">
                   <div class="about-icon">
@@ -169,10 +161,7 @@ elseif($theme->theme === 'dark'){
 
             <h2 class="h2 section-title">Trusted For Our Services</h2>
 
-            <p class="section-text">
-              Travel with ease and reliability through our well-maintained and professional transport services.
-            </p>
-
+           
             <ul class="service-list grid-list">
 
               <li>
@@ -184,12 +173,12 @@ elseif($theme->theme === 'dark'){
                   </div>
 
                   <h3 class="h3 card-title">
-                    <span class="span">01</span> Ticket Booking
+                    <span class="span">01</span> Trusted Mobility
                   </h3>
 
                   <p class="card-text">
-                    Our aim is to enhance and streamline your travel experience, ensuring a smooth, comfortable, and
-                    hassle-free journey every time
+                  We provide reliable services to ensure the smooth and timely movement of people and goods,
+                  with a focus on care and accuracy, 
                   </p>
 
                   <a href="#" class="btn-link">
@@ -210,12 +199,12 @@ elseif($theme->theme === 'dark'){
                   </div>
 
                   <h3 class="h3 card-title">
-                    <span class="span">02</span> Cargo Booking
+                    <span class="span">02</span> Smooth Solutions
                   </h3>
 
                   <p class="card-text">
-                    Our goal is to simplify and improve cargo transportation, ensuring secure, efficient, and on-time
-                    deliveries for your business.
+                  We streamline the movement of goods and individuals, delivering secure,
+                  timely, and efficient experiences tailored to your needs
                   </p>
 
                   <a href="#" class="btn-link">
@@ -264,13 +253,13 @@ elseif($theme->theme === 'dark'){
             <div class="title-wrapper">
 
               <div>
-                <p class="section-subtitle">Reliable Transport</p>
+                <p class="section-subtitle">Reliable Service</p>
 
-                <h2 class="h2 section-title">Seamless Travel & Transport Solutions</h2>
+                <h2 class="h2 section-title">Seamless Mobility Solutions</h2>
 
                 <p class="section-text">
-                  Experience safe, efficient, and comfortable travel with our professional transport services. We ensure
-                  a hassle-free journey for every passenger.
+                Experience reliability, efficiency, and comfort with our professional services. 
+                We prioritize a smooth and stress-free experience for every customer.
                 </p>
               </div>
 
@@ -287,10 +276,10 @@ elseif($theme->theme === 'dark'){
                     <img src="{{ Vite::asset('resources/images/feature-icon-1.png') }}" width="72" height="91" alt="">
                   </div>
 
-                  <h3 class="h3 card-title">Comfortable & Safe Rides</h3>
+                  <h3 class="h3 card-title">Reliable & Secure Journeys</h3>
 
                   <p class="card-text">
-                    Our modern fleet ensures a smooth, secure, and enjoyable journey for every passenger.
+                  Our well-maintained services provide a smooth, safe, and pleasant experience for every customer.
                   </p>
 
                   <a href="#" class="card-btn" aria-label="Read more">
@@ -307,10 +296,10 @@ elseif($theme->theme === 'dark'){
                     <img src="{{ Vite::asset('resources/images/feature-icon-2.png') }}" width="94" height="94" alt="">
                   </div>
 
-                  <h3 class="h3 card-title">Multiple Pickup & Drop Locations</h3>
+                  <h3 class="h3 card-title">Easy Access Points</h3>
 
                   <p class="card-text">
-                    We provide convenient pickup and drop-off points for a stress-free travel experience.
+                  Our service provides a variety of convenient locations, ensuring a seamless and stress-free experience every time
                   </p>
 
                   <a href="#" class="card-btn" aria-label="Read more">
@@ -330,7 +319,7 @@ elseif($theme->theme === 'dark'){
                   <h3 class="h3 card-title">Punctual & Reliable Service</h3>
 
                   <p class="card-text">
-                    We value your time! Our transport services are always on schedule to ensure a hassle-free trip.
+                    We value your time! Our services are always on schedule to ensure a hassle-free trip.
                   </p>
 
                   <a href="#" class="card-btn" aria-label="Read more">
