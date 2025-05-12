@@ -129,8 +129,10 @@ Route::view('/CargoManagement', 'admin.cargo.dashboardCall')->name('CargoManagem
  
 Route::get('/TicketManagement', ManageTicket::class)->name('TicketManagement');
 
-Route::get('/FleetManagement', VehicleRegistration::class)->name('vehicleRegistraion');
+// Route::get('/FleetManagement', VehicleRegistration::class)->name('vehicleRegistraion');
 
+
+Route::view('/FleetManagement', 'fleetmanagement')->name('vehicleRegistraion');
 
 
 Route::view('/routeregister', 'admin.RouteRegister')->name('RouteRegister');
