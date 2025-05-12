@@ -187,13 +187,15 @@ Route::view('profile', 'profile')
 // });
         
 
-Route::middleware('guest:end_user')->group(function () {
+Route::middleware('guest:end_user')->group(function () {});
     
+
+
 Volt::route('/{company:name}/login', 'pages.auth.end-user-login')->name('end-user-login');
           
     Volt::route('/{company:name}/register', 'pages.auth.end-user')
         ->name('end-user-register');
-});
+
 
 
 

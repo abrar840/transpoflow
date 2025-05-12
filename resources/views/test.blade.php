@@ -25,7 +25,7 @@
 
      {{-- @livewire('Admin.Cargo.cargo-dashboard') --}}
      {{-- @livewire('Admin.Cargo.BookingManager') --}}
-           @livewire('VehicleRegistration') 
+           {{-- @livewire('VehicleRegistration')  --}}
     
 </body>
 </html>

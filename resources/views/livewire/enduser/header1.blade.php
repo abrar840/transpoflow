@@ -20,12 +20,26 @@
         </ul>
     </nav>
     <div class="sign-in flex items-center space-x-4">
-        @guest('end_user')
+       
+        {{-- @guest('end_user')
+          
             <a href="{{ route('end-user-login', ['company' => $company->name]) }}" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
+<<<<<<< HEAD
             
         @endguest
+=======
+            <a href="{{ route('end-user-register', ['company' => $company->name]) }}" class="sign-in-btn ml-2" style="text-decoration: none;">Register</a>
+         
+            @endguest --}}
+
+             @if(!$isauth)
+            <a href="{{ route('end-user-login', ['company' => $company->name]) }}" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
+            <a href="{{ route('end-user-register', ['company' => $company->name]) }}" class="sign-in-btn ml-2" style="text-decoration: none;">Register</a>
+         @endif
+>>>>>>> 8c7a4695becc76c0bd37b4d769f9dbbc214c31c0
 
         @auth('end_user')
+        @if($isauth)
         <div x-data="{ open: true }" class="relative">
             <button @click="open = true" class="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full focus:outline-none">
                 <span>Profile</span>
@@ -42,6 +56,7 @@
             @csrf
             <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-yellow-100">Logout</button>
         </form>
+        @endif
         @endauth
     </div>
 </header>

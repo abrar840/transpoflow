@@ -427,13 +427,13 @@
 
   <!-- Ticket Search Results Popup -->
   @if($showSearchResults)
-  <button wire:click="$set('showSearchResults', false)" style="background-color: #ccc;">
-    Close
-  </button>
+ 
   <div class="overlay-box">
     <div class="popup-content">
       <span class="close-btn" wire:click="$set('showSearchResults', false)">&times;</span>
-      <h3>Search Results</h3>
+      <h3>Search Results</h3> <button wire:click="$set('showSearchResults', false)" style="background-color: #ccc;">
+    Close
+  </button>
 
       @if($searchResults->count() > 0)
       <div class="results-grid">
