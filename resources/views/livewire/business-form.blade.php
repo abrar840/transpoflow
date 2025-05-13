@@ -72,7 +72,9 @@
                             <input type="checkbox" wire:model='services' value='{{$service->id}}'>
                             {{$service->name}}
                         </label>
+                        
                          @endforeach
+                        
                          
                    
                    
@@ -82,7 +84,7 @@
                    
                    
                     </div>
-
+  @error('services') <span class="error">{{$message}}</span> @enderror
                 </div>
 
                 {{-- <!-- Phone Number -->

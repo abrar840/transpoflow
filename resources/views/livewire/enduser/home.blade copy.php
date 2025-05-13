@@ -174,7 +174,7 @@ elseif($theme->theme === 'dark'){
             </p>
 
             <ul class="service-list grid-list">
-
+   @if(!empty($services) && in_array('TicketManagement', $services))
               <li>
                 <div class="service-card">
 
@@ -200,7 +200,12 @@ elseif($theme->theme === 'dark'){
 
                 </div>
               </li>
+              @endif
 
+
+
+
+               @if(!empty($services) && in_array('CargoManagement', $services))
               <li>
                 <div class="service-card">
 
@@ -226,6 +231,8 @@ elseif($theme->theme === 'dark'){
 
                 </div>
               </li>
+              @endif
+              
 
               <li>
                 <div class="service-card">

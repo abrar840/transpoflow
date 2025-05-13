@@ -17,6 +17,6 @@ class Logout
         // Session::invalidate();
         // Session::regenerateToken();
         
-        return redirect(route('home')); // Redirect to homepage
+        return redirect('/'); // Redirect to homepage
     }
 }

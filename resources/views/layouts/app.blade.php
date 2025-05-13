@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>{{ config('app.name', 'Transpoflow') }}</title>
+  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,37 +21,9 @@
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  
-  <!-- Additional CSS -->
   @vite('resources/css/VehicleRegistration.css')
   @vite('resources/css/admin.css')
-  
   @livewireStyles
-
-  <style>
-    .page-header .header-options {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0;
-    }
-
-    .page-header button {
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: background 0.3s ease;
-    }
-
-    .page-header button.active {
-      background: #3498db;
-      color: white;
-    }
-
-    /* Ensure icons are visible */
-    .fas, .fab {
-      font-style: normal;
-      font-size: inherit;
-    }
-  </style>
 </head>
 
 <body class="font-sans antialiased">

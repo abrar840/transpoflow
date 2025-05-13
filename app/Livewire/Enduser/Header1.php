@@ -10,6 +10,8 @@ class Header1 extends Component
     public $serviceNames = [];
     public $user;
     public $isauth = false;
+
+    public $logo;
     public function mount(Company $company = null)
     {
 
@@ -30,6 +32,9 @@ class Header1 extends Component
 
 
         $this->company = $company;
+
+
+        $this->logo=$this->company->logo;
         $this->serviceNames = $company->services->pluck('name')->toArray() ?? [];
         // dd($this->serviceNames[]);
     }

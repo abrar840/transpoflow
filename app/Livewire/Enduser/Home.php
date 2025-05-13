@@ -14,6 +14,7 @@ class Home extends Component
     public $company;
     public $user;
     public $isauth=false;
+    public $services;
     public function mount(Company $company)
     {
         $this->company = $company;
@@ -30,6 +31,9 @@ if($this->user->company->id==$this->company->id){
 
 
         }
+
+
+              $this->services = $company->services->pluck('name')->toArray() ?? [];
 
         if (!$this->company) {
             abort(404); // Company not found, show 404 page

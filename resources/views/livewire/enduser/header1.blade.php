@@ -4,7 +4,11 @@
 
     @vite("resources/css/enduser/theme1/header.css")
     <div class="logo flex items-center space-x-3">
-        <img src="{{ Vite::asset('resources/images/bus.svg') }}" alt="Company Logo" class="w-10 h-10">
+        <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo">
+
+
+
+
         <p class="text-2xl font-extrabold text-yellow-500 uppercase">{{$company->name}}</p>
     </div>
     <nav class="navbar">
@@ -30,7 +34,7 @@
 
              @if(!$isauth)
             <a href="{{ route('end-user-login', ['company' => $company->name]) }}" class="sign-in-btn" style="text-decoration: none;">Sign In/Sign Up</a>
-            <a href="{{ route('end-user-register', ['company' => $company->name]) }}" class="sign-in-btn ml-2" style="text-decoration: none;">Register</a>
+            {{-- <a href="{{ route('end-user-register', ['company' => $company->name]) }}" class="sign-in-btn ml-2" style="text-decoration: none;">Register</a> --}}
          @endif
 
         @auth('end_user')

@@ -1,5 +1,5 @@
 <div class="topbar">
-    <div class="container">
+    {{-- <div class="container">
 
       <address class="topbar-item">
         <div class="icon">
@@ -32,5 +32,5 @@
         <span class="span">mail@transpoflow.com</span>
       </a>
 
-    </div>
+    </div> --}}
   </div>

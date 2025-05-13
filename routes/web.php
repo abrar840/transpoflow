@@ -31,7 +31,7 @@ Route::get('/cargo', RouteManager::class);
 
 Route::get('/preview', AdminPanelPreview::class)->name('admin-panel-preview');
 
-Route::get('/p', ThemePreviewer::class)->name('theme-preview');
+
  
 
 Route::get('/CustomerSupport', CustomerSupport::class);
@@ -101,15 +101,18 @@ Route::get('/{company:name}/service/{service}', function ($company, $service) {
 Route::get('/form', BusinessForm::class)->name('form');
 
 
-Route::get('/form', BusinessForm::class)->name('companyform');
-
+Route::get('/form/{theme}', BusinessForm::class)->name('companyform');
  
+
 
 
 
 Route::post('/logout', Logout::class)->name('logout');
  
 Route::view('/', 'transpoflow/home')->name('home');
+
+Route::view('/home', 'transpoflow/home')->name('dashboard');
+
 
 
 
@@ -120,33 +123,19 @@ Route::view('/aboutus', 'transpoflow/aboutus')->name('aboutus');
 
 
 Route::view('/contact', 'transpoflow/contact')->name('contact');
-Route::view('/test', 'test')->name('contact');
+Route::view('/test', 'test')
+;
 // Route::view('/form', 'form')->name('form');
 
-Route::get('/admin', AdminPanel::class)->name('AdminPanel');
-
-Route::view('/CargoManagement', 'admin.cargo.dashboardCall')->name('CargoManagement');
- 
-Route::get('/TicketManagement', ManageTicket::class)->name('TicketManagement');
-
-// Route::get('/FleetManagement', VehicleRegistration::class)->name('vehicleRegistraion');
-
-
-Route::view('/FleetManagement', 'fleetmanagement')->name('vehicleRegistraion');
-
-
-Route::view('/routeregister', 'admin.RouteRegister')->name('RouteRegister');
-
-Route::view('/vs', 'admin.vehicle-schedule')->name('schedule');
 
 
 
 
 
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('dashboard', 'dashboard')
+//     ->middleware(['auth', 'verified'])
+//     
 
 
 
@@ -187,7 +176,55 @@ Route::view('profile', 'profile')
 // });
         
 
-Route::middleware('guest:end_user')->group(function () {});
+
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+Route::get('/p', ThemePreviewer::class)->name('theme-preview');
+Route::get('/admin', AdminPanel::class)->name('AdminPanel');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::middleware('auth')->group(function () {
+
+
+
+
+
+Route::view('/CargoManagement', 'admin.cargo.dashboardCall')->name('CargoManagement');
+ 
+Route::get('/TicketManagement', ManageTicket::class)->name('TicketManagement');
+
+// Route::get('/FleetManagement', VehicleRegistration::class)->name('vehicleRegistraion');
+
+
+Route::view('/FleetManagement', 'fleetmanagement')->name('vehicleRegistraion');
+
+
+Route::view('/routeregister', 'admin.RouteRegister')->name('RouteRegister');
+
+Route::view('/vs', 'admin.vehicle-schedule')->name('schedule');
+
+
+
+});
     
 
 

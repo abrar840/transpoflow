@@ -12,7 +12,8 @@
    
     @stack('styles')
   
-    
+      <title>{{ config('app.name', 'Transpoflow') }}</title>
+
     
     
 

@@ -56,7 +56,7 @@ $this->redirectIntended(default: route('home', absolute: false), navigate: true)
                 <!-- Email Address -->
                 <div class="input-container">
                     <input type="email" wire:model="form.email" id="email" name="email" class="input-field" placeholder="Email Address" required autofocus autocomplete="username" />
-                    @error('form.email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    @error('form.email') <span class="text-red-500 text-xl">{{ $message }}</span> @enderror
                 </div>
                 <!-- Password -->
                 <div class="input-container password-container">
@@ -64,24 +64,32 @@ $this->redirectIntended(default: route('home', absolute: false), navigate: true)
                     <span class="password-toggle" id="togglePassword">
                         <i class="fa fa-eye"></i>
                     </span>
-                    @error('form.password') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    @error('form.password') <span class="text-red-500 text-xl">{{ $message }}</span> @enderror
                 </div>
                 <!-- Remember Me -->
-                <div class="block mt-4">
-                    <label for="remember" class="inline-flex items-center">
-                        <input wire:model="form.remember" id="remember" type="checkbox"
-                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                        <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                    </label>
-                </div>
-                <!-- Session Status/Error -->
+               <div class="block mt-6">
+    <label for="remember" class="inline-flex items-center text-lg">
+        <input wire:model="form.remember" id="remember" type="checkbox"
+            class="rounded border-gray-300 text-white shadow-sm focus:ring-indigo-500" name="remember">
+        <span class="ms-2 text-xl text-white">{{ __('Remember me') }}</span>
+    </label>
+</div>
+
+<div class="mt-6">
+    @if (Route::has('password.request'))
+        <a class="text-lg text-whitw hover:text-red-600 transition duration-200" href="{{ route('password.request') }}">
+            {{ __('Forgot your password?') }}
+        </a>
+    @endif
+</div>
+          <!-- Session Status/Error -->
                 @if (session('status'))
                     <div class="mb-4 text-green-600">
                         {{ session('status') }}
                     </div>
                 @endif
                 @if ($errors->has('form.email'))
-                    <div class="mb-2 text-red-500 text-xs">
+                    <div class="mb-2 text-red-500 text-xl">
                         {{ $errors->first('form.email') }}
                     </div>
                 @endif

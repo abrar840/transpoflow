@@ -14,10 +14,10 @@ class ServicesTableSeeder extends Seeder
     public function run(): void
     {
         $services=[
-            'AdminPanel',
+            
             'FleetManagement',
             'TicketManagement',
-            'Customer Support',
+            'CustomerSupport',
             'CargoManagement ',
   ];
 

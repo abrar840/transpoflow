@@ -26,12 +26,17 @@ class BusinessForm extends Component
     public $colorPalettes;
     public $theme = 'light';
 
+    public $logopath;
+
     // Initialize data
-    public function mount($theme = 'light')
+    public function mount($theme)
     {
+
+
+        $this->theme = $theme;
         $this->user_id = auth()->user()->id;
         $this->email = auth()->user()->email;
-      
+
         if (auth()->user()->company && auth()->user()->company->exists) {
             return redirect(route('AdminPanel'));
         }
@@ -53,7 +58,7 @@ class BusinessForm extends Component
     ];
 
     protected $messages = [
-        'admin_username'=> 'the admin user name may contain letters',
+        'admin_username' => 'the admin user name may contain letters',
         'name.string' => 'The company name must be a string.',
         'name.max' => 'The company name may not be greater than 255 characters.',
         'name.unique' => 'This company name is already taken.',
@@ -74,15 +79,15 @@ class BusinessForm extends Component
         'services.array' => 'The services field must be an array.',
         'services.*.exists' => 'One or more selected services are invalid.',
     ];
-    
+
     public function submit()
     {
         $this->validate();
 
         DB::transaction(function () {
-            $logopath = $this->handleLogoUpload();
-            $company = $this->createCompany($logopath);
-            
+            $this->logopath = $this->handleLogoUpload();
+            $company = $this->createCompany($this->logopath);
+
             $this->attachServices($company);
             $this->attachColorPalette($company);
             $this->attachCompanyToUser($company); // Add this line
@@ -106,7 +111,7 @@ class BusinessForm extends Component
             'type' => $this->type,
             'address' => $this->address,
             'email' => $this->email,
-            'logo' => $logopath,
+            'logo' => $this->logopath,
             'admin_username' => $this->admin_username,
             'num_employees' => $this->num_employees,
         ]);

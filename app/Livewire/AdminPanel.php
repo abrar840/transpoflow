@@ -7,17 +7,28 @@ use App\Models\Company;
 use App\Models\Vehicle;
 use App\Models\Route;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 class AdminPanel extends Component
 {
     public $company;
     public $stats = [];
     public $editCompany = [];
 
+    public $service;
+
     public function mount()
     {
         $this->company = Auth::user()->company;
+
+        if (!$this->company) {
+            return redirect('/p');
+        }
+
+
         $this->editCompany = $this->company?->toArray() ?? [];
+       $this->service = $this->company->services->pluck('name')->toArray();
+
+     
         $this->loadStats();
     }
 
@@ -53,10 +64,20 @@ class AdminPanel extends Component
         $active = $this->company->vehicles()->where('is_active', true)->count();
         return $total > 0 ? round(($active / $total) * 100) : 0;
     }
-
     protected function calculateRevenue()
     {
-        return $this->company->routes()->sum('fare_per_seat') * 100;
+        // Calculate ticket revenue (sum of all ticket totals for the company)
+        $ticketRevenue = $this->company->tickets()
+            ->where('payment_status', 'paid')
+            ->sum('total_amount');
+
+        // Calculate cargo revenue (sum of all cargo booking totals)
+        $cargoRevenue = DB::table('cargo_books')
+            ->where('company_id', $this->company->id)
+
+            ->sum('total_amount');
+
+        return $ticketRevenue + $cargoRevenue;
     }
 
     public function getVehicleIcon($type)

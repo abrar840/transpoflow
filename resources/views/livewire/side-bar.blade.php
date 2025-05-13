@@ -49,10 +49,14 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="logout" wire:navigate>
-                    <i class="fas fa-right-from-bracket"></i>
-                    <span class="text">Logout</span>
-                </a>
+               <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" style="background: none; border: none; color: #444; cursor: pointer; display: flex; align-items: center;">
+        <i class="fas fa-right-from-bracket" style="margin-right: 8px; color:red;"></i>
+        <span>Logout</span>
+    </button>
+</form>
+
             </li>
         </ul>
     </div>
