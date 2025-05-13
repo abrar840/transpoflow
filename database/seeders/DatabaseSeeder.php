@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call(ServicesTableSeeder::class);
         $this->call(RoleSeeder::class);
-
+// $this->call([
+//         VehicleSeeder::class,
+//     ]);
 
         User::factory()->create([
             'name' => 'Test User',
@@ -24,3 +26,4 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+ 

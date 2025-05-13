@@ -19,7 +19,7 @@ return new class extends Migration
             
             // For vehicle_id - matches vehicles.registration_number type
             $table->string('vehicle_id'); 
-            
+          
             $table->json('days_of_week');
             $table->time('departure_time');
             $table->time('arrival_time');
@@ -32,12 +32,10 @@ return new class extends Migration
                   ->onDelete('cascade');
                   
             // Foreign key for vehicle - referencing registration_number
-            $table->foreign('vehicle_id')
-                  ->references('registration_number')
-                  ->on('vehicles')
-                  ->onDelete('cascade');
+        
+                   
             
-            $table->unique(['route_id', 'vehicle_id', 'departure_time']);
+            // $table->unique(['route_id', 'vehicle_id', 'departure_time']);
         });
     }
 

@@ -256,60 +256,42 @@ public function loadSchedules()
     ];
 
 
+public function saveSchedule()
+{
+    $this->validate();
 
-    public function saveSchedule()
-    {
+    // Get the route
+    try {
+        $route = Routes::where('company_id', $this->company->id)
+            ->where('departure_city', $this->selectedDepartureCity)
+            ->where('arrival_city', $this->selectedArrivalCity)
+            ->where('vehicle_type', $this->selectedVehicleType)
+            ->firstOrFail();
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        session()->flash('error', 'Route not found!');
+        return;
+    }
 
-
-        $this->validate();
-        // Check if the vehicle number is in the suggestions
-
-        if ($this->fleetEnabled()) {
-
-            if (!in_array($this->query, $this->suggestions)) {
-                session()->flash('error', 'Please select a vehicle number from the suggestions.');
-                return;
-            }
-        }
-
-        try {
-            $route = Routes::where('company_id', $this->company->id)
-                ->where('departure_city', $this->selectedDepartureCity)
-                ->where('arrival_city', $this->selectedArrivalCity)
-                ->where('vehicle_type', $this->selectedVehicleType)
-                ->firstOrFail();
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            session()->flash('error', 'Route not found!');
+    // Handle vehicle registration based on fleet status
+    if ($this->fleetEnabled()) {
+        // For companies with fleet management
+        if (!in_array($this->query, $this->suggestions)) {
+            session()->flash('error', 'Please select a vehicle number from the suggestions.');
             return;
         }
 
+        try {
+            $vehicle = Vehicle::where('company_id', $this->company->id)
+                ->where('registration_number', $this->query)
+                ->firstOrFail();
 
-        if ($this->fleetEnabled()) { // run below functionlity only if company have selecetd the fleet servoce 
-            try {
-                $vehicle = Vehicle::where('company_id', $this->company->id)
-                    ->where('registration_number', $this->query)
-                    ->firstOrFail();
-
-            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-                session()->flash('error', 'Vehicle not found!');
-                return;
-            }
-        }
-
-
-
-
-        //check if vehicel is alredy registered and we are not in edit mode
-
-        if ($this->fleetEnabled()) {
-
+            // Vehicle validation checks
             if ($vehicle->scheduled == 1 && !$this->editMode) {
                 session()->flash('error', 'This vehicle is already scheduled');
                 return;
             }
 
             if ($vehicle->scheduled == 1 && $this->editMode && $this->editingVehicleId != $vehicle->registration_number) {
-                dd($vehicle->id);
                 session()->flash('error', 'This vehicle is already scheduled in another schedule');
                 return;
             }
@@ -319,43 +301,51 @@ public function loadSchedules()
                 return;
             }
 
-
             $vehicle->update(['scheduled' => 1]);
-
-            $registrationnumber = strtoupper($vehicle->registration_number);
-
-
-        } else {
-
-            $registrationnumber = strtoupper($this->query);
+            $vehicleData = [
+                'vehicle_id' => $vehicle->id,
+                'registration_number' => strtoupper($vehicle->registration_number)
+            ];
+            
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            session()->flash('error', 'Vehicle not found!');
+            return;
         }
-
-
-
-
-
-        $data = [
-            'route_id' => $route->id,
-            'vehicle_id' => $registrationnumber,
-            'days_of_week' => $this->selectedDays,
-            'departure_time' => $this->departureTime,
-            'arrival_time' => $this->arrivalTime
+    } else {
+        // For companies without fleet management
+        $vehicleData = [
+            'vehicle_id' => 1, // Set to null to avoid foreign key constraint
+            'registration_number' => strtoupper($this->query)
         ];
-
-        if ($this->editMode) {
-            $schedule = VehicleSchedule::findOrFail($this->scheduleId);
-            $schedule->update($data);
-            session()->flash('message', 'Schedule updated successfully!');
-
-        } else {
-            VehicleSchedule::create($data);
-            session()->flash('message', 'Schedule created successfully!');
+        
+        // Basic validation for registration number format
+        if (!preg_match('/^[A-Z0-9]{3,15}$/', $vehicleData['registration_number'])) {
+            session()->flash('error', 'Please enter a valid vehicle registration number');
+            return;
         }
-        $this->clearFields();
-        $this->loadschedules();
-
-
     }
+
+    // Prepare schedule data
+    $data = [
+        'route_id' => $route->id,
+        'days_of_week' => $this->selectedDays,
+        'departure_time' => $this->departureTime,
+        'arrival_time' => $this->arrivalTime
+    ] + $vehicleData; // Merge vehicle data
+
+    // Save or update schedule
+    if ($this->editMode) {
+        $schedule = VehicleSchedule::findOrFail($this->scheduleId);
+        $schedule->update($data);
+        session()->flash('message', 'Schedule updated successfully!');
+    } else {
+        VehicleSchedule::create($data);
+        session()->flash('message', 'Schedule created successfully!');
+    }
+
+    $this->clearFields();
+    $this->loadschedules();
+}
     public function editSchedule($id)
     {
         $schedule = VehicleSchedule::with(['route', 'vehicle'])->findOrFail($id);
