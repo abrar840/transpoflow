@@ -303,8 +303,8 @@ public function saveSchedule()
 
             $vehicle->update(['scheduled' => 1]);
             $vehicleData = [
-                'vehicle_id' => $vehicle->id,
-                'registration_number' => strtoupper($vehicle->registration_number)
+                'vehicle_id' => strtoupper($vehicle->registration_number)
+                 
             ];
             
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
@@ -314,8 +314,9 @@ public function saveSchedule()
     } else {
         // For companies without fleet management
         $vehicleData = [
-            'vehicle_id' => 1, // Set to null to avoid foreign key constraint
-            'registration_number' => strtoupper($this->query)
+            'vehicle_id' => 'ABC-123', // Set to null to avoid foreign key constraint
+            'manual_vehicle_number'=> strtoupper($this->query)
+             
         ];
         
         // Basic validation for registration number format

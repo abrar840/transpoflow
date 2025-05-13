@@ -297,7 +297,7 @@
                 <li>
                     <i class="fas fa-dollar-sign"></i>
                     <span class="text">
-                        <h3>${{ number_format($stats['revenue']) }}</h3>
+                        <h3>{{ number_format($stats['revenue']) }}</h3>
                         <p>Monthly Revenue</p>
                     </span>
                 </li>

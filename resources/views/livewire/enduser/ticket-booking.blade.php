@@ -496,7 +496,7 @@
                             <option value="">Select a seat</option>
                             @foreach(range(1, $selectedSchedule->vehicle->seating_capacity) as $seat)
                             @if(!in_array($seat, $bookedSeats))
-                            <option value="{{ $seat }}">Seat {{ $seat }}</option>
+                            <option value="{{ $seat }}" class="text-black">Seat {{ $seat }}</option>
                             @endif
                             @endforeach
                         </select>

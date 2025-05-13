@@ -175,6 +175,18 @@ public function searchTickets()
 
 
 
+public function TicketDelete($ticketId)
+{
+    try {
+        $ticket = Ticket::findOrFail($ticketId);
+        $ticket->delete();
+
+        session()->flash('success', 'Ticket deleted successfully.');
+    } catch (\Exception $e) {
+        session()->flash('error', 'Failed to delete ticket: ' . $e->getMessage());
+    }
+}
+
 
 
 

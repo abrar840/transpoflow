@@ -615,7 +615,8 @@
             </button>
           </td>
           <td>     
-      <button class="delete-btn" wire:click="deleteSelected">Delete</button></td>
+    <button class="delete-btn" wire:click="TicketDelete({{ $ticket->id }})">Delete</button>
+
         </tr>
         @empty
         <tr>
