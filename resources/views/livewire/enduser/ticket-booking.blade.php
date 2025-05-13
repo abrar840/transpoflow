@@ -5,7 +5,7 @@
     @if($theme->theme === 'light')
     @vite('resources/css/enduser/theme1/ticketbooking.css')
     @else
-    @vite('resources/css/enduser/theme1/ticketbooking2.css')
+    @vite('resources/css/enduser/theme2/ticketbooking2.css')
     @endif
 
     <style>
@@ -184,7 +184,7 @@
             padding: 10px;
         }
 
-        . .btn-clear {
+        .btn-clear {
             background: #f8f9fa;
             color: #333;
         }

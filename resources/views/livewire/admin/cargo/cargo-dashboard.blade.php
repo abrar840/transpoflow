@@ -18,11 +18,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-<<<<<<< HEAD
             margin-left: 280px;
-=======
-            margin-left: 284px;
->>>>>>> 8c7a4695becc76c0bd37b4d769f9dbbc214c31c0
         }
 
         .dashboard-header h1 {
@@ -33,11 +29,7 @@
         .cargo-tabs {
             display: flex;
             border-bottom: 1px solid #ddd;
-<<<<<<< HEAD
-            margin-left: 280px;
-=======
             margin-left: 284px;
->>>>>>> 8c7a4695becc76c0bd37b4d769f9dbbc214c31c0
         }
 
         .cargo-tabs button {

@@ -111,11 +111,7 @@ public function layoutData():array
 
 
 <main>
-  <header class="w-full bg-white/80 backdrop-blur-md border-b border-white/20 py-4 px-8 flex items-center justify-between">
-    <h1 class="text-2xl font-bold text-[#1c1c2b] uppercase tracking-wide">
-        {{ $this->company?->name ?? 'Company' }}
-    </h1>
-</header>
+ 
   @vite('resources/css/enduser/signin_signup.css')
   <div class="login-form-container">
     <div class="login-form-wrapper">
