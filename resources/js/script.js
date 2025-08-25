@@ -1,33 +1,13 @@
 'use strict';
 
-
-
-/**
- * PRELOAD
- * 
- * loading will be end after document is loaded
- */
-
-const preloader = document.querySelector("[data-preaload]");
-
-window.addEventListener("load", function () {
-  preloader.classList.add("loaded");
-  document.body.classList.add("loaded");
-});
-
-
-
 /**
  * add event listener on multiple elements
  */
-
 const addEventOnElements = function (elements, eventType, callback) {
   for (let i = 0, len = elements.length; i < len; i++) {
     elements[i].addEventListener(eventType, callback);
-  }
-}
-
-
+   }
+ }
 
 /**
  * NAVBAR
@@ -44,8 +24,6 @@ const toggleNavbar = function () {
 }
 
 addEventOnElements(navTogglers, "click", toggleNavbar);
-
-
 
 /**
  * HEADER & BACK TOP BTN
@@ -67,18 +45,16 @@ const hideHeader = function () {
   lastScrollPos = window.scrollY;
 }
 
-window.addEventListener("scroll", function () {
-  if (window.scrollY >= 50) {
+ window.addEventListener("scroll", function () {
+   if (window.scrollY >= 50) {
     header.classList.add("active");
     backTopBtn.classList.add("active");
-    hideHeader();
+     hideHeader();
   } else {
     header.classList.remove("active");
     backTopBtn.classList.remove("active");
   }
-});
-
-
+ });
 
 /**
  * HERO SLIDER
@@ -108,7 +84,7 @@ const slideNext = function () {
   updateSliderPos();
 }
 
-heroSliderNextBtn.addEventListener("click", slideNext);
+ heroSliderNextBtn.addEventListener("click", slideNext);
 
 const slidePrev = function () {
   if (currentSlidePos <= 0) {
@@ -119,8 +95,7 @@ const slidePrev = function () {
 
   updateSliderPos();
 }
-
-heroSliderPrevBtn.addEventListener("click", slidePrev);
+ heroSliderPrevBtn.addEventListener("click", slidePrev);
 
 /**
  * auto slide
@@ -141,8 +116,6 @@ addEventOnElements([heroSliderNextBtn, heroSliderPrevBtn], "mouseover", function
 addEventOnElements([heroSliderNextBtn, heroSliderPrevBtn], "mouseout", autoSlide);
 
 window.addEventListener("load", autoSlide);
-
-
 
 /**
  * PARALLAX EFFECT
