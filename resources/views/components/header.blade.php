@@ -1,3 +1,6 @@
+
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@vite("resources/css/style.css")
 <header class="header" data-header>
     <div class="container">
         <a href="#" class="logo">
@@ -15,7 +18,7 @@
 
             <ul class="navbar-list">
                 <li class="navbar-item">
-                    <a href="{{ route('home') }}" class="navbar-link hover-underline {{ request()->routeIs('home') ? 'active' : '' }}">
+                    <a href="{{ route('home') }}" class="navbar-link hover-underline {{ request()->routeIs('home') ? 'active' : '' }}" wire:navigate.hover>
                        
                         <div class="separator"></div>
                         <span class="span">Home</span>
@@ -23,21 +26,21 @@
                 </li>
 
                 <li class="navbar-item">
-                    <a href="{{ route('services') }}" class="navbar-link hover-underline {{ request()->routeIs('services') ? 'active' : '' }}">
+                    <a href="{{ route('services') }}" class="navbar-link hover-underline {{ request()->routeIs('services') ? 'active' : '' }}" wire:navigate.hover>
                         <div class="separator"></div>
                         <span class="span">Services</span>
                     </a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="{{ route('aboutus') }}" class="navbar-link hover-underline {{ request()->routeIs('aboutus') ? 'active' : '' }}">
+                    <a href="{{ route('aboutus') }}" class="navbar-link hover-underline {{ request()->routeIs('aboutus') ? 'active' : '' }}" wire:navigate.hover>
                         <div class="separator"></div>
                         <span class="span">About Us</span>
                     </a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="{{ route('contact') }}" class="navbar-link hover-underline {{ request()->routeIs('contact') ? 'active' : '' }}">
+                    <a href="{{ route('contact') }}" class="navbar-link hover-underline {{ request()->routeIs('contact') ? 'active' : '' }}" wire:navigate>
                         <div class="separator"></div>
                         <span class="span">Contact</span>
                     </a>
@@ -45,15 +48,47 @@
             </ul>
         </nav>
 
-        <a href="{{ route('login') }}" class="btn btn-secondary">
-            <span class="text text-1">Sign In</span>
-            <span class="text text-2" aria-hidden="true">Sign In</span>
-        </a>
 
-        <a href="{{ route('register') }}" class="btn btn-secondary">
-            <span class="text text-1">Sign Up</span>
-            <span class="text text-2" aria-hidden="true">Sign Up</span>
-        </a>
+
+
+      
+
+        @guest
+        <div class="flex space-x-4">
+            <a href="{{ route('login') }}" class="btn btn-secondary">
+                <span class="text text-1">Sign In</span>
+                <span class="text text-2" aria-hidden="true">Sign In</span>
+            </a>
+    
+            <a href="{{ route('register') }}" class="btn btn-secondary">
+                <span class="text text-1">Sign Up</span>
+                <span class="text text-2" aria-hidden="true">Sign Up</span>
+            </a>
+        </div>
+    @endguest
+
+    <!-- User Menu - Only show when authenticated -->
+    @auth
+    <div class="flex items-center space-x-4">
+
+       
+        
+        <!-- Livewire Logout Button -->
+        {{-- <button 
+            wire:click.prevent="logout"
+            class="text-white hover:text-gray-300"
+        >
+            Logout
+        </button> --}}
+        
+        <!-- OR Traditional Form (if you prefer) -->
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="text-white hover:text-gray-300">Logout</button>
+        </form>
+    </div>
+@endauth
+        
 
         <button class="nav-open-btn" aria-label="open services" data-nav-toggler>
             <span class="line line-1"></span>
@@ -64,3 +99,6 @@
         <div class="overlay" data-nav-toggler data-overlay></div>
     </div>
 </header>
+@auth
+ 
+ @endauth

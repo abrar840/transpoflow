@@ -30,59 +30,86 @@ new #[Layout('layouts.guest')] class extends Component
 
         event(new Registered($user = User::create($validated)));
 
+        $user->assignRole('admin');
+        
+
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirect(route('home', absolute: false), navigate: true);
     }
 }; ?>
+<section class="signup-section">
+    <div class="signup-container">
+      <div class="signup-form">
+        <h3>Create an Account</h3>
+        <form wire:submit.prevent="register">
+          <!-- Username -->
+          <div class="input-container">
+            <input type="text" wire:model="name" class="input-field" placeholder="Username" required autofocus autocomplete="name" />
+            @error('name') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
+          </div>
 
-<div>
-    <form wire:submit="register">
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+          <!-- Email Address -->
+          <div class="input-container">
+            <input type="email" wire:model="email" class="input-field" placeholder="Email Address" required autocomplete="username" />
+            @error('email') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
+          </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+          <!-- Password -->
+          <div class="input-container password-container">
+            <input type="password" wire:model="password" class="input-field" id="signupPassword" placeholder="Password" required autocomplete="new-password" />
+            <span class="password-toggle" id="toggleSignupPassword">
+              <i class="fa fa-eye"></i>
+            </span>
+            @error('password') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
+          </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+          <!-- Confirm Password -->
+          <div class="input-container password-container">
+            <input type="password" wire:model="password_confirmation" class="input-field" id="confirmPassword" placeholder="Confirm Password" required autocomplete="new-password" />
+            <span class="password-toggle" id="toggleConfirmPassword">
+              <i class="fa fa-eye"></i>
+            </span>
+            @error('password_confirmation') <span class="text-red-500 text-lg">{{ $message }}</span> @enderror
+          </div>
 
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+          <!-- Terms & Conditions -->
+          <div class="input-container">
+            <label>
+              <input type="checkbox" required> <a href="#">I agree Terms & Conditions</a>
+            </label>
+          </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+          <button type="submit" class="btn-submit">Sign Up</button>
+        </form>
+        <p class="signin-link">
+          Already have an account? <a href="{{ route('login') }}" class="signin-link-text">Sign In</a>
+        </p>
+      </div>
+    </div>
+</section>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+<!-- Password toggle script (unchanged) -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleSignupPassword = document.getElementById('toggleSignupPassword');
+    const signupPasswordField = document.getElementById('signupPassword');
+    toggleSignupPassword.addEventListener('click', function () {
+      const type = signupPasswordField.type === 'password' ? 'text' : 'password';
+      signupPasswordField.type = type;
+      const icon = this.querySelector('i');
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
 
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</div>
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+    toggleConfirmPassword.addEventListener('click', function () {
+      const type = confirmPasswordField.type === 'password' ? 'text' : 'password';
+      confirmPasswordField.type = type;
+      const icon = this.querySelector('i');
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
+  });
+</script>

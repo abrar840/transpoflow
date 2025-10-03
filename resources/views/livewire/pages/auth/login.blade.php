@@ -18,54 +18,102 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->form->authenticate();
 
-        Session::regenerate();
+        $user = Auth()->user();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+ 
+// Check if user has 'end-user' role
+if ($user->hasRole('admin')) {
+    
+    Session::regenerate();
+    
+  
+$this->redirectIntended(default: route('home', absolute: false), navigate: true);
+    return;
+} else {
+    Auth::guard('web')->logout();
+    $this->addError('form.email', 'The provided credentials do not match our records.');
+}
+
+
+
+        
+
+        
+     
+
     }
 }; ?>
-
-<div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form wire:submit="login">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+<div class="signin-section">
+    @if (session('status'))
+    <div class="mb-4 text-green-600">
+        {{ session('status') }}
+    </div>
+@endif
+    <div class="signin-container">
+        <div class="signin-form">
+            <h3>Sign In</h3>
+            <form wire:submit.prevent="login">
+                <!-- Email Address -->
+                <div class="input-container">
+                    <input type="email" wire:model="form.email" id="email" name="email" class="input-field" placeholder="Email Address" required autofocus autocomplete="username" />
+                    @error('form.email') <span class="text-red-500 text-xl">{{ $message }}</span> @enderror
+                </div>
+                <!-- Password -->
+                <div class="input-container password-container">
+                    <input type="password" wire:model="form.password" id="password" name="password" class="input-field" placeholder="Password" required autocomplete="current-password" />
+                    <span class="password-toggle" id="togglePassword">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                    @error('form.password') <span class="text-red-500 text-xl">{{ $message }}</span> @enderror
+                </div>
+                <!-- Remember Me -->
+               <div class="block mt-6">
+    <label for="remember" class="inline-flex items-center text-lg">
+        <input wire:model="form.remember" id="remember" type="checkbox"
+            class="rounded border-gray-300 text-white shadow-sm focus:ring-indigo-500" name="remember">
+        <span class="ms-2 text-xl text-white">{{ __('Remember me') }}</span>
+    </label>
 </div>
+
+<div class="mt-6">
+    @if (Route::has('password.request'))
+        <a class="text-lg text-whitw hover:text-red-600 transition duration-200" href="{{ route('password.request') }}">
+            {{ __('Forgot your password?') }}
+        </a>
+    @endif
+</div>
+          <!-- Session Status/Error -->
+                @if (session('status'))
+                    <div class="mb-4 text-green-600">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if ($errors->has('form.email'))
+                    <div class="mb-2 text-red-500 text-xl">
+                        {{ $errors->first('form.email') }}
+                    </div>
+                @endif
+                <button type="submit" class="btn-submit mt-4">Sign In</button>
+            </form>
+            <p class="create-account mt-4">
+                Don't have an account? <a href="{{ route('register') }}" class="create-account-link">Create one</a>
+            </p>
+            <a href="{{ url('/') }}" style="color: lightgray;">Go to Home</a>
+        </div>
+    </div>
+</div>
+
+<!-- Password toggle script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    togglePassword.addEventListener('click', function () {
+      const type = passwordField.type === 'password' ? 'text' : 'password';
+      passwordField.type = type;
+      const icon = this.querySelector('i');
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
+  });
+</script>

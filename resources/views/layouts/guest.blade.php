@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{{ config('app.name', 'Transpoflow') }}</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -13,16 +13,20 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @vite('resources/css/style.css')
+        @vite('resources/css/signin_signup.css')
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
-                <a href="/" wire:navigate>
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+                <div class="logo flex items-center space-x-3">
+                    <img src="{{ Vite::asset('resources/images/bus.svg') }}" alt="Company Logo" class="w-10 h-10">
+                    <p class="text-2xl font-extrabold text-yellow-500 uppercase">Transpo FLOW</p>
+                </div>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full">
                 {{ $slot }}
             </div>
         </div>
