@@ -4,22 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TranspoFlow Ticket Booking </title>
-    <link rel="stylesheet" href="ticketbooking.css">
- 
-    
+
   @php
-  if($theme === 'light') {
     $cssPath = 'resources/css/enduser/theme1/ticketbooking.css';
     $imagePath = 'resources/images/';
-   
-  } else {
-    
-    $cssPath = 'resources/css/enduser/theme1/ticketbooking2.css';
-    $imagePath = 'resources/images/enduser/images/';
-  }
-@endphp
- 
-@vite($cssPath);
+  @endphp
+
+  <link rel="stylesheet" href="{{ Vite::asset($cssPath) }}">
+  @include('preview.end-user._brand')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -30,11 +22,11 @@
         </div>
         <nav class="navbar">
           <ul class="nav-links">
-            <li><a href="{{ route('home.preview', ['theme' => $theme]) }}" wire:navigate>Home</a></li>
-            <li><a href="{{ route('aboutus.preview', ['theme' => $theme]) }}" wire:navigate>About Us</a></li>
-            <li><a href="{{ route('ticketbooking.preview', ['theme' => $theme]) }} " wire:navigate>Ticket Booking</a></li>
-            <li><a href="{{ route('cargobooking.preview', ['theme' => $theme]) }}" wire:navigate>Cargo Booking</a></li>
-            <li><a href="{{ route('contactus.preview', ['theme' => $theme]) }}" wire:navigate>Contact Us</a></li>
+            <li><a href="{{ route('home.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">Home</a></li>
+            <li><a href="{{ route('aboutus.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">About Us</a></li>
+            <li><a href="{{ route('ticketbooking.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }} ">Ticket Booking</a></li>
+            <li><a href="{{ route('cargobooking.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">Cargo Booking</a></li>
+            <li><a href="{{ route('contactus.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">Contact Us</a></li>
         </ul>
         </nav>
         <div class="sign-in">

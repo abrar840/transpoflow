@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Password;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest2')] class extends Component
+new #[Layout('layouts.guest')] class extends Component
 {
     public string $email = '';
 
@@ -36,26 +36,37 @@ new #[Layout('layouts.guest2')] class extends Component
     }
 }; ?>
 
-<div>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+    <div class="mb-6 text-center">
+        <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">Forgot password?</h1>
+        <p class="mt-1.5 text-sm text-slate-600">
+            {{ __('Enter your email and we\'ll send you a link to reset your password.') }}
+        </p>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    {{-- Status --}}
+    @if (session('status'))
+        <div class="mb-5 flex items-center gap-2 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800">
+            <i class="fa-solid fa-circle-check"></i> {{ session('status') }}
+        </div>
+    @endif
 
-    <form wire:submit="sendPasswordResetLink">
-        <!-- Email Address -->
+    <form wire:submit="sendPasswordResetLink" class="space-y-5">
+        {{-- Email --}}
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <label for="email" class="mb-1.5 block text-sm font-semibold text-slate-700">Email address</label>
+            <input type="email" wire:model="email" id="email" name="email" placeholder="you@example.com" required autofocus
+                class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 @error('email') border-red-400 @enderror" />
+            @error('email') <p class="mt-1.5 text-xs font-medium text-red-600">{{ $message }}</p> @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
+        <button type="submit"
+            class="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            {{ __('Email password reset link') }}
+        </button>
     </form>
+
+    <p class="mt-6 text-center text-sm text-slate-600">
+        <a href="{{ route('login') }}" class="font-semibold text-indigo-600 hover:text-indigo-700">← Back to sign in</a>
+    </p>
 </div>

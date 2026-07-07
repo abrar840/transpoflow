@@ -25,6 +25,7 @@ class BusinessForm extends Component
     public $availableServices;
     public $colorPalettes;
     public $theme = 'light';
+    public $brand_color = '#f39c12';
 
     public $logopath;
 
@@ -37,6 +38,13 @@ class BusinessForm extends Component
         }
 
         $this->theme = $theme;
+
+        // Brand color can be pre-chosen on the /p color page and passed via ?color=
+        $color = request()->query('color');
+        if ($color && preg_match('/^#[A-Fa-f0-9]{6}$/', $color)) {
+            $this->brand_color = $color;
+        }
+
         $this->user_id = auth()->user()->id;
         $this->email = auth()->user()->email;
 
@@ -52,12 +60,13 @@ class BusinessForm extends Component
         'name' => 'string|max:255|unique:companies,name',
         'type' => 'required|in:fleet,shuttle,transport',
         'email' => 'required|email|unique:companies,email',
-        'address' => 'nullable|string|alpha_num|max:255',
+        'address' => 'nullable|string|max:255',
         'logo' => 'nullable|image|max:2048',
         'admin_username' => 'required|string|max:225',
         'num_employees' => 'in:<5,5-20,20-100,100-250,>250',
         'services' => 'required|array|min:1',
         'services.*' => 'exists:services,id',
+        'brand_color' => 'required|regex:/^#([A-Fa-f0-9]{6})$/',
     ];
 
     protected $messages = [
@@ -70,7 +79,6 @@ class BusinessForm extends Component
         'email.required' => 'The email address is required.',
         'email.email' => 'Please provide a valid email address.',
         'email.unique' => 'This email address is already registered.',
-        'address.string' => 'The address must be a string.',
         'address.max' => 'The address may not be greater than 255 characters.',
         'logo.image' => 'The logo must be an image.',
         'logo.max' => 'The logo must not be larger than 2MB.',
@@ -109,7 +117,7 @@ class BusinessForm extends Component
     protected function createCompany($logopath)
     {
         return Company::create([
-            'name' => $this->name,
+            'name' => trim($this->name),
             'user_id' => $this->user_id,
             'type' => $this->type,
             'address' => $this->address,
@@ -135,6 +143,7 @@ class BusinessForm extends Component
         CompanyTheme::create([
             'company_id' => $company->id,
             'theme' => $this->theme,
+            'brand_color' => $this->brand_color ?: '#f39c12',
         ]);
     }
 

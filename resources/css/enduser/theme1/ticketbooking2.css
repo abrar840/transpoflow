@@ -188,7 +188,7 @@ select {
 }
 
 .booking-form button {
-  background-color: #f39c12;
+  background-color: var(--brand);
   border: none;
   padding: 10px;
   color: #fff;
@@ -298,7 +298,7 @@ select {
 }
 
 .fare-calculator button {
-  background-color: #f39c12;
+  background-color: var(--brand);
   border: none;
   padding: 10px;
   color: #fff;
@@ -363,7 +363,7 @@ select {
 }
 
 .feedback-form button {
-  background-color: #007bff;
+  background-color: var(--brand);
   border: none;
   padding: 10px 20px;
   color: #fff;
@@ -412,7 +412,7 @@ select {
   }
   
   .footer-section ul li a:hover {
-    color: #f39c12;
+    color: var(--brand);
   }
   
   .footer-bottom {
@@ -502,7 +502,7 @@ select {
 }
 
 .submit-button button {
-  background-color: #f39c12;
+  background-color: var(--brand);
   color: white;
   border: none;
   padding: 12px 30px;
@@ -513,7 +513,7 @@ select {
 }
 
 .submit-button button:hover {
-  background-color: #e67e22;
+  background-color: var(--brand-dark);
 }
 
 .submit-button span {
@@ -522,13 +522,13 @@ select {
 }
 
 .submit-button a {
-  color: #f39c12;
+  color: var(--brand);
   text-decoration: none;
   font-weight: 500;
 }
 
 .forgot-password a {
-  color: #f39c12;
+  color: var(--brand);
   text-decoration: none;
   font-weight: 500;
 }

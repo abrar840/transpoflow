@@ -276,7 +276,7 @@
     }
     
     .page-link:hover {
-        color: #0d6efd;
+        color: #7c3aed;
         background-color: #e9ecef;
         border-color: #dee2e6;
     }

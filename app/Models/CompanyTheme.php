@@ -12,7 +12,7 @@ class CompanyTheme extends Model
     protected $fillable = [
         'company_id',
         'theme',
-        
+        'brand_color',
     ];
 
 

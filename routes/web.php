@@ -40,36 +40,42 @@ Route::get('/CustomerSupport', CustomerSupport::class);
 
 Route::get('/home-preview', function () {
     $theme = request()->get('theme', 'theme1');
-    return view('preview.end-user.homepage', ['theme' => $theme]);
+    $color = request()->get('color', '#f39c12');
+    if (! preg_match('/^#[A-Fa-f0-9]{6}$/', $color)) {
+        $color = '#f39c12';
+    }
+    return view('preview.end-user.homepage', ['theme' => $theme, 'color' => $color]);
 })->name('home.preview');
 
 
-Route::get('/cargo-preview', function () {
-    $theme = request()->get('theme', 'theme1');
-    return view('preview.end-user.cargo', ['theme' => $theme]);
+$previewColor = function () {
+    $color = request()->get('color', '#f39c12');
+    return preg_match('/^#[A-Fa-f0-9]{6}$/', $color) ? $color : '#f39c12';
+};
+
+Route::get('/cargo-preview', function () use ($previewColor) {
+    return view('preview.end-user.cargo', ['theme' => 'theme1', 'color' => $previewColor()]);
 })->name('cargobooking.preview');
 
 
 
 
-Route::get('/ticket-preview', function () {
-    $theme = request()->get('theme', 'theme1');
-    return view('preview.end-user.ticketbooking', ['theme' => $theme]);
+Route::get('/ticket-preview', function () use ($previewColor) {
+    return view('preview.end-user.ticketbooking', ['theme' => 'theme1', 'color' => $previewColor()]);
 })->name('ticketbooking.preview');
 
 
 
-Route::get('/contact-preview', function () {
-    $theme = request()->get('theme', 'theme1');
-    return view('preview.end-user.contact', ['theme' => $theme]);
+Route::get('/contact-preview', function () use ($previewColor) {
+    return view('preview.end-user.contact', ['theme' => 'theme1', 'color' => $previewColor()]);
 })->name('contactus.preview');
 
 
 
 
-Route::get('/about-preview', function () {
+Route::get('/about-preview', function () use ($previewColor) {
     $theme = request()->get('theme', 'theme1');
-    return view('preview.end-user.aboutus', ['theme' => $theme]);
+    return view('preview.end-user.aboutus', ['theme' => $theme, 'color' => $previewColor()]);
 })->name('aboutus.preview');
 
 

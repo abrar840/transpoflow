@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>Document</title>
-</head>
-<body>
-    @vite("resources/css/admin.css")
-        @vite("resources/css/VehicleRegistration.css")
-      @livewire("side-bar")
-  
-           @livewire('VehicleRegistration') 
-    
-</body>
-</html>
+<x-app-layout>
+    <x-admin.page-header title="Fleet Management" icon="road"
+        subtitle="Register vehicles, build schedules, and manage your fleet." />
+
+    @livewire('VehicleRegistration')
+</x-app-layout>

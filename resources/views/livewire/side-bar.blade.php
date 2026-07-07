@@ -6,14 +6,19 @@
             <i class="fab fa-slack"></i>
             <span class="text">Admin Panel</span>
         </a>
+        <button type="button" class="sidebar-collapse-btn"
+            onclick="document.body.classList.toggle('sidebar-collapsed')" aria-label="Toggle sidebar">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
 
     <!-- Main Navigation -->
     <div class="sidebar-menu">
         <ul class="side-menu top">
             @foreach($serviceNames as $name)
+            @php $name = trim($name); @endphp
             <li class="{{ request()->is($name) ? 'active' : '' }}">
-                <a href="/{{ $name }}" class="nav-link" >
+                <a href="/{{ $name }}" class="nav-link" wire:navigate>
                     @switch($name)
                         @case('FleetManagement')
                             <i class="fas fa-road"></i>
@@ -23,16 +28,14 @@
                             @break
                         @case('CustomerSupport')
                             <i class="fas fa-headset"></i>
-                            
                             @break
-
                         @case('CargoManagement')
                             <i class="fas fa-shipping-fast"></i>
                             @break
                         @default
                             <i class="fas fa-border-all"></i>
                     @endswitch
-                    <span class="text">{{ ucfirst($name) }}</span>
+                    <span class="text">{{ \Illuminate\Support\Str::headline($name) }}</span>
                 </a>
             </li>
             @endforeach

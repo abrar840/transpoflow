@@ -10,16 +10,21 @@
   <link rel="shortcut icon" href="{{ Vite::asset('resources/images/favicon.svg') }}" type="image/svg+xml">
 
   @php
-    if($theme === 'light') {
-      $cssPath = 'resources/css/enduser/theme1/homepage.css';
-      $imagePath = 'resources/images/';
-    } elseif($theme === 'dark') {
-      $cssPath = 'resources/css/enduser/theme2/homepage.css';
-      $imagePath = 'resources/images/enduser/images/';
-    }
+    $cssPath = 'resources/css/enduser/theme1/homepage.css';
+    $imagePath = 'resources/images/';
+    $brand = ($color ?? null) && preg_match('/^#[A-Fa-f0-9]{6}$/', $color) ? $color : '#f39c12';
   @endphp
 
   <link rel="stylesheet" href="{{ Vite::asset($cssPath) }}">
+
+  {{-- Live brand color for the preview --}}
+  <style>
+    :root {
+      --brand: {{ $brand }};
+      --brand-dark: color-mix(in srgb, {{ $brand }} 82%, black);
+      --brand-soft: color-mix(in srgb, {{ $brand }} 12%, white);
+    }
+  </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,11 +39,11 @@
   </div>
   <nav class="navbar">
     <ul class="nav-links">
-      <li><a href="{{ route('home.preview', ['theme' => $theme]) }}" wire:navigate>Home</a></li>
-      <li><a href="{{ route('aboutus.preview', ['theme' => $theme]) }}" wire:navigate>About Us</a></li>
-      <li><a href="{{ route('ticketbooking.preview', ['theme' => $theme]) }} " wire:navigate>Ticket Booking</a></li>
-      <li><a href="{{ route('cargobooking.preview', ['theme' => $theme]) }}" wire:navigate>Cargo Booking</a></li>
-      <li><a href="{{ route('contactus.preview', ['theme' => $theme]) }}" wire:navigate>Contact Us</a></li>
+      <li><a href="{{ route('home.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">Home</a></li>
+      <li><a href="{{ route('aboutus.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">About Us</a></li>
+      <li><a href="{{ route('ticketbooking.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }} ">Ticket Booking</a></li>
+      <li><a href="{{ route('cargobooking.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">Cargo Booking</a></li>
+      <li><a href="{{ route('contactus.preview', ['theme' => $theme, 'color' => $color ?? '#f39c12']) }}">Contact Us</a></li>
   </ul>
   </nav>
   <div class="sign-in">

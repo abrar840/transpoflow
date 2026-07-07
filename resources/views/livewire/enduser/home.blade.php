@@ -5,24 +5,8 @@
     href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-@php
-    if ($theme->theme === 'light'){
-      $cssPath='resources/css/enduser/theme1/homepage.css';
-    }
-    
-      
-    
-elseif($theme->theme === 'dark'){
-  $cssPath='resources/css/enduser/theme2/homepage.css';
-}
-    
-
-
-@endphp
-
 @push('styles')
-
-@vite($cssPath)
+@vite('resources/css/enduser/theme1/homepage.css')
 @endpush
 
 

@@ -1,0 +1,34 @@
+/* ------------------------------------------------------------------
+   Shared brand accents — loaded on every enduser page after the base
+   theme CSS. The page CSS files now use var(--brand) directly for
+   heroes/headings; this file only covers common buttons, links and
+   active states so those stay on-brand everywhere.
+------------------------------------------------------------------ */
+
+/* Primary buttons */
+.btn,
+.btn-primary,
+.sign-in-btn,
+.book-btn,
+.submit-btn,
+.cta-btn,
+.search-btn,
+.book-now-btn {
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+.btn:hover,
+.btn-primary:hover,
+.sign-in-btn:hover,
+.book-btn:hover,
+.submit-btn:hover {
+    background-color: var(--brand-dark, var(--brand));
+}
+
+/* Active nav + link hovers */
+.nav-links a:hover,
+.nav-links a.active,
+.navbar .nav-links a:hover,
+.footer-section ul li a:hover {
+    color: var(--brand);
+}

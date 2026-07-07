@@ -2,11 +2,7 @@
 <div class="ticket-booking-container">
 
 
-    @if($theme->theme === 'light')
     @vite('resources/css/enduser/theme1/ticketbooking.css')
-    @else
-    @vite('resources/css/enduser/theme1/ticketbooking2.css')
-    @endif
 
     <style>
         .hero {

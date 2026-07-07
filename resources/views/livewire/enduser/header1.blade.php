@@ -9,7 +9,7 @@
 
 
 
-        <p class="text-2xl font-extrabold text-yellow-500 uppercase">{{$company->name}}</p>
+        <p class="text-2xl font-extrabold uppercase" style="color: var(--brand);">{{$company->name}}</p>
     </div>
     <nav class="navbar">
         <ul class="nav-links">
@@ -40,7 +40,7 @@
         @auth('end_user')
         @if($isauth)
         <div x-data="{ open: true }" class="relative">
-            <button @click="open = true" class="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full focus:outline-none">
+            <button @click="open = true" class="flex items-center space-x-2 text-white px-4 py-2 rounded-full focus:outline-none" style="background: var(--brand);">
                 <span>Profile</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
