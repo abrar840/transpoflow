@@ -53,8 +53,25 @@
             <span wire:loading wire:target="color" class="ml-auto text-xs text-gray-400">updating…</span>
         </div>
 
-        <div class="relative bg-white" style="height: 620px;">
-            <iframe wire:key="preview-{{ $color }}"
+        <div class="relative bg-white" style="height: 620px;"
+            x-data="{ last: @js($color) }"
+            wire:ignore>
+            {{-- wire:ignore keeps Livewire from re-rendering the iframe. The
+                 watcher re-tints only on a REAL color change, and updates the
+                 color param on the iframe's CURRENT page (so navigating inside
+                 the preview isn't reset back to home). --}}
+            <iframe x-ref="pv"
+                x-init="$watch('$wire.color', c => {
+                    if (!c || c === last) return;
+                    last = c;
+                    try {
+                        const u = new URL($refs.pv.contentWindow.location.href);
+                        u.searchParams.set('color', c);
+                        $refs.pv.src = u.toString();
+                    } catch (e) {
+                        $refs.pv.src = @js(route('home.preview', ['theme' => 'light'])) + '?color=' + encodeURIComponent(c);
+                    }
+                })"
                 src="{{ route('home.preview', ['theme' => 'light', 'color' => $color]) }}"
                 class="absolute inset-0 h-full w-full border-0"
                 title="Live site preview"></iframe>

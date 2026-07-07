@@ -6,14 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About us</title>
   @php
-  if($theme === 'light') {
     $cssPath = 'resources/css/enduser/theme1/aboutus.css';
     $imagePath = 'resources/images/';
-  } else {
-    $cssPath = 'resources/css/enduser/theme1/aboutus.css';
-    $imagePath = 'resources/images/enduser/images/';
-  }
-@endphp
+  @endphp
 <link rel="stylesheet" href="{{ Vite::asset($cssPath) }}">
   @include('preview.end-user._brand')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +17,7 @@
     <!-- Header -->
     <header class="header">
         <div class="logo">
-            <img src="logo.png" alt="Company Logo">
+            <img src="{{ Vite::asset($imagePath . 'logo.png') }}" alt="Company Logo">
         </div>
         <nav class="navbar">
             <ul class="nav-links">

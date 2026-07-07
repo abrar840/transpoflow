@@ -9,13 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  
   @php
-    if($theme === 'light') {
-      $cssPath = 'resources/css/enduser/theme1/contact.css';
-      $imagePath = 'resources/images/';
-    } else {
-      $cssPath = 'resources/css/enduser/theme1/contact.css';
-      $imagePath = 'resources/images/enduser/images/';
-    }
+    $cssPath = 'resources/css/enduser/theme1/contact.css';
+    $imagePath = 'resources/images/';
   @endphp
    <link rel="stylesheet" href="{{ Vite::asset($cssPath) }}">
   @include('preview.end-user._brand')
@@ -27,7 +22,7 @@
     <!-- Header -->
     <header class="header">
         <div class="logo">
-            <img src="logo.png" alt="Company Logo">
+            <img src="{{ Vite::asset($imagePath . 'logo.png') }}" alt="Company Logo">
         </div>
         <nav class="navbar">
             <ul class="nav-links">
