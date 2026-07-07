@@ -4,3 +4,7 @@
 @tailwind utilities;
 
 [x-cloak] { display: none !important; }
+
+/* Always reserve the scrollbar gutter so page content doesn't shift
+   horizontally when navigating between short and tall pages. */
+html { overflow-y: scroll; scrollbar-gutter: stable; }

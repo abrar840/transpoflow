@@ -241,15 +241,9 @@
     </style>
 
     <main>
-        @if($theme->theme==='light')
         @push('styles')
         @vite('resources/css/enduser/theme1/cargo.css')
         @endpush
-        @else
-        @push('styles')
-        @vite('resources/css/enduser/theme2/cargo.css')
-        @endpush
-        @endif
 
         <!-- My Bookings Section - Moved to Top -->
         <section class="mb-8">

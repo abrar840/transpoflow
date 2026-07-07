@@ -74,12 +74,12 @@ select {
 }
 
 .navbar .nav-links a:hover {
-  color: #f39c12;
+  color: var(--brand);
 }
 
 /* Sign-in Button */
 .sign-in .sign-in-btn {
-  background-color: #f39c12;
+  background-color: var(--brand);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -89,7 +89,7 @@ select {
 }
 
 .sign-in .sign-in-btn:hover {
-  background-color: #e67e22;
+  background-color: var(--brand-dark);
 }
 
 /* Responsive Design - Mobile View */
@@ -182,8 +182,10 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  /* Adjust opacity for darkness */
+  /* Brand-tinted overlay */
+  background:
+    linear-gradient(135deg, var(--brand), transparent 65%),
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6));
   z-index: -1;
 }
 
@@ -240,7 +242,7 @@ select {
 }
 
 .booking-form button {
-  background-color: #f39c12;
+  background-color: var(--brand);
   border: none;
   padding: 10px;
   color: #fff;
@@ -346,12 +348,17 @@ select {
 }
 
 .fare-calculator button {
-  background-color: #f39c12;
+  background-color: var(--brand);
   border: none;
   padding: 10px;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.fare-display h1,
+.fare-display h2 {
+  color: var(--brand);
 }
 
 .fare-display p {
@@ -411,7 +418,7 @@ select {
 }
 
 .feedback-form button {
-  background-color: #007bff;
+  background-color: var(--brand);
   border: none;
   padding: 10px 20px;
   color: #fff;
@@ -461,7 +468,7 @@ select {
 }
 
 .footer-section ul li a:hover {
-  color: #f39c12;
+  color: var(--brand);
 }
 
 .footer-bottom {
@@ -551,7 +558,7 @@ select {
 }
 
 .submit-button button {
-  background-color: #f39c12;
+  background-color: var(--brand);
   color: white;
   border: none;
   padding: 12px 30px;
@@ -562,7 +569,7 @@ select {
 }
 
 .submit-button button:hover {
-  background-color: #e67e22;
+  background-color: var(--brand-dark);
 }
 
 .submit-button span {
@@ -571,13 +578,13 @@ select {
 }
 
 .submit-button a {
-  color: #f39c12;
+  color: var(--brand);
   text-decoration: none;
   font-weight: 500;
 }
 
 .forgot-password a {
-  color: #f39c12;
+  color: var(--brand);
   text-decoration: none;
   font-weight: 500;
 }
@@ -635,7 +642,7 @@ label {
 /* Button styling */
 .btn-search,
 .btn-calculate {
-  background-color: #f39c12;
+  background-color: var(--brand);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -648,7 +655,7 @@ label {
 
 .btn-search:hover,
 .btn-calculate:hover {
-  background-color: #e67e22;
+  background-color: var(--brand-dark);
 }
 
 /* Hero section adjustments */
@@ -793,7 +800,7 @@ label {
 }
 
 .overlay-box h1 {
-  color: #f39c12;
+  color: var(--brand);
   /* Your accent color */
   margin-bottom: 20px;
   font-size: 1.8rem;
@@ -813,7 +820,7 @@ label {
 }
 
 .close-overlay:hover {
-  color: #f39c12;
+  color: var(--brand);
 }
 
 /* Animation for smooth appearance */
@@ -872,7 +879,7 @@ overflow: hidden;
   font-weight: 900;
   margin: 0 0 20px 0;
   text-align: center;
-  color: #f39c12;
+  color: var(--brand);
   /* Match your accent color */
   font-size: 1.8rem;
 }
@@ -881,7 +888,7 @@ overflow: hidden;
 
 
 .bus-details h4 {
-  color: #f39c12;
+  color: var(--brand);
 
   font-size: 1.4rem;
 }
@@ -898,7 +905,7 @@ overflow: hidden;
 }
 
 .passenger-details h4 {
-  color: #f39c12;
+  color: var(--brand);
   margin-bottom: 15px;
   font-size: 1.3rem;
 }
@@ -921,7 +928,7 @@ overflow: hidden;
 
 /* Booking Button */
 .btn-book {
-  background-color: #f39c12;
+  background-color: var(--brand);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -934,7 +941,7 @@ overflow: hidden;
 }
 
 .btn-book:hover {
-  background-color: #e67e22;
+  background-color: var(--brand-dark);
 }
 
 /* Animation */
@@ -964,7 +971,7 @@ overflow: hidden;
 }
 
 .close-overlay:hover {
-  color: #f39c12;
+  color: var(--brand);
 }
 
 

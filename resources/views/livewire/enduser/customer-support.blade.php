@@ -2,15 +2,9 @@
  
 
    
- @if($theme->theme==='light')
  @push('styles')
  @vite('resources/css/enduser/theme1/contact.css')
 @endpush
-@else
-@push('styles')
-@vite('resources/css/enduser/theme2/contact.css')
-@endpush
-@endif
    <!-- Main Content -->
    <main>
 

@@ -22,7 +22,7 @@
                 </p>
 
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <a href="{{ route('form') }}"
+                    <a href="{{ route('theme-preview') }}"
                         class="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-all hover:bg-indigo-700 hover:shadow-lg">
                         Create Your Site — Free <i class="fa-solid fa-arrow-right text-sm"></i>
                     </a>

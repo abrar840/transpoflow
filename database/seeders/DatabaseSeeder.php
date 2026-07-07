@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(VehicleSeeder::class);
 
-// $this->call([
-//         VehicleSeeder::class,
-//     ]);
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Realistic multi-tenant demo data (companies, routes, tickets, cargo)
+        // so a freshly deployed site isn't empty. Idempotent — safe to re-run.
+        $this->call(DemoDataSeeder::class);
     }
 }
  

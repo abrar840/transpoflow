@@ -17,8 +17,8 @@
   --lato: "Lato", sans-serif;
 
   --light: #f9f9f9;
-  --blue: #3c91e6;
-  --light-blue: #cfe8ff;
+  --blue: #7c3aed;
+  --light-blue: #ede9fe;
   --grey: #eee;
   --dark-grey: #aaaaaa;
   --dark: #342e37;
@@ -31,6 +31,11 @@
 
 html {
   overflow-x: hidden;
+  /* Always reserve the vertical scrollbar gutter so page width stays constant
+     between navigations (prevents the header/content shifting left-right when
+     a short page has no scrollbar and a tall one does). */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 body {

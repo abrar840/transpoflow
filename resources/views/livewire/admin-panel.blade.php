@@ -99,8 +99,8 @@
         .box-info li:nth-child(1) { border-color: #4CAF50; }
         .box-info li:nth-child(1) i { background: #4CAF50; }
         
-        .box-info li:nth-child(2) { border-color: #2196F3; }
-        .box-info li:nth-child(2) i { background: #2196F3; }
+        .box-info li:nth-child(2) { border-color: #7c3aed; }
+        .box-info li:nth-child(2) i { background: #7c3aed; }
         
         .box-info li:nth-child(3) { border-color: #FF9800; }
         .box-info li:nth-child(3) i { background: #FF9800; }
@@ -194,6 +194,60 @@
             margin: 0;
         }
 
+        /* Company Information form */
+        .company-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+        .cf-group { display: flex; flex-direction: column; }
+        .cf-full { grid-column: 1 / -1; }
+        .cf-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+        .cf-group input,
+        .cf-group select,
+        .cf-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #1e293b;
+            background: #fff;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        .cf-group input:focus,
+        .cf-group select:focus,
+        .cf-group textarea:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+        }
+        .cf-group textarea { resize: vertical; }
+        .cf-error { color: #dc2626; font-size: 0.78rem; margin-top: 5px; }
+        .cf-actions { margin-top: 22px; }
+        .cf-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .cf-submit:hover { background: #6d28d9; }
+
         /* Responsive adjustments */
         @media (max-width: 1000px) {
             .sidebar-toggle-btn {
@@ -232,9 +286,13 @@
             .box-info {
                 grid-template-columns: 1fr !important;
             }
-            
+
             .distribution-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .company-form-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -261,13 +319,13 @@
                         <span class="text">View Website</span>
                     </a>
 
-                    <div x-data={open:false} @click.away="open=false">
-                        <button @click="open=true" class="download-btn">
+                    <div x-data="{ open: false }" @click.away="open = false">
+                        <button @click="open = !open" class="download-btn">
                             <i class="fas fa-file-export"></i>
                             <span class="text">Export Data</span>
                         </button>
 
-                        <div x-show=open x-transition>
+                        <div x-show="open" x-transition style="position:relative; z-index:20;">
                             @livewire('Admin.CompanyDataExport')
                         </div>
                     </div>
@@ -297,8 +355,8 @@
                 <li>
                     <i class="fas fa-dollar-sign"></i>
                     <span class="text">
-                        <h3>{{ number_format($stats['revenue']) }}</h3>
-                        <p>Monthly Revenue</p>
+                        <h3>{{ number_format($stats['monthly_revenue']) }}</h3>
+                        <p>Revenue (This Month)</p>
                     </span>
                 </li>
                 
@@ -354,7 +412,9 @@
                 <div class="chart-header">
                     <h3>Vehicle Status Distribution</h3>
                 </div>
-                {{-- <canvas id="vehicleStatusChart" height="100"></canvas> --}}
+                <div style="max-width:360px; margin:0 auto;">
+                    <canvas id="vehicleStatusChart" height="220"></canvas>
+                </div>
             </div>
 
             <div class="chart-container">
@@ -362,6 +422,7 @@
                     <h3>Vehicle Type Distribution</h3>
                     <p>Breakdown of your fleet by vehicle type</p>
                 </div>
+                @if($stats['vehicle_count'] > 0)
                 <div class="distribution-grid">
                     @foreach($this->getVehicleTypesDistribution() as $type => $count)
                     <div class="distribution-item">
@@ -371,48 +432,122 @@
                     </div>
                     @endforeach
                 </div>
+                @else
+                    <x-admin.empty-state icon="bus" title="No vehicles yet"
+                        text="Register your first vehicle to start building schedules and selling tickets."
+                        link="{{ route('vehicleRegistraion') }}" cta="Add a vehicle" />
+                @endif
+            </div>
+            @endif
+
+            <!-- Service Summaries: Ticket / Cargo / Support -->
+            @php
+                $hasTicket = !empty($service) && in_array('TicketManagement', $service);
+                $hasCargo  = !empty($service) && in_array('CargoManagement', $service);
+                $hasSupport = !empty($service) && in_array('CustomerSupport', $service);
+            @endphp
+
+            @if($hasTicket || $hasCargo || $hasSupport)
+            <div class="box-info">
+                @if($hasTicket)
+                <li>
+                    <i class="fas fa-ticket-alt"></i>
+                    <span class="text">
+                        <h3>{{ number_format($stats['ticket_count']) }}</h3>
+                        <p>Tickets Booked · {{ number_format($stats['tickets_paid']) }} paid</p>
+                    </span>
+                </li>
+                <li>
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span class="text">
+                        <h3>{{ number_format($stats['ticket_revenue']) }}</h3>
+                        <p>Ticket Revenue (all time)</p>
+                    </span>
+                </li>
+                @endif
+
+                @if($hasCargo)
+                <li>
+                    <i class="fas fa-box"></i>
+                    <span class="text">
+                        <h3>{{ number_format($stats['cargo_count']) }}</h3>
+                        <p>Cargo Bookings · {{ number_format($stats['cargo_in_transit']) }} in transit</p>
+                    </span>
+                </li>
+                <li>
+                    <i class="fas fa-truck-loading"></i>
+                    <span class="text">
+                        <h3>{{ number_format($stats['cargo_revenue']) }}</h3>
+                        <p>Cargo Revenue (all time)</p>
+                    </span>
+                </li>
+                @endif
+
+                @if($hasSupport)
+                <li>
+                    <i class="fas fa-headset"></i>
+                    <span class="text">
+                        <h3>{{ number_format($stats['message_count']) }}</h3>
+                        <p>Support Messages</p>
+                    </span>
+                </li>
+                @endif
             </div>
             @endif
 
             <!-- Company Management Section -->
             <div class="chart-container">
                 <div class="chart-header">
-                    <h3>Company Information</h3>
+                    <h3><i class="fas fa-building" style="color:#7c3aed; margin-right:8px;"></i>Company Information</h3>
                 </div>
                 @if (session()->has('company_updated'))
-                <div class="alert alert-success" style="margin-bottom: 1rem;">
-                    {{ session('company_updated') }}
+                <div style="display:flex; align-items:center; gap:10px; background:#ecfdf5; border:1px solid #a7f3d0; color:#047857; padding:12px 16px; border-radius:10px; font-size:0.9rem; font-weight:500; margin-bottom:20px;">
+                    <i class="fas fa-check-circle"></i> {{ session('company_updated') }}
                 </div>
                 @endif
-                <form wire:submit.prevent="updateCompany">
-                    <div class="form-group">
-                        <label>Company Name</label>
-                        <input type="text" wire:model="editCompany.name" placeholder="Company Name" />
+
+                <form wire:submit.prevent="updateCompany" class="company-form">
+                    <div class="company-form-grid">
+                        <div class="cf-group">
+                            <label>Company Name</label>
+                            <input type="text" wire:model="editCompany.name" placeholder="Company name" />
+                            @error('editCompany.name') <span class="cf-error">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="cf-group">
+                            <label>Company Type</label>
+                            <select wire:model="editCompany.type">
+                                <option value="fleet">Fleet</option>
+                                <option value="shuttle">Shuttle</option>
+                                <option value="transport">Transport</option>
+                            </select>
+                            @error('editCompany.type') <span class="cf-error">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="cf-group">
+                            <label>Employee Count</label>
+                            <select wire:model="editCompany.num_employees">
+                                <option value="<5">Less than 5</option>
+                                <option value="5-20">5 to 20</option>
+                                <option value="20-100">20 to 100</option>
+                                <option value="100-250">100 to 250</option>
+                                <option value=">250">More than 250</option>
+                            </select>
+                        </div>
+
+                        <div class="cf-group cf-full">
+                            <label>Address</label>
+                            <textarea wire:model="editCompany.address" rows="3" placeholder="Company address"></textarea>
+                            @error('editCompany.address') <span class="cf-error">{{ $message }}</span> @enderror
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Company Type</label>
-                        <select wire:model="editCompany.type">
-                            <option value="fleet">Fleet</option>
-                            <option value="shuttle">Shuttle</option>
-                            <option value="transport">Transport</option>
-                        </select>
+                    <div class="cf-actions">
+                        <button type="submit" class="cf-submit">
+                            <span wire:loading.remove wire:target="updateCompany"><i class="fas fa-save"></i> Save Changes</span>
+                            <span wire:loading wire:target="updateCompany"><i class="fas fa-circle-notch fa-spin"></i> Saving…</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label>Address</label>
-                        <textarea wire:model="editCompany.address" placeholder="Company address"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Employee Count</label>
-                        <select wire:model="editCompany.num_employees">
-                            <option value="<5">Less than 5</option>
-                            <option value="5-20">5-20</option>
-                            <option value="20-100">20-100</option>
-                            <option value="100-250">100-250</option>
-                            <option value=">250">More than 250</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-submit">Save Changes</button>
                 </form>
             </div>
         </main>
@@ -456,16 +591,12 @@
                             {{ $stats['vehicle_count'] ? round(($stats['scheduled_vehicles']/$stats['vehicle_count'])*100) : 0 }}
                         ],
                         backgroundColor: [
-                            'rgba(75, 192, 192, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)'
+                            '#7c3aed',
+                            '#8b5cf6',
+                            '#1e293b'
                         ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)'
-                        ],
-                        borderWidth: 1
+                        borderRadius: 6,
+                        borderWidth: 0
                     }]
                 },
                 options: {
@@ -505,11 +636,12 @@
                             {{ $stats['scheduled_vehicles'] }}
                         ],
                         backgroundColor: [
-                            'rgba(75, 192, 192, 0.7)',
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(255, 206, 86, 0.7)'
+                            '#7c3aed',
+                            '#1e293b',
+                            '#64748b'
                         ],
-                        borderWidth: 1
+                        borderColor: '#ffffff',
+                        borderWidth: 2
                     }]
                 },
                 options: {
