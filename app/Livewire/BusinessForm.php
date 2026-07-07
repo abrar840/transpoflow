@@ -29,9 +29,12 @@ class BusinessForm extends Component
     public $logopath;
 
     // Initialize data
-    public function mount($theme)
+    public function mount($theme = 'light')
     {
-
+        // Guests must sign in / register before creating a company site.
+        if (! auth()->check()) {
+            return redirect()->guest(route('login'));
+        }
 
         $this->theme = $theme;
         $this->user_id = auth()->user()->id;
