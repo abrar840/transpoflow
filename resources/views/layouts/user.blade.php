@@ -19,6 +19,22 @@
 
     @livewireStyles
     <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+
+    {{-- Per-company brand color. One theme, many color schemes: enduser CSS uses
+         var(--brand) / var(--brand-dark) so each company site is tinted by its
+         chosen color. --}}
+    @php
+        $brand = optional(optional($company ?? null)->theme)->brand_color ?: '#f39c12';
+    @endphp
+    <style>
+        :root {
+            --brand: {{ $brand }};
+            --brand-dark: color-mix(in srgb, {{ $brand }} 82%, black);
+            --brand-soft: color-mix(in srgb, {{ $brand }} 12%, white);
+            --dark-orange: {{ $brand }};
+        }
+    </style>
+    <link rel="stylesheet" href="{{ Vite::asset('resources/css/enduser/brand-accents.css') }}">
 </head>
 <body class="">
   @php

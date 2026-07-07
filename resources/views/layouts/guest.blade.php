@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>{{ config('app.name', 'Transpoflow') }}</title>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <title>{{ config('app.name', 'TranspoFlow') }}</title>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        @vite('resources/css/style.css')
-        @vite('resources/css/signin_signup.css')
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <div class="logo flex items-center space-x-3">
-                    <img src="{{ Vite::asset('resources/images/bus.svg') }}" alt="Company Logo" class="w-10 h-10">
-                    <p class="text-2xl font-extrabold text-yellow-500 uppercase">Transpo FLOW</p>
-                </div>
-            </div>
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-            <div class="w-full">
-                {{ $slot }}
-            </div>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body class="font-sans text-slate-700 antialiased">
+    <div class="flex min-h-screen flex-col items-center justify-center bg-slate-50 px-4 py-10">
+
+        {{-- Brand --}}
+        <a href="{{ route('home') }}"
+            class="mb-8 inline-flex items-center gap-2 text-2xl font-extrabold text-slate-900">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm">
+                <i class="fa-solid fa-route text-base"></i>
+            </span>
+            Transpo<span class="text-indigo-600">Flow</span>
+        </a>
+
+        <div class="w-full max-w-md">
+            {{ $slot }}
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

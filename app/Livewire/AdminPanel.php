@@ -26,7 +26,7 @@ class AdminPanel extends Component
 
 
         $this->editCompany = $this->company?->toArray() ?? [];
-       $this->service = $this->company->services->pluck('name')->toArray();
+       $this->service = $this->company->services->pluck('name')->map(fn ($n) => trim($n))->toArray();
 
      
         $this->loadStats();
@@ -38,10 +38,25 @@ class AdminPanel extends Component
             'performance' => $this->calculatePerformance(),
             'active_users' => $this->company->user()->count(),
             'revenue' => $this->calculateRevenue(),
+            'monthly_revenue' => $this->calculateMonthlyRevenue(),
             'vehicle_count' => $this->company->vehicles()->count(),
             'route_count' => $this->company->routes()->count(),
             'active_vehicles' => $this->company->vehicles()->where('is_active', true)->count(),
-            'scheduled_vehicles' => $this->company->vehicles()->where('scheduled', true)->count()
+            'scheduled_vehicles' => $this->company->vehicles()->where('scheduled', true)->count(),
+
+            // Ticket service
+            'ticket_count' => $this->company->tickets()->count(),
+            'tickets_paid' => $this->company->tickets()->where('payment_status', 'paid')->count(),
+            'ticket_revenue' => (float) $this->company->tickets()->where('payment_status', 'paid')->sum('total_amount'),
+
+            // Cargo service
+            'cargo_count' => DB::table('cargo_books')->where('company_id', $this->company->id)->count(),
+            'cargo_in_transit' => DB::table('cargo_books')->where('company_id', $this->company->id)->where('status', 'in_transit')->count(),
+            'cargo_delivered' => DB::table('cargo_books')->where('company_id', $this->company->id)->where('status', 'delivered')->count(),
+            'cargo_revenue' => (float) DB::table('cargo_books')->where('company_id', $this->company->id)->sum('total_amount'),
+
+            // Support service
+            'message_count' => DB::table('messages')->where('company_id', $this->company->id)->count(),
         ];
     }
 
@@ -75,6 +90,23 @@ class AdminPanel extends Component
         $cargoRevenue = DB::table('cargo_books')
             ->where('company_id', $this->company->id)
 
+            ->sum('total_amount');
+
+        return $ticketRevenue + $cargoRevenue;
+    }
+
+    protected function calculateMonthlyRevenue()
+    {
+        $ticketRevenue = $this->company->tickets()
+            ->where('payment_status', 'paid')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->sum('total_amount');
+
+        $cargoRevenue = DB::table('cargo_books')
+            ->where('company_id', $this->company->id)
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
             ->sum('total_amount');
 
         return $ticketRevenue + $cargoRevenue;

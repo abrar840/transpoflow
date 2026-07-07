@@ -6,7 +6,6 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
-            margin-left: 250px;
         }
         
         /* ... (keep all existing styles) ... */
@@ -76,7 +75,7 @@
         }
         
         .edit-btn {
-            background-color: #2196F3;
+            background-color: #7c3aed;
             color: white;
             border: none;
             padding: 8px 15px;

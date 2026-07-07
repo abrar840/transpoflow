@@ -25,7 +25,7 @@
                     $cards = [
                         ['icon' => 'fa-envelope', 'title' => 'Email', 'value' => 'hello@transpoflow.com', 'href' => 'mailto:hello@transpoflow.com'],
                         ['icon' => 'fa-location-dot', 'title' => 'Office', 'value' => 'Lahore, Pakistan', 'href' => null],
-                        ['icon' => 'fa-rocket', 'title' => 'Ready to start?', 'value' => 'Create your site', 'href' => route('form')],
+                        ['icon' => 'fa-rocket', 'title' => 'Ready to start?', 'value' => 'Create your site', 'href' => route('theme-preview')],
                     ];
                 @endphp
                 @foreach ($cards as $card)

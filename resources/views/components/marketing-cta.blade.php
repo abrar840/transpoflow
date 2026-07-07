@@ -14,7 +14,7 @@
                     {{ $sub }}
                 </p>
                 <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                    <a href="{{ route('form') }}"
+                    <a href="{{ route('theme-preview') }}"
                         class="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-7 py-3.5 text-base font-semibold text-indigo-600 shadow-sm transition-all hover:bg-indigo-50 hover:shadow-lg">
                         Create Your Site — Free <i class="fa-solid fa-arrow-right text-sm"></i>
                     </a>

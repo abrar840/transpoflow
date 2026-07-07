@@ -36,7 +36,7 @@
                         </div>
                         <h3 class="text-lg font-bold text-slate-900">{{ $service['title'] }}</h3>
                         <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{{ $service['text'] }}</p>
-                        <a href="{{ route('form') }}"
+                        <a href="{{ route('theme-preview') }}"
                             class="mt-6 inline-flex items-center justify-center gap-1.5 rounded-lg bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
                             Create Your Site <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>

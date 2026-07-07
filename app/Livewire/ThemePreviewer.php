@@ -6,11 +6,24 @@ use Livewire\Component;
 
 class ThemePreviewer extends Component
 {
-    public $theme = 'light';
+    public $color = '#f39c12';
 
-    public function setTheme($theme)
+    public $presets = [
+        '#f39c12', // orange
+        '#7c3aed', // violet
+        '#2563eb', // blue
+        '#059669', // emerald
+        '#e11d48', // rose
+        '#0891b2', // cyan
+        '#db2777', // pink
+        '#ea580c', // deep orange
+    ];
+
+    public function setColor($color)
     {
-        $this->theme = $theme;
+        if (preg_match('/^#[A-Fa-f0-9]{6}$/', $color)) {
+            $this->color = $color;
+        }
     }
 
     public function render()
@@ -18,4 +31,3 @@ class ThemePreviewer extends Component
         return view('livewire.theme-previewer')->layout('layouts.user');
     }
 }
-

@@ -69,37 +69,40 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <form wire:submit="resetPassword">
-        <!-- Email Address -->
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+    <div class="mb-6 text-center">
+        <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">Reset password</h1>
+        <p class="mt-1.5 text-sm text-slate-600">Choose a new password for your account.</p>
+    </div>
+
+    <form wire:submit="resetPassword" class="space-y-5">
+        {{-- Email --}}
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <label for="email" class="mb-1.5 block text-sm font-semibold text-slate-700">Email address</label>
+            <input type="email" wire:model="email" id="email" name="email" placeholder="you@example.com" required autofocus autocomplete="username"
+                class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 @error('email') border-red-400 @enderror" />
+            @error('email') <p class="mt-1.5 text-xs font-medium text-red-600">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        {{-- Password --}}
+        <div>
+            <label for="password" class="mb-1.5 block text-sm font-semibold text-slate-700">New password</label>
+            <input type="password" wire:model="password" id="password" name="password" placeholder="••••••••" required autocomplete="new-password"
+                class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 @error('password') border-red-400 @enderror" />
+            @error('password') <p class="mt-1.5 text-xs font-medium text-red-600">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                          type="password"
-                          name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        {{-- Confirm Password --}}
+        <div>
+            <label for="password_confirmation" class="mb-1.5 block text-sm font-semibold text-slate-700">Confirm password</label>
+            <input type="password" wire:model="password_confirmation" id="password_confirmation" name="password_confirmation" placeholder="••••••••" required autocomplete="new-password"
+                class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 @error('password_confirmation') border-red-400 @enderror" />
+            @error('password_confirmation') <p class="mt-1.5 text-xs font-medium text-red-600">{{ $message }}</p> @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
+        <button type="submit"
+            class="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            {{ __('Reset password') }}
+        </button>
     </form>
 </div>

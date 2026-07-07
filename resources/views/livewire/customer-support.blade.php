@@ -1,7 +1,8 @@
 <!-- filepath: resources/views/livewire/customer-support.blade.php -->
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-6">Customer Messages</h1>
-    
+    <x-admin.page-header title="Customer Support" icon="headset"
+        subtitle="View and respond to messages from your customers." />
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- Message List -->
         <div class="col-span-1 bg-white rounded-lg shadow p-4">

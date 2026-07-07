@@ -62,7 +62,7 @@
                         class="rounded-lg px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:text-indigo-600">
                         Sign In
                     </a>
-                    <a href="{{ route('form') }}"
+                    <a href="{{ route('theme-preview') }}"
                         class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-indigo-700 hover:shadow">
                         Create Your Site
                     </a>
@@ -106,7 +106,7 @@
                         <a href="{{ route('login') }}"
                             class="rounded-lg border border-slate-300 px-4 py-2 text-center text-sm font-semibold text-slate-700">Sign
                             In</a>
-                        <a href="{{ route('form') }}"
+                        <a href="{{ route('theme-preview') }}"
                             class="rounded-lg bg-indigo-600 px-4 py-2 text-center text-sm font-semibold text-white">Create
                             Your Site</a>
                     @endguest
@@ -147,7 +147,7 @@
                         The no-code platform for transport companies. Launch a branded site where your customers book
                         tickets and cargo — while you manage your fleet from one dashboard.
                     </p>
-                    <a href="{{ route('form') }}"
+                    <a href="{{ route('theme-preview') }}"
                         class="mt-6 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-500">
                         Create Your Site <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
@@ -183,7 +183,7 @@
             <div
                 class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-8 text-sm text-slate-400 sm:flex-row">
                 <p>&copy; {{ date('Y') }} TranspoFlow. All rights reserved.</p>
-                <a href="{{ route('form') }}" class="font-semibold text-white hover:text-indigo-400">Get started
+                <a href="{{ route('theme-preview') }}" class="font-semibold text-white hover:text-indigo-400">Get started
                     free →</a>
             </div>
         </div>
