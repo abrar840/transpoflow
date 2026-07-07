@@ -1,761 +1,204 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-marketing-layout>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- ============================= HERO ============================= --}}
+    <section class="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-white">
+        <div class="mx-auto max-w-7xl px-6 py-20 lg:flex lg:items-center lg:gap-16 lg:px-8 lg:py-28">
 
-  <!-- 
-    - primary meta tags
-  -->
-  <title>TranspoFlow</title>
-  <meta name="title" content="TranspoFlow">
-  <meta name="description" content="Website for transportcompanies">
+            {{-- Copy --}}
+            <div class="max-w-xl lg:flex-1">
+                <span
+                    class="inline-flex items-center gap-2 rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700">
+                    <i class="fa-solid fa-bolt"></i> No-code · Live in minutes
+                </span>
 
-  <!-- 
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-
-  <!-- 
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
-
-  <!-- 
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
-  @vite('resources/css/style.css')
-
-  <!-- 
-    - preload images
-  -->
-  <link rel="preload" as="image" href="images/hero-slider-1.jpg">
-  <link rel="preload" as="image" href="images/hero-slider-2.jpg">
-  <link rel="preload" as="image" href="images/hero-slider-3.jpg">
-
-</head>
-
-<body id="top">
-
-  <!-- 
-    - #PRELOADER
-  -->
-
-  <div class="preload" data-preaload>
-    <div class="circle"></div>
-    <p class="text">TRanspoflow</p>
-  </div>
-
-
-
-
-
-  <!-- 
-    - #TOP BAR
-  -->
-
- 
-
-
-
-
-
-  <!-- 
-    - #HEADER
-  -->
-
-
-  <x-header />
-
-
-
-
-  <main>
-    <article>
-
-      <!-- 
-        - #HERO
-      -->
-
-      <section class="hero text-center" aria-label="home" id="home">
-
-        @php
-        $services = [
-            [
-                'image' => 'images/hero-slider-1.jpg',
-                'tagline' => 'Seamless Transport',
-                'title' => 'Simplify your <br> Transport Business',
-                'description' => 'Your Road to Effortless Management Begins Here!',
-            ],
-            [
-                'image' => 'images/hero-slider-2.jpg',
-                'tagline' => 'Effortless Management',
-                'title' => 'Create. Manage.<br> Scale.',
-                'description' => 'Your Road to Effortless Management Begins Here!',
-            ],
-            [
-                'image' => 'images/hero-slider-3.jpg',
-                'tagline' => 'Manage Smarter',
-                'title' => 'Empowering Business to<br> Move Smarter!',
-                'description' => 'Your Road to Effortless Management Begins Here!',
-            ],
-        ];
-    @endphp
-    
-    <ul class="hero-slider" data-hero-slider>
-        @foreach ($services as $index => $service)
-            <li class="slider-item {{ $loop->first ? 'active' : '' }}" data-hero-slider-item>
-    
-                <div class="slider-bg">
-                    <img src="{{ asset($service['image']) }}" width="1880" height="950" alt="" class="img-cover">
-                </div>
-    
-                <p class="label-2 section-subtitle slider-reveal">{{ $service['tagline'] }}</p>
-    
-                <h1 class="display-1 hero-title slider-reveal">
-                    {!! $service['title'] !!}
+                <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                    Launch your transport business <span class="text-indigo-600">online</span> — no code.
                 </h1>
-    
-                <p class="body-2 hero-text slider-reveal">
-                    {{ $service['description'] }}
+
+                <p class="mt-6 text-lg leading-relaxed text-slate-600">
+                    Sign up, pick your services, and choose a theme. TranspoFlow gives you a branded website where your
+                    customers book <strong class="text-slate-800">tickets</strong> and <strong
+                        class="text-slate-800">cargo</strong> — while you manage your fleet from one simple dashboard.
                 </p>
-    
-                @guest
-                <a href="/login" class="btn btn-primary slider-reveal">
-                    <span class="text text-1" aria-hidden="true">signUP / signIn to continue</span>
-                </a>
-                @endguest
-    
-                @auth
-                @if(auth()->user()->company)
-                    <a href="/admin" class="btn btn-primary slider-reveal">
-                        <span class="text text-1" aria-hidden="true">view : {{ auth()->user()->company->name }}</span>
+
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a href="{{ route('form') }}"
+                        class="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-all hover:bg-indigo-700 hover:shadow-lg">
+                        Create Your Site — Free <i class="fa-solid fa-arrow-right text-sm"></i>
                     </a>
-                @else
-                    <a href="/p" class="btn btn-primary slider-reveal">
-                        <span class="text text-1" aria-hidden="true">Create-One</span>
+                    <a href="{{ route('demo.admin') }}"
+                        class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-indigo-300 hover:text-indigo-600">
+                        <i class="fa-solid fa-circle-play text-sm"></i> See a live demo
                     </a>
-                @endif
-                @endauth
-    
-            </li>
-        @endforeach
-    </ul>
-    
-        <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
-          <ion-icon name="chevron-back"></ion-icon>
-        </button>
-
-        <button class="slider-btn next" aria-label="slide to next" data-next-btn>
-          <ion-icon name="chevron-forward"></ion-icon>
-        </button>
-
-
-        @auth
-        @if(auth()->user()->company)
-
-        <a href="/admin" class="hero-btn has-after">
-          <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
-
-          <span class="label-2 text-center span">{{auth()->user()->company->name}}</span>
-        </a>
-        @else
-        <a href="/p" class="hero-btn has-after">
-          <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
-
-          <span class="label-2 text-center span">Create Now</span>
-        </a>
-        @endif
-
-        @endauth
-
-        @guest
-        <p class="hero-btn has-after">
-          <img src="images/hero-icon.png" width="48" height="48" alt="booking icon">
-
-          <span class="label-2 text-center span">login or register to start</span>
-        </p>
-        @endguest
-
-
-
-
-      </section>
-
-
-
-
-
-      <!-- 
-        - #SERVICE
-      -->
-
-      <section class="section service bg-black-10 text-center" aria-label="service">
-        <div class="container">
-
-          <p class="section-subtitle label-2">Efficient Logistics</p>
-
-          <h2 class="headline-1 section-title">Our Top Services</h2>
-
-          <p class="section-text">
-            Empowering your transport business with cutting-edge tools, AI-powered solutions, and seamless management
-            services.
-          </p>
-
-          <ul class="grid-list">
-
-            <li>
-              <div class="service-card">
-
-                <a href="#" class="has-before hover:shine">
-                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="images/fms.jpg" width="285" height="336" loading="lazy" alt="Breakfast" class="img-cover">
-                  </figure>
-                </a>
-
-                <div class="card-content">
-
-
-
-
-                  @auth
-
-                  @if (auth()->user()->company)
-                  <h3 class="title-4 card-title">
-                    {{-- <a href="/admin">{{ auth()->user()->company->name }}</a> --}}
-                  </h3>
-                  <a href="/admin" class="btn-text hover-underline label-2" wire:navigate>admin panel</a>
-                  @else
-                  <h3 class="title-4 card-title">
-                    <a href="/p">Create One</a>
-                  </h3>
-                  <a href="/p" class="btn-text hover-underline label-2" wire:navigate>click to continue</a>
-                  @endif
-                  @endauth
-
-                  @guest
-                  <h3 class="title-4 card-title">
-                    <a href="{{ route('login') }}">Create One</a>
-                  </h3>
-                  <a href="{{ route('login') }}" class="btn-text hover-underline label-2" wire:navigate>login to
-                    continue</a>
-                  @endguest
-
-
-
-
-
-
-
                 </div>
 
-              </div>
-            </li>
+                <p class="mt-5 text-sm text-slate-500">
+                    <i class="fa-solid fa-check text-green-500"></i> No credit card required &nbsp;·&nbsp;
+                    <i class="fa-solid fa-check text-green-500"></i> Your own branded URL
+                </p>
+            </div>
 
-            <li>
-              <div class="service-card">
-
-                <a href="{{route('demo.admin')}}" class="has-before hover:shine">
-                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="images/service-2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
-                      class="img-cover">
-                  </figure>
-                </a>
-
-                <div class="card-content">
-
-                  <h3 class="title-4 card-title">
-                    <a href="{{route('demo.admin')}}">Admin Dashboard</a>
-                  </h3>
-
-                  <a href="{{route('demo.admin')}}" class="btn-text hover-underline label-2">View demo</a>
-
+            {{-- Visual --}}
+            <div class="mt-14 lg:mt-0 lg:flex-1">
+                <div class="relative mx-auto max-w-md">
+                    <div class="absolute -inset-4 rounded-3xl bg-indigo-200/40 blur-2xl"></div>
+                    <div class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-xl">
+                        <div class="flex items-center gap-1.5 border-b border-slate-100 pb-4">
+                            <span class="h-3 w-3 rounded-full bg-red-400"></span>
+                            <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+                            <span class="h-3 w-3 rounded-full bg-green-400"></span>
+                            <span class="ml-3 text-xs text-slate-400">yourcompany.transpoflow.com</span>
+                        </div>
+                        <div class="space-y-4 pt-5">
+                            <div class="flex items-center justify-between rounded-xl bg-indigo-50 p-4">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-ticket text-lg text-indigo-600"></i>
+                                    <span class="text-sm font-semibold text-slate-700">Book a Ticket</span>
+                                </div>
+                                <span class="rounded-md bg-indigo-600 px-3 py-1 text-xs font-semibold text-white">Go</span>
+                            </div>
+                            <div class="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-box text-lg text-slate-500"></i>
+                                    <span class="text-sm font-semibold text-slate-700">Send Cargo</span>
+                                </div>
+                                <span class="rounded-md bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-600">Go</span>
+                            </div>
+                            <div class="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-bus text-lg text-slate-500"></i>
+                                    <span class="text-sm font-semibold text-slate-700">Fleet Schedule</span>
+                                </div>
+                                <span class="rounded-md bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-600">Go</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="service-card">
-
-                <a href="#" class="has-before hover:shine">
-                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src="images/cms.jpg" width="285" height="336" loading="lazy" alt="Drinks" class="img-cover">
-                  </figure>
-                </a>
-
-                <div class="card-content">
-
-                  <h3 class="title-4 card-title">
-                    <a href="#"></a>
-                  </h3>
-
-                  <a href="/services" class="btn-text hover-underline label-2">View services</a>
-
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-          <img src="images/shape-1.png" width="246" height="412" loading="lazy" alt="shape"
-            class="shape shape-1 move-anim">
-          <img src="images/shape-2.png" width="343" height="345" loading="lazy" alt="shape"
-            class="shape shape-2 move-anim">
-
+            </div>
         </div>
-      </section>
+    </section>
 
-
-
-
-
-      <!-- 
-        - #ABOUT
-      -->
-
-      <section class="section about text-center" aria-labelledby="about-label" id="about">
-        <div class="container">
-
-          <div class="about-content">
-
-            <p class="label-2 section-subtitle" id="about-label">Our Story</p>
-
-            <h2 class="headline-1 section-title">Our Journey Towards Revolutionizing Transport Management</h2>
-
-            <p class="section-text">
-              At TRANSPO FLOW, we started with a simple vision: to make transport management smarter, easier, and more
-              efficient. By combining innovative technology with AI-driven solutions, we empower businesses to
-              streamline operations, enhance customer experiences, and drive growth. Our passion for excellence and
-              commitment to innovation continues to shape the future of transport management, one company at a time.
+    {{-- ============================= TRUST STRIP ============================= --}}
+    <section class="border-y border-slate-100 bg-white">
+        <div class="mx-auto max-w-7xl px-6 py-6 lg:px-8">
+            <p class="text-center text-sm font-medium text-slate-500">
+                Everything a transport company needs —
+                <span class="font-semibold text-slate-700">Ticket booking</span> ·
+                <span class="font-semibold text-slate-700">Cargo booking</span> ·
+                <span class="font-semibold text-slate-700">Fleet management</span> — in one place.
             </p>
+        </div>
+    </section>
 
-            <a href="aboutus.html" class="btn btn-primary">
-              <span class="text text-1">Read More</span>
-
-              <span class="text text-2" aria-hidden="true">Read More</span>
-            </a>
-
-          </div>
-
-          <figure class="about-banner">
-
-            <img src="images/about-banner.png" width="570" height="570" loading="lazy" alt="about banner" class="w-100"
-              data-parallax-item data-parallax-speed="1">
-
-            <div class="abs-img abs-img-1 has-before" data-parallax-item data-parallax-speed="1.75">
-              <img src="images/about-abs-image.jpg" width="285" height="285" loading="lazy" alt="" class="w-100">
+    {{-- ============================= HOW IT WORKS ============================= --}}
+    <section class="bg-slate-50 py-20 lg:py-28">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">How it works</p>
+                <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    Your site, live in three steps
+                </h2>
+                <p class="mt-4 text-lg text-slate-600">No developers, no setup headaches. If you can fill a form, you
+                    can launch.</p>
             </div>
 
-
-
-          </figure>
-
-          <img src="images/shape-3.png" width="197" height="194" loading="lazy" alt="" class="shape">
-
+            <div class="mt-16 grid gap-8 md:grid-cols-3">
+                @php
+                    $steps = [
+                        ['n' => '1', 'icon' => 'fa-clipboard-list', 'title' => 'Sign up & pick services', 'text' => 'Create your account and choose what you offer — ticket booking, cargo, fleet management, or all three.'],
+                        ['n' => '2', 'icon' => 'fa-palette', 'title' => 'Choose a theme', 'text' => 'Select a visual theme that matches your brand. Preview it instantly before you go live.'],
+                        ['n' => '3', 'icon' => 'fa-share-nodes', 'title' => 'Share your branded site', 'text' => 'Get your own URL and start taking bookings. Manage everything from your dashboard.'],
+                    ];
+                @endphp
+                @foreach ($steps as $step)
+                    <div class="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
+                        <span
+                            class="absolute -top-4 left-8 inline-flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white">{{ $step['n'] }}</span>
+                        <div
+                            class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-xl text-indigo-600">
+                            <i class="fa-solid {{ $step['icon'] }}"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">{{ $step['title'] }}</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">{{ $step['text'] }}</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
-      </section>
-
-
-
-
-      <!-- 
-        - #services
-      -->
-
-      <section class="section services" aria-label="services-label" id="services">
-        <div class="container">
-
-          <p class="section-subtitle text-center label-2">Special Selection</p>
-
-          <h2 class="headline-1 section-title text-center">Our services</h2>
-
-          <ul class="grid-list">
-
-            <li>
-              <div class="services-card hover:card">
-
-                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="aadmin-dashboard"
-                    class="img-cover">
-                </figure>
-
-                <div>
-
-                  <div class="title-wrapper">
-                    <h3 class="title-3">
-                      <a href="/preview" class="card-title">Admin Dashboard</a>
-                    </h3>
-
-                    <span class="badge label-1">HOT</span>
-
-
-                  </div>
-
-                  <p class="card-text label-1">
-                    Effortlessly oversee your business detailed reports, and company information management.
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="services-card hover:card">
-
-                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="tms" class="img-cover">
-                </figure>
-
-                <div>
-
-                  <div class="title-wrapper">
-                    <h3 class="title-3">
-                      <a href="#" class="card-title">Ticket Management System</a>
-                    </h3>
-
-                  </div>
-
-                  <p class="card-text label-1">
-                    Simplify ticket pricing, bookings, and cancellations to provide a seamless experience for your
-                    passengers
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="services-card hover:card">
-
-                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="cms" class="img-cover">
-                </figure>
-
-                <div>
-
-                  <div class="title-wrapper">
-                    <h3 class="title-3">
-                      <a href="#" class="card-title">Cargo Managment System</a>
-                    </h3>
-
-                  </div>
-
-                  <p class="card-text label-1">
-                    Streamline cargo bookings, handle efficiently, and optimize pricing managment.
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="services-card hover:card">
-
-                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="fms" class="img-cover">
-                </figure>
-
-                <div>
-
-                  <div class="title-wrapper">
-                    <h3 class="title-3">
-                      <a href="#" class="card-title">Fleet Management System</a>
-                    </h3>
-
-                    <span class="badge label-1">HOT</span>
-
-                  </div>
-
-                  <p class="card-text label-1">
-                    Manage vehicle details, create schedules, and oversee drivers to keep your operations running
-                    smoothly.
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="services-card hover:card">
-
-                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src="images/menu-1.jpg" width="100" height="100" loading="lazy" alt="csm" class="img-cover">
-                </figure>
-
-                <div>
-
-                  <div class="title-wrapper">
-                    <h3 class="title-3">
-                      <a href="#" class="card-title">Customer Support Managment</a>
-                    </h3>
-
-                  </div>
-
-                  <p class="card-text label-1">
-                    Enhance customer satisfaction with instant chat support, a feedback system, and responsive
-                    communication tools.
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
-
-
-
-          </ul>
-
-
-
-          <a href="#" class="btn btn-primary">
-            <span class="text text-1">View All services</span>
-
-            <span class="text text-2" aria-hidden="true">View All services</span>
-          </a>
-
-          <img src="images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
-            class="shape shape-2 move-anim">
-          <img src="images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
-            class="shape shape-3 move-anim">
-
-        </div>
-      </section>
-
-
-
-
-      <!-- 
-        - #FEATURES
-      -->
-
-      <section class="section features text-center" aria-label="features">
-        <div class="container">
-
-          <p class="section-subtitle label-2">Why Choose Us</p>
-
-          <h2 class="headline-1 section-title">Our Strength</h2>
-
-          <ul class="grid-list">
-
-            <li class="feature-item">
-              <div class="feature-card">
-
-                <div class="card-icon">
-                  <img src="images/features-icon-1.png" width="100" height="80" loading="lazy" alt="icon">
-                </div>
-
-                <h3 class="title-2 card-title">Customizable Solutions</h3>
-
-                <p class="label-1 card-text">Tailored services to fit your needs.</p>
-
-              </div>
-            </li>
-
-            <li class="feature-item">
-              <div class="feature-card">
-
-                <div class="card-icon">
-                  <img src="images/features-icon-2.png" width="100" height="80" loading="lazy" alt="icon">
-                </div>
-
-                <h3 class="title-2 card-title">User-Friendly Interface</h3>
-
-                <p class="label-1 card-text">Easy-to-navigate dashboards and features.</p>
-
-              </div>
-            </li>
-
-            <li class="feature-item">
-              <div class="feature-card">
-
-                <div class="card-icon">
-                  <img src="images/features-icon-3.png" width="100" height="80" loading="lazy" alt="icon">
-                </div>
-
-                <h3 class="title-2 card-title">Comprehensive Management</h3>
-
-                <p class="label-1 card-text">All-in-one platform for transport businesses.</p>
-
-              </div>
-            </li>
-
-            <li class="feature-item">
-              <div class="feature-card">
-
-                <div class="card-icon">
-                  <img src="images/features-icon-4.png" width="100" height="80" loading="lazy" alt="icon">
-                </div>
-
-                <h3 class="title-2 card-title">Reliable Support</h3>
-
-                <p class="label-1 card-text">24/7 assistance to keep you moving.</p>
-
-              </div>
-            </li>
-
-          </ul>
-
-          <img src="images/shape-7.png" width="208" height="178" loading="lazy" alt="shape" class="shape shape-1">
-
-          <img src=".images/shape-8.png" width="120" height="115" loading="lazy" alt="shape" class="shape shape-2">
-
-        </div>
-      </section>
-
-
-    </article>
-  </main>
-
-
-
-
-
-  <!-- 
-    - #FOOTER
-  -->
-
-  <footer class="footer section has-bg-image text-center" style="background-color: black;">
-    <div class="container">
-
-      <div class="footer-top grid-list">
-
-        <div class="footer-brand has-before has-after">
-
-          <a href="#" class="logo">
-            <img src="images/logo.svg" width="160" height="50" loading="lazy" alt="transpo-flow">
-          </a>
-
-          <address class="body-4">
-            xyz, Lahore City, Pakistan
-          </address>
-
-          <a href="mailto:mail@transpoflow.com" class="body-4 contact-link">mail@transpoflow.com</a>
-
-          <a href="tel:+920000000000" class="body-4 contact-link">Booking Request : +92-000-000-0000</a>
-
-          <div class="wrapper">
-            <div class="separator"></div>
-            <div class="separator"></div>
-            <div class="separator"></div>
-          </div>
-
-          <p class="title-1">Get Updates</p>
-
-
-          <form action="" class="input-wrapper">
-            <div class="icon-wrapper">
-              <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-
-              <input type="email" name="email_address" placeholder="Your email" autocomplete="off" class="input-field">
+    </section>
+
+    {{-- ============================= SERVICES ============================= --}}
+    <section class="bg-white py-20 lg:py-28">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">What you can offer</p>
+                <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    One platform, every service
+                </h2>
             </div>
 
-            <button type="submit" class="btn btn-secondary">
-              <span class="text text-1">Subscribe</span>
-
-              <span class="text text-2" aria-hidden="true">Subscribe</span>
-            </button>
-          </form>
-
+            <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                @php
+                    $services = [
+                        ['icon' => 'fa-ticket', 'title' => 'Ticket Booking', 'text' => 'Let passengers browse schedules, pick seats, and pay online. Handle pricing, bookings and cancellations with ease.', 'route' => route('demo.ticket')],
+                        ['icon' => 'fa-box', 'title' => 'Cargo Booking', 'text' => 'Streamline cargo bookings with flexible weight and volume pricing tiers, all managed from one place.', 'route' => route('demo.cargo')],
+                        ['icon' => 'fa-bus', 'title' => 'Fleet Management', 'text' => 'Register vehicles, build schedules, and oversee drivers to keep your operations running smoothly.', 'route' => route('demo.fleet')],
+                        ['icon' => 'fa-gauge-high', 'title' => 'Admin Dashboard', 'text' => 'Oversee your whole business — reports, company info, and data export — from a single admin panel.', 'route' => route('demo.admin')],
+                        ['icon' => 'fa-headset', 'title' => 'Customer Support', 'text' => 'Built-in messaging and feedback tools so your customers can always reach you.', 'route' => route('services')],
+                        ['icon' => 'fa-palette', 'title' => 'Branded Themes', 'text' => 'Pick a look that fits your company and give customers a polished, professional experience.', 'route' => route('services')],
+                    ];
+                @endphp
+                @foreach ($services as $service)
+                    <div class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg">
+                        <div
+                            class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-xl text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                            <i class="fa-solid {{ $service['icon'] }}"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">{{ $service['title'] }}</h3>
+                        <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{{ $service['text'] }}</p>
+                        <a href="{{ $service['route'] }}"
+                            class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+                            Learn more <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
+    </section>
 
-        <ul class="footer-list">
+    {{-- ============================= WHY US ============================= --}}
+    <section class="bg-slate-50 py-20 lg:py-28">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">Why TranspoFlow</p>
+                <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    Built for transport operators
+                </h2>
+            </div>
 
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Home</a>
-          </li>
+            <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                @php
+                    $features = [
+                        ['icon' => 'fa-sliders', 'title' => 'Customizable', 'text' => 'Tailor services and themes to fit exactly how your business works.'],
+                        ['icon' => 'fa-wand-magic-sparkles', 'title' => 'No-code', 'text' => 'Launch without writing a single line of code or hiring a developer.'],
+                        ['icon' => 'fa-layer-group', 'title' => 'All-in-one', 'text' => 'Tickets, cargo, and fleet — managed together, not across five tools.'],
+                        ['icon' => 'fa-life-ring', 'title' => 'Reliable support', 'text' => 'Help when you need it, so your operations never stall.'],
+                    ];
+                @endphp
+                @foreach ($features as $feature)
+                    <div class="text-center sm:text-left">
+                        <div
+                            class="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600 text-xl text-white sm:mx-0">
+                            <i class="fa-solid {{ $feature['icon'] }}"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">{{ $feature['title'] }}</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">{{ $feature['text'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
 
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Services</a>
-          </li>
+    {{-- ============================= CTA BAND ============================= --}}
+    <x-marketing-cta />
 
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">About Us</a>
-          </li>
-
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Contact</a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Facebook</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Instagram</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Twitter</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Youtube</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Google Map</a>
-          </li>
-
-        </ul>
-
-      </div>
-
-      <div class="footer-bottom">
-
-        <p class="copyright">
-          &copy; 2024 TranspoFlow. All Rights Reserved | Crafted by <a href="https://github.com/codewithsadee"
-            target="_blank" class="link">TranspoFlow</a>
-        </p>
-
-      </div>
-
-    </div>
-  </footer>
-
-
-
-
-
-  <!-- 
-    - #BACK TO TOP
-  -->
-
-  <a href="#top" class="back-top-btn active" aria-label="back to top" data-back-top-btn>
-    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
-  </a>
-
-
-
-
-
-  <!-- 
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
-  @vite('resources/js/script.js')
-
-  <!-- 
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-</body>
-
-</html>
+</x-marketing-layout>

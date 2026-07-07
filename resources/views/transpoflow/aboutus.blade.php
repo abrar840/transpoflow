@@ -1,166 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Services - TranspoFlow</title>
+<x-marketing-layout title="About Us">
 
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  @vite('resources/css/style.css')
-   <!-- 
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-
-    <!-- 
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
-
-  <style>
-    body{
-        height: 0px;
-    }
-    </style>
-</head>
-<body class="loaded">
-  
-  <!-- 
-    - #TOP BAR
-  -->
-  <x-topbar/>
-  <!-- 
-    - #HEADER
-  -->
-  <x-header />
-
-  <!-- 
-    - #BACK TO TOP
-  -->
-  <a href="#top" class="back-top-btn" data-back-top-btn aria-label="back to top">
-    <ion-icon name="chevron-up-outline" aria-hidden="true"></ion-icon>
-  </a>
-
-  <!-- 
-    - #SERVICES
-  -->
-<!-- About Us Section -->
-<section class="section about-us bg-black-10" id="about-us">
-    <div class="container">
-      <br><br><br><br>
-      <p class="section-subtitle text-center">Learn More About Us</p>
-      <h2 class="headline-1 section-title text-center">Who We Are</h2>
-  
-      <div class="about-content">
-        <div class="about-text">
-          <h3 class="title-4">Our Mission</h3>
-          <p class="label-2">
-            We are a dedicated team focused on simplifying transportation management and providing seamless experiences for both passengers and cargo services. Our mission is to make every journey smarter and more efficient.
-          </p>
+    {{-- ============================= PAGE HEADER ============================= --}}
+    <section class="bg-gradient-to-b from-indigo-50 to-white">
+        <div class="mx-auto max-w-3xl px-6 py-20 text-center lg:py-24">
+            <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">About us</p>
+            <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+                Making transport management effortless
+            </h1>
+            <p class="mt-5 text-lg leading-relaxed text-slate-600">
+                TranspoFlow started with a simple idea: launching a transport business online shouldn't require a
+                development team. We combine everything an operator needs — ticketing, cargo, and fleet — into one
+                platform any company can set up on their own.
+            </p>
         </div>
-  
-        <div class="about-text">
-          <h3 class="title-4">Our Vision</h3>
-          <p class="label-2">
-            We envision a future where transportation is fully optimized, easy to manage, and accessible to everyone. Our goal is to innovate continuously and help businesses thrive in an ever-evolving industry.
-          </p>
+    </section>
+
+    {{-- ============================= MISSION / VISION / VALUES ============================= --}}
+    <section class="bg-slate-50 py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="grid gap-8 md:grid-cols-3">
+                @php
+                    $pillars = [
+                        ['icon' => 'fa-bullseye', 'title' => 'Our Mission', 'text' => 'To simplify transportation management and make every journey — for passengers and cargo alike — smarter and more efficient.'],
+                        ['icon' => 'fa-eye', 'title' => 'Our Vision', 'text' => 'A future where any transport business, of any size, can run a fully optimized online operation with ease.'],
+                        ['icon' => 'fa-heart', 'title' => 'Our Values', 'text' => 'Integrity, innovation, and customer satisfaction guide everything we build — dependable tools designed around real operators.'],
+                    ];
+                @endphp
+                @foreach ($pillars as $pillar)
+                    <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                        <div
+                            class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-xl text-indigo-600">
+                            <i class="fa-solid {{ $pillar['icon'] }}"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">{{ $pillar['title'] }}</h3>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-600">{{ $pillar['text'] }}</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
-  
-        <div class="about-text">
-          <h3 class="title-4">Our Values</h3>
-          <p class="label-2">
-            Integrity, innovation, and customer satisfaction are at the heart of everything we do. We aim to deliver value through dependable solutions that are designed with both the customer and business in mind.
-          </p>
+    </section>
+
+    {{-- ============================= WHO IT'S FOR ============================= --}}
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">Who it's for</p>
+                <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    Built for transport operators
+                </h2>
+                <p class="mt-4 text-lg text-slate-600">
+                    Whether you run buses, coaches, or cargo routes, TranspoFlow gives you the tools to sell and manage
+                    online — without the technical overhead.
+                </p>
+            </div>
+
+            <div class="mx-auto mt-14 grid max-w-4xl gap-6 sm:grid-cols-3">
+                @php
+                    $audience = [
+                        ['icon' => 'fa-bus', 'title' => 'Bus & coach lines', 'text' => 'Sell tickets and manage seats and schedules online.'],
+                        ['icon' => 'fa-truck-fast', 'title' => 'Cargo & courier', 'text' => 'Take cargo bookings with clear weight and volume pricing.'],
+                        ['icon' => 'fa-warehouse', 'title' => 'Fleet operators', 'text' => 'Keep vehicles, drivers, and routes organised in one place.'],
+                    ];
+                @endphp
+                @foreach ($audience as $item)
+                    <div class="text-center">
+                        <div
+                            class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-xl text-white">
+                            <i class="fa-solid {{ $item['icon'] }}"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900">{{ $item['title'] }}</h3>
+                        <p class="mt-2 text-sm text-slate-600">{{ $item['text'] }}</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
-      </div>
-<br><br><br>
-  
-      <div class="team-section">
-        <h3 class="title-4">Meet Our Team</h3>
-        <div class="team-cards">
-          <div class="team-card">
-            <img src="assets/images/badge-1.png" alt="Team Member 1" class="team-image">
-            <h4 class="team-name">John Doe</h4>
-            <p class="team-role">CEO & Founder</p>
-          </div>
-  
-          <div class="team-card">
-            <img src="assets/images/hero-slider-2.jpg" alt="Team Member 2" class="team-image">
-            <h4 class="team-name">Jane Smith</h4>
-            <p class="team-role">CTO</p>
-          </div>
-  
-          <div class="team-card">
-            <img src="assets/images/menu-3.png" alt="Team Member 3" class="team-image">
-            <h4 class="team-name">Alice Brown</h4>
-            <p class="team-role">Head of Operations</p>
-          </div>
-        </div>
-      </div>
-  
-      <img src="/api/placeholder/200/200" alt="shape" class="shape shape-1 move-anim">
-      <img src="/api/placeholder/200/200" alt="shape" class="shape shape-2 move-anim">
-    </div>
-  </section>
-  
+    </section>
 
-<!-- 
-  - #FOOTER
--->
-<footer class="footer2">
-    <div class="container2">
-      <div class="footer-content2">
-        <ul class="footer-links2">
-          <li><a href="#home" class="footer-link">Home</a></li>
-          <li><a href="#about" class="footer-link">About</a></li>
-          <li><a href="#services" class="footer-link">Services</a></li>
-          <li><a href="#contact" class="footer-link">Contact</a></li>
-        </ul>
-  
-        <p class="copyright2">
-          &copy; 2024 <a href="#" class="link">TranspoFlow</a>. All Rights Reserved
-        </p>
-      </div>
-    </div>
-  </footer>
+    {{-- ============================= CTA BAND ============================= --}}
+    <x-marketing-cta heading="Join operators moving smarter" />
 
-  <!-- 
-    - #SCRIPTS
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-  <script>
-    const header = document.querySelector("[data-header]");
-    const backTopBtn = document.querySelector("[data-back-top-btn]");
-
-    let lastScrollPos = 0;
-
-    const hideHeader = function () {
-      const isScrollBottom = lastScrollPos < window.scrollY;
-      if (isScrollBottom) {
-        header.classList.add("hide");
-      } else {
-        header.classList.remove("hide");
-      }
-
-      lastScrollPos = window.scrollY;
-    }
-
-    window.addEventListener("scroll", function () {
-      if (window.scrollY >= 50) {
-        header.classList.add("active");
-        backTopBtn.classList.add("active");
-        hideHeader();
-      } else {
-        header.classList.remove("active");
-        backTopBtn.classList.remove("active");
-      }
-    });
-  </script>
-
-</body>
-</html>
+</x-marketing-layout>

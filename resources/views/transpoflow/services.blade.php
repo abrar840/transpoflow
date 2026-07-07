@@ -1,199 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Services - TranspoFlow</title>
+<x-marketing-layout title="Services">
 
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  @vite('resources/css/style.css')
-   <!-- 
-    - favicon
-  -->
-  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
-
-    <!-- 
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
-
-  <style>
-    body{
-        height: 0px;
-    }
-    </style>
-</head>
-<body class="loaded">
-  
-  <!-- 
-    - #TOP BAR
-  -->
-   <x-topbar/>
-
-  <!-- 
-    - #HEADER
-  -->
-  <x-header />
-
-  <!-- 
-    - #BACK TO TOP
-  -->
-  <a href="#top" class="back-top-btn" data-back-top-btn aria-label="back to top">
-    <ion-icon name="chevron-up-outline" aria-hidden="true"></ion-icon>
-  </a>
-
-  <!-- 
-    - #SERVICES
-  -->
-  <section class="section services bg-black-10" id="services">
-    <div class="container">
-        <br><br><br><br>
-      <p class="section-subtitle text-center">Transport Simplified</p>
-      <h2 class="headline-1 section-title text-center">Our Services</h2>
-
-      <div class="grid-list">
-        <div class="service-card">
-          <div class="card-icon">
-            <img src="images/admin-panel.jpg" alt="Admin Dashboard" class="img-cover">
-          </div>
-          
-          <h3 class="title-4 card-title">Admin Dashboard</h3>
-          
-          <p class="label-2 card-text">
-            Effortlessly oversee your business detailed reports, and company information management.
-                </p>
-          
-          <a href="#" class="btn-text hover-underline">
-            <span class="text">View Plan</span>
-          </a>
+    {{-- ============================= PAGE HEADER ============================= --}}
+    <section class="bg-gradient-to-b from-indigo-50 to-white">
+        <div class="mx-auto max-w-7xl px-6 py-20 text-center lg:px-8 lg:py-24">
+            <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">Our services</p>
+            <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+                Everything to run your transport business
+            </h1>
+            <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-600">
+                Turn any of these on with a click when you create your site. Mix and match the services your company
+                needs — no code, no setup.
+            </p>
         </div>
+    </section>
 
-        <div class="service-card">
-          <div class="card-icon">
-            <img src="images/tms.jpg" alt="Ticket Management System" class="img-cover">
-          </div>
-          
-          <h3 class="title-4 card-title">Ticket Management System</h3>
-          
-          <p class="label-2 card-text">
-            Simplify ticket pricing, bookings, and cancellations to provide a seamless experience for your passengers
-        </p>
-          
-          <a href="#" class="btn-text hover-underline">
-            <span class="text">View Plan</span>
-          </a>
+    {{-- ============================= SERVICES GRID ============================= --}}
+    <section class="bg-slate-50 py-16 lg:py-20">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                @php
+                    $services = [
+                        ['icon' => 'fa-gauge-high', 'title' => 'Admin Dashboard', 'text' => 'Oversee your entire business — detailed reports, company information, and one-click data export — from a single control panel.'],
+                        ['icon' => 'fa-ticket', 'title' => 'Ticket Booking', 'text' => 'Let passengers browse schedules, choose seats, and pay online. Manage pricing, bookings and cancellations effortlessly.'],
+                        ['icon' => 'fa-box', 'title' => 'Cargo Booking', 'text' => 'Streamline cargo bookings with flexible weight and volume pricing tiers, handled efficiently in one place.'],
+                        ['icon' => 'fa-bus', 'title' => 'Fleet Management', 'text' => 'Register vehicles, build schedules, and oversee drivers so your operations keep running smoothly.'],
+                        ['icon' => 'fa-headset', 'title' => 'Customer Support', 'text' => 'Boost satisfaction with built-in messaging, a feedback system, and responsive communication tools.'],
+                        ['icon' => 'fa-palette', 'title' => 'Branded Themes', 'text' => 'Choose a professional theme that matches your brand and gives your customers a polished experience.'],
+                    ];
+                @endphp
+                @foreach ($services as $service)
+                    <div class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg">
+                        <div
+                            class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-xl text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                            <i class="fa-solid {{ $service['icon'] }}"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">{{ $service['title'] }}</h3>
+                        <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{{ $service['text'] }}</p>
+                        <a href="{{ route('form') }}"
+                            class="mt-6 inline-flex items-center justify-center gap-1.5 rounded-lg bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                            Create Your Site <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
+    </section>
 
-        <div class="service-card">
-          <div class="card-icon">
-            <img src="images/cms.jpg" alt="Corporate Events" class="img-cover">
-          </div>
-          
-          <h3 class="title-4 card-title">Cargo Managment System</h3>
-          
-          <p class="label-2 card-text">
-            Streamline cargo bookings, handle efficiently, and optimize pricing managment.
-          </p>
-          
-          <a href="#" class="btn-text hover-underline">
-            <span class="text">View Plan</span>
-          </a>
-        </div>
+    {{-- ============================= CTA BAND ============================= --}}
+    <x-marketing-cta heading="Pick your services and go live" />
 
-        <div class="service-card">
-          <div class="card-icon">
-            <img src="images/fms.jpg" alt="Fleet Management System" class="img-cover">
-          </div>
-          
-          <h3 class="title-4 card-title">Fleet Management System</h3>
-          
-          <p class="label-2 card-text">
-            Manage vehicle details, create schedules, and oversee drivers to keep your operations running smoothly.
-        </p>
-          
-          <a href="#" class="btn-text hover-underline">
-            <span class="text">View Plan</span>
-          </a>
-        </div>
-        <div class="service-card">
-          <div class="card-icon">
-            <img src="images/csm.jpg" alt="Customer Support Managment" class="img-cover">
-          </div>
-          
-          <h3 class="title-4 card-title">Customer Support Managment</h3>
-          
-          <p class="label-2 card-text">
-            Enhance customer satisfaction with instant chat support, a feedback system, and responsive communication tools.
-        </p>
-          
-          <a href="#" class="btn-text hover-underline">
-            <span class="text">View Plan</span>
-          </a>
-        </div>
-      </div>
-
-      <img src="/api/placeholder/200/200" alt="shape" class="shape shape-1 move-anim">
-      <img src="/api/placeholder/200/200" alt="shape" class="shape shape-2 move-anim">
-    </div>
-  </section>
-
-<!-- 
-  - #FOOTER
--->
-<footer class="footer2">
-    <div class="container2">
-      <div class="footer-content2">
-        <ul class="footer-links2">
-          <li><a href="/" class="footer-link">Home</a></li>
-          <li><a href="/services" class="footer-link">About</a></li>
-          <li><a href="#services" class="footer-link">Services</a></li>
-          <li><a href="#contact" class="footer-link">Contact</a></li>
-        </ul>
-  
-        <p class="copyright2">
-          &copy; 2024 <a href="#" class="link">TranspoFlow</a>. All Rights Reserved
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- 
-    - #SCRIPTS
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-  <script>
-    const header = document.querySelector("[data-header]");
-    const backTopBtn = document.querySelector("[data-back-top-btn]");
-
-    let lastScrollPos = 0;
-
-    const hideHeader = function () {
-      const isScrollBottom = lastScrollPos < window.scrollY;
-      if (isScrollBottom) {
-        header.classList.add("hide");
-      } else {
-        header.classList.remove("hide");
-      }
-
-      lastScrollPos = window.scrollY;
-    }
-
-    window.addEventListener("scroll", function () {
-      if (window.scrollY >= 50) {
-        header.classList.add("active");
-        backTopBtn.classList.add("active");
-        hideHeader();
-      } else {
-        header.classList.remove("active");
-        backTopBtn.classList.remove("active");
-      }
-    });
-  </script>
-
-</body>
-</html>
+</x-marketing-layout>
